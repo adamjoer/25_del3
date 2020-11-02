@@ -1,0 +1,142 @@
+\documentclass[12pt,oneside,a4paper,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.25cm,headheight=26pt,includeheadfoot]{geometry}
+\usepackage[danish]{babel}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage[framed, numbered]{matlab-prettifier}
+\usepackage{changepage}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{caption}
+\usepackage{tocloft}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{titling}
+\usepackage{float}
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{indentfirst}
+\usepackage{lscape}
+\usepackage{booktabs,caption}
+\usepackage[flushleft]{threeparttable}
+\usepackage[english]{nomencl}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{document.bib}
+
+% --- set footer and header ---
+\pagestyle{fancy}
+\fancyhf{}
+
+\setlength{\parindent}{2em}
+\title{CDIO1} % to reference as \title, dont use \maketitle
+\makeatletter\let\Title\@title\makeatother
+
+
+
+\lstset{language=Matlab,
+style=Matlab-editor,
+basicstyle=\normalsize\mlttfamily,
+numbers=left,
+numberstyle={\scriptsize\color{black}},			% size of the numbers
+numbersep=0.5cm											
+}
+
+\newlist{steps}{enumerate}{1}
+\setlist[steps, 1]{leftmargin=1.5cm,label = Step \arabic*:}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+%\lhead{\Title}
+\rhead{\nouppercase{\rightmark}}
+\lhead{\Title}
+\rfoot{\includegraphics[height=1.25cm]{root/logo.pdf}} % right header logo
+\setlength\headheight{16pt}
+\setlength{\footskip}{50pt}
+\lhead{\Title} %rightH title
+\cfoot{\thepage}
+
+% --- End of page settings ---
+
+
+
+\begin{document}
+\pagenumbering{roman} 
+\input{sources/0_frontpage.tex}
+
+\newpage
+\doublespacing
+%\addcontentsline{toc}{section}{Table of Contents}
+\renewcommand{\baselinestretch}{1}\normalsize
+\tableofcontents
+\renewcommand{\baselinestretch}{1}\normalsize
+%\singlespacing
+\thispagestyle{fancy} % force page style
+
+\newpage
+\pagenumbering{arabic} 
+\fancyfoot[C]{Page \thepage\ of \pageref{EndOfText}}
+
+
+\section{Resumé} \label{resume}
+\input{sources/0_2_resume.tex}
+\section{Indledning} \label{introduction}
+\input{sources/1_introduction.tex} 
+\newpage
+\section{Krav} \label{demands}
+\input{sources/2_krav.tex}
+\section{Analyse} \label{analysis}
+\input{sources/3_analyse.tex}
+\section{Design} \label{design}
+\input{sources/4_design.tex}
+\newpage
+\section{Implementering} \label{implementation}
+\input{sources/5_implementering.tex}
+\newpage
+\section{Brug} \label{brug}
+\input{sources/5_1_brug.tex}
+\section{Test} \label{test}
+\input{sources/6_test.tex}
+\newpage
+\section{Test fra CDIO1} \label{test1}
+\input{sources/6_1_test.tex}
+\section{Projektplanlægning} \label{projectplan}
+\input{sources/7_projektplan.tex}
+\section{Konklusion} \label{conclusion}
+\input{sources/8_konklusion.tex}
+\label{EndOfText}
+
+\newpage
+\pagenumbering{Roman} 
+\addcontentsline{toc}{section}{Figurer}
+\fancyfoot[C]{Page \thepage\ of \pageref{endOfDoc}}
+\listoffigures
+\thispagestyle{fancy}
+
+\newpage
+\addcontentsline{toc}{section}{Tabeller}
+\listoftables
+\thispagestyle{fancy}
+
+%\newpage
+%\addcontentsline{toc}{section}{Nomenklatur}
+%\input{sources/9_nomenclat.tex}
+
+\newpage
+\addcontentsline{toc}{section}{Litteratur}
+\printbibliography
+
+%\newpage
+%\section{Bilag A} \label{ch11}
+
+\label{endOfDoc}
+\end{document}
