@@ -1,6 +1,6 @@
 package game;
 
-public class Tile {
+public class Field {
     // Variables
     final private String name;
     final private String flavorText;
@@ -8,7 +8,7 @@ public class Tile {
     final private boolean extraTurn;
 
     // Constructor
-    public Tile (String iName, String iFlavorText, int iPoints, boolean iExtraTurn){
+    public Field(String iName, String iFlavorText, int iPoints, boolean iExtraTurn){
         name = iName;
         flavorText = iFlavorText;
         points = iPoints;

@@ -1,14 +1,14 @@
 package game;
 
-public class Board {
+public class GameBoard {
 
     // Declarations
-    final private Tile[] gameBoard;
+    final private Field[] gameBoard;
     final private Player[] scoreBoard;
 
-    // Constructor. Loads XML info into Tile array. Sets Player names.
-    public Board (int players, String[] playerNames) {
-        this.gameBoard = Utility.tileGenerator("resources/tileList.xml");
+    // Constructor. Loads XML info into Field array. Sets Player names.
+    public GameBoard(int players, String[] playerNames) {
+        this.gameBoard = Utility.fieldGenerator("resources/fieldList.xml");
         this.scoreBoard = new Player[players];
 
         if (playerNames.length < players) {
