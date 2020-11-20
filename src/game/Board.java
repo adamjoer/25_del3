@@ -8,7 +8,7 @@ public class Board {
 
     // Constructor. Loads XML info into Tile array. Sets Player names.
     public Board (int players, String[] playerNames) {
-        this.gameBoard = Utility.tileGenerator("src/game/tileList.xml");
+        this.gameBoard = Utility.tileGenerator("resources/tileList.xml");
         this.scoreBoard = new Player[players];
 
         if (playerNames.length < players) {
