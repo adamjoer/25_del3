@@ -1,13 +1,13 @@
 package game;
 
-public class Board {
+public class GameBoard {
 
     // Declarations
     final private Tile[] gameBoard;
     final private Player[] scoreBoard;
 
     // Constructor. Loads XML info into Tile array. Sets Player names.
-    public Board (int players, String[] playerNames) {
+    public GameBoard(int players, String[] playerNames) {
         this.gameBoard = Utility.tileGenerator("resources/tileList.xml");
         this.scoreBoard = new Player[players];
 

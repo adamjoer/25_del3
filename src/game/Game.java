@@ -10,7 +10,7 @@ public class Game {
     final static int POINTS_GOAL = 3000;
 
     static Beaker beaker;
-    static Board board;
+    static GameBoard gameBoard;
 
     public static void main(String[] args) {
 
@@ -39,7 +39,7 @@ public class Game {
 
         // Create instances of objects
         beaker = new Beaker(DICE, DIE_MAXVALUE);
-        board = new Board(PLAYERS, playerNames);
+        gameBoard = new GameBoard(PLAYERS, playerNames);
 
         int playerTurn;
         boolean end = false;
@@ -47,12 +47,12 @@ public class Game {
         // Loop for restarting game
         do {
             playerTurn = 0;
-            for (int i = 0; i < PLAYERS; i++) { board.movePlayer(i,0); }
+            for (int i = 0; i < PLAYERS; i++) { gameBoard.movePlayer(i,0); }
             // Play game until someone wins
             while (true) {
 
                 // Announce player turn
-                System.out.printf("\nIt is %s's turn.\n", board.getName(playerTurn));
+                System.out.printf("\nIt is %s's turn.\n", gameBoard.getName(playerTurn));
 
                 // Prompt player for input and wait
                 Utility.awaitEnter();
@@ -61,20 +61,20 @@ public class Game {
                 beaker.roll();
                 int diceResult = beaker.getSum();
                 System.out.printf("You rolled %d\n", diceResult);
-                board.movePlayer(playerTurn, diceResult);
+                gameBoard.movePlayer(playerTurn, diceResult);
 
                 // Execute tileAction for the given tile
-                board.tileAction(playerTurn);
+                gameBoard.tileAction(playerTurn);
 
                 // Has the player won? If so, announce winner and break the loop
-                if (board.getBalance(playerTurn) >= POINTS_GOAL) {
-                    System.out.printf("You have reached the goal of %d points, and win! Congratulations, %s!\n", POINTS_GOAL, board.getName(playerTurn));
+                if (gameBoard.getBalance(playerTurn) >= POINTS_GOAL) {
+                    System.out.printf("You have reached the goal of %d points, and win! Congratulations, %s!\n", POINTS_GOAL, gameBoard.getName(playerTurn));
                     break;
 
                 } else { // Go on to next turn
 
                     // Check if current player got an extra turn
-                    if (!board.getExtraTurn(playerTurn)) {
+                    if (!gameBoard.getExtraTurn(playerTurn)) {
 
                         // If they didn't get an extra turn, move on to the next one
                         playerTurn = (playerTurn + 1) % PLAYERS;
@@ -106,9 +106,9 @@ public class Game {
                 case 'Y':
                 case 'y':
                     for (int i = 0; i < PLAYERS; i++) {
-                        board.setBalance(i, 1000);
-                        board.setExtraTurn(i, false);
-                        board.setPosition(i, -1);
+                        gameBoard.setBalance(i, 1000);
+                        gameBoard.setExtraTurn(i, false);
+                        gameBoard.setPosition(i, -1);
                     }
                     break;
 
