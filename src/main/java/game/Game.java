@@ -12,7 +12,7 @@ public class Game {
     static Beaker beaker;
     static GameBoard gameBoard;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
 
