@@ -56,20 +56,33 @@ class GameBoardTest {
     }
 
     int getTileAction(int number) {
-        return switch (number) {
-            case 0 -> -60;
-            case 1 -> 250;
-            case 2 -> -100;
-            case 3 -> 100;
-            case 4 -> -20;
-            case 5 -> 180;
-            case 6 -> 0;
-            case 7 -> -70;
-            case 8 -> 60;
-            case 9 -> -80;
-            case 10 -> -50;
-            case 11 -> 650;
-            default -> throw new AssertionError();
-        };
+        switch (number) {
+            case 0:
+                return -60;
+            case 1:
+                return 250;
+            case 2:
+                return -100;
+            case 3:
+                return 100;
+            case 4:
+                return -20;
+            case 5:
+                return 180;
+            case 6:
+                return 0;
+            case 7:
+                return -70;
+            case 8:
+                return 60;
+            case 9:
+                return -80;
+            case 10:
+                return -50;
+            case 11:
+                return 650;
+            default:
+                throw new AssertionError();
+        }
     }
 }
