@@ -18,35 +18,35 @@ public class Utility {
             e.printStackTrace();
         }
     }
-    public static Tile[] tileGenerator(String filePath){
-        Tile[] tileArr = new Tile[12];
+    public static Field[] fieldGenerator(String filePath){
+        Field[] fieldArr = new Field[12];
         try {
-            // Load XML file and make a list of tile elements.
-            File tileXML = new File(filePath);
+            // Load XML file and make a list of field elements.
+            File fieldXML = new File(filePath);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newDefaultInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document tileDoc = dBuilder.parse(tileXML);
-            tileDoc.getDocumentElement().normalize();
-            NodeList tileList = tileDoc.getElementsByTagName("tile");
+            Document fieldDoc = dBuilder.parse(fieldXML);
+            fieldDoc.getDocumentElement().normalize();
+            NodeList fieldList = fieldDoc.getElementsByTagName("field");
 
 
-            // Extract data from each tileList element and create Tile objects for the Tile[].
-            for (int i = 0; i < tileList.getLength(); i++) {
-                Node tile = tileList.item(i);
+            // Extract data from each tileList element and create Field objects for the Field[].
+            for (int i = 0; i < fieldList.getLength(); i++) {
+                Node field = fieldList.item(i);
 
-                if (tile.getNodeType() == Node.ELEMENT_NODE) {
-                    Element ele = (Element) tile;
+                if (field.getNodeType() == Node.ELEMENT_NODE) {
+                    Element ele = (Element) field;
                     String name = ele.getElementsByTagName("name").item(0).getTextContent();
                     String flavor = ele.getElementsByTagName("flavor").item(0).getTextContent();
                     int value = Integer.parseInt(ele.getElementsByTagName("value").item(0).getTextContent());
                     boolean extraTurn = Boolean.parseBoolean(ele.getElementsByTagName("extraturn").item(0).getTextContent());
-                    tileArr[i] = new Tile(name,flavor,value,extraTurn);
+                    fieldArr[i] = new Field(name,flavor,value,extraTurn);
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return tileArr;
+        return fieldArr;
     }
 }

@@ -1,16 +1,16 @@
 package test;
 
 import org.junit.jupiter.api.Test;
-import game.Board;
+import game.GameBoard;
 import game.Die;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BoardTest {
+class GameBoardTest {
 
     final int players = 2;
     final int tests = 1000;
-    final Board board = new Board(players, new String[]{"John", "Jane"});
+    final GameBoard gameBoard = new GameBoard(players, new String[]{"John", "Jane"});
     final Die d = new Die(12);
 
     @Test
@@ -24,10 +24,10 @@ class BoardTest {
             for (int j = 0; j < players; j++) {
                 d.roll();
                 increment = d.getFaceValue();
-                position = board.getPosition(j);
-                board.movePlayer(j, increment);
+                position = gameBoard.getPosition(j);
+                gameBoard.movePlayer(j, increment);
 
-                assertEquals((position + increment) % 12, board.getPosition(j));
+                assertEquals((position + increment) % 12, gameBoard.getPosition(j));
             }
         }
     }
@@ -42,15 +42,15 @@ class BoardTest {
             // Test all players alternately
             for (int j = 0; j < players; j++) {
                 d.roll();
-                board.movePlayer(j, d.getFaceValue());
+                gameBoard.movePlayer(j, d.getFaceValue());
 
-                System.out.printf("Position for player %d: %d", j, board.getPosition(j));
-                xturn = board.getPosition(j) == 9;
-                money = board.getBalance(j) + getTileAction(board.getPosition(j));
+                System.out.printf("Position for player %d: %d", j, gameBoard.getPosition(j));
+                xturn = gameBoard.getPosition(j) == 9;
+                money = gameBoard.getBalance(j) + getTileAction(gameBoard.getPosition(j));
 
-                board.tileAction(j);
-                assertEquals(money, board.getBalance(j));
-                assertEquals(xturn, board.getExtraTurn(j));
+                gameBoard.tileAction(j);
+                assertEquals(money, gameBoard.getBalance(j));
+                assertEquals(xturn, gameBoard.getExtraTurn(j));
             }
         }
     }

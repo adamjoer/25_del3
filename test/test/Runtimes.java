@@ -6,7 +6,7 @@ public class Runtimes {
     public static void main(String[] args){
         Beaker beaker = new Beaker(2, 6);
         Player player = new Player("Test",1000);
-        Tile[] gameBoard = Utility.tileGenerator("src/game/tileList.xml");
+        Field[] gameBoard = Utility.fieldGenerator("src/game/tileList.xml");
 
         int tests = 1_000_000;
         int currentPosition;

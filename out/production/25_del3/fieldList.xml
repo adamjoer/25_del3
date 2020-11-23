@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<fieldlist>
+	<field>
+		<name>Pyramid</name>
+		<value>-60</value>
+		<flavor>You find a pyramid and cautiously search for treasure - except the pyramid is a hideout for thugs and they demand tribute.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+	<field>
+		<name>Tower</name>
+		<value>250</value>
+		<flavor>You've found a dragon tower, but the dragon is out. You quickly grab a bit of the dragon's hoard and run away.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+	<field>
+		<name>Crater</name>
+		<value>-100</value>
+		<flavor>You search the crater for valuables, but you get ambushed by bandits.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+	<field>
+		<name>Palace gates</name>
+		<value>100</value>
+		<flavor>You meet a nobleman leaving the palace, he pities you and gives you a handout.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+	<field>
+		<name>Cold desert</name>
+		<value>-20</value>
+		<flavor>The cold night in the desert is hard. You pay a traveling nomad for food and drink.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+	<field>
+		<name>Walled city</name>
+		<value>180</value>
+		<flavor>You assist a warband marauding against the city and get a share of the plunder.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+	<field>
+		<name>Monastery</name>
+		<value>0</value>
+		<flavor>You spend the day with accommodating monks. They give you food and shelter.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+	<field>
+		<name>Black cave</name>
+		<value>-70</value>
+		<flavor>You delve into the cave, but get spooked by a sudden movement. As you flee, you drop your purse.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+	<field>
+		<name>Huts in the mountain</name>
+		<value>60</value>
+		<flavor>The village worships you and makes a sacrifice of "wealth". You sell off the junk for a bit of change.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+	<field>
+		<name>The Werewall (werewolf-wall)</name>
+		<value>-80</value>
+		<flavor>You spend a night howling with your new friends. Feeling invigorated, you rush on.</flavor>
+		<extraturn>True</extraturn>
+	</field>
+	<field>
+		<name>The Pit</name>
+		<value>-50</value>
+		<flavor>You bet on fights at The Pit. Unfortunately, you're bad at betting.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+	<field>
+		<name>Goldmine</name>
+		<value>650</value>
+		<flavor>You see an unguarded mine cart at the goldmine. You quickly and successfully scamper off with the contents.</flavor>
+		<extraturn>False</extraturn>
+	</field>
+</fieldlist>
