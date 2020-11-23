@@ -1,8 +1,7 @@
 package test;
 
 import org.junit.jupiter.api.Test;
-import game.GameBoard;
-import game.Die;
+import game.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

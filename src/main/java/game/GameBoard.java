@@ -8,7 +8,7 @@ public class GameBoard {
 
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard(int players, String[] playerNames) {
-        this.gameBoard = Utility.fieldGenerator("resources/fieldList.xml");
+        this.gameBoard = Utility.fieldGenerator("src/main/resources/tileList.xml");
         this.scoreBoard = new Player[players];
 
         if (playerNames.length < players) {
