@@ -17,7 +17,7 @@ public abstract class Field {
         this.position = position;
     }
 
-    public abstract void fieldAction();
+//    public abstract void fieldAction();
 
     public String getTitle() {
         return title;
