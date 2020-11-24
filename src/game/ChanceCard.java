@@ -2,7 +2,7 @@ package game;
 
 public abstract class ChanceCard {
 
-    private final String CARD_TEXT;
+    protected final String CARD_TEXT;
 
     public ChanceCard(String CARD_TEXT){
 
