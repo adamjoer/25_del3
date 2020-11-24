@@ -8,4 +8,8 @@ public abstract class ChanceCard {
 
         this.CARD_TEXT = CARD_TEXT;
     }
+
+    public String getChanceCardText() {
+        return CARD_TEXT;
+    }
 }
