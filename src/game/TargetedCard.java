@@ -9,7 +9,7 @@ public class TargetedCard extends ChanceCard{
         this.TARGETED_PLAYER = Targeted_player;
     }
 
-    public int GetTargetedPlayer(){
+    public int getTargetedPlayer(){
         return TARGETED_PLAYER;
     }
 }

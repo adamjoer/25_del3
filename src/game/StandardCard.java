@@ -18,5 +18,25 @@ public class StandardCard extends ChanceCard {
         this.AMOUNT = amount;
     }
 
+    public String getCardAction(){
+        if(FINE){
+            return "fine";
+        }
+        else if(GIFT){
+            return "gift";
+        }
+        else{
+            return "move";
+        }
+    }
+
+
+    public int getDestination(){
+        return DESTINATION;
+    }
+
+    public int getAmount(){
+        return AMOUNT;
+    }
 
 }
