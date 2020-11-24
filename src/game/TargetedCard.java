@@ -8,4 +8,8 @@ public class TargetedCard extends ChanceCard{
         super(CARD_TEXT);
         this.TARGETED_PLAYER = Targeted_player;
     }
+
+    public int GetTargetedPlayer(){
+        return TARGETED_PLAYER;
+    }
 }
