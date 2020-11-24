@@ -6,20 +6,20 @@ public class Property extends Field {
 
     // Attributes
     private final Color color;
-    private final Property partnerProperty;
+    private final Property relatedProperty;
 
     // Constructor
-    public Property(String title, String subText, String description, int position, Color color, Property partnerProperty) {
+    public Property(String title, String subText, String description, int position, Color color, Property relatedProperty) {
         super(title, subText, description, position);
         this.color = color;
-        this.partnerProperty = partnerProperty;
+        this.relatedProperty = relatedProperty;
     }
 
     public Color getColor() {
         return color;
     }
 
-    public Property getPartnerProperty() {
-        return partnerProperty;
+    public Property getRelatedProperty() {
+        return relatedProperty;
     }
 }
