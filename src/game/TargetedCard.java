@@ -9,6 +9,10 @@ public class TargetedCard extends ChanceCard{
         this.TARGETED_PLAYER = Targeted_player;
     }
 
+    public String getCardText() {
+        return CARD_TEXT;
+    }
+
     public int getTargetedPlayer(){
         return TARGETED_PLAYER;
     }
