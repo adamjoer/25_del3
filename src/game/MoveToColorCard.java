@@ -9,9 +9,6 @@ public class MoveToColorCard extends ChanceCard{
         COLOR = color;
     }
 
-    public String getCardText() {
-        return CARD_TEXT;
-    }
 
     public String getColor(){
         return COLOR;

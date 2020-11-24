@@ -9,10 +9,6 @@ public class HeldCard extends ChanceCard{
         HELD_BY = heldBy;
     }
 
-    public String getCardText() {
-        return CARD_TEXT;
-    }
-
     public int getHeldBy(){
         return HELD_BY;
     }
