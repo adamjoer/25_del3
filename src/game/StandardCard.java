@@ -11,11 +11,11 @@ public class StandardCard extends ChanceCard {
 
     public StandardCard(String CARD_TEXT, boolean fine, boolean gift, boolean move, int destination, int amount){
         super(CARD_TEXT);
-        this.FINE = fine;
-        this.GIFT = gift;
-        this.MOVE = move;
-        this.DESTINATION = destination;
-        this.AMOUNT = amount;
+        FINE = fine;
+        GIFT = gift;
+        MOVE = move;
+        DESTINATION = destination;
+        AMOUNT = amount;
     }
 
     public String getCardText(){
