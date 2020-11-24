@@ -6,7 +6,7 @@ public class TargetedCard extends ChanceCard{
 
     public TargetedCard(String CARD_TEXT, int Targeted_player){
         super(CARD_TEXT);
-        this.TARGETED_PLAYER = Targeted_player;
+        TARGETED_PLAYER = Targeted_player;
     }
 
     public String getCardText() {
