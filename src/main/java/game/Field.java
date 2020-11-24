@@ -34,4 +34,8 @@ public abstract class Field {
     public int getPosition() {
         return position;
     }
+
+    public String getField(){
+        return getClass().getSimpleName();
+    }
 }
