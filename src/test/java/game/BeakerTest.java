@@ -1,5 +1,4 @@
-package test;
-import game.Beaker;
+package game;
 
 import static org.junit.jupiter.api.Assertions.*;
 

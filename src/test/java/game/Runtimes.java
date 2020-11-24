@@ -1,6 +1,4 @@
-package test;
-
-import game.*;
+package game;
 
 public class Runtimes {
     public static void main(String[] args){
