@@ -1,8 +1,6 @@
-package test;
+package game;
 
 import java.lang.*;
-
-import game.Beaker;
 
 public class test1 {
 

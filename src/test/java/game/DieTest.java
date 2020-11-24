@@ -1,5 +1,4 @@
-package test;
-import game.Die;
+package game;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DieTest {
