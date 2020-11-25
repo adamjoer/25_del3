@@ -44,7 +44,7 @@
         <cardType>StandardCard</cardType>
         <fine>True</fine>
         <gift>False</gift>
-        <move>False</move>
+        <moveDestination>False</moveDestination>
         <amount>2</amount>
     </chancecard>
     <chancecard>
@@ -84,7 +84,7 @@
         <cardType>StandardCard</cardType>
         <fine>False</fine>
         <gift>True</gift>
-        <move>False</move>
+        <moveDestination>False</moveDestination>
         <amount>1</amount>
     </chancecard>
     <chancecard>
@@ -97,7 +97,7 @@
         <cardType>StandardCard</cardType>
         <fine>False</fine>
         <gift>True</gift>
-        <move>False</move>
+        <moveDestination>False</moveDestination>
         <amount>2</amount>
     </chancecard>
     <chancecard>

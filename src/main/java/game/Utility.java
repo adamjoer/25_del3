@@ -77,7 +77,7 @@ public class Utility {
                     Element ele = (Element) field;
                     String cardType = ele.getElementsByTagName("cardType").item(0).getTextContent();
                     int cardNum = Integer.parseInt(ele.getElementsByTagName("number").item(0).getTextContent());
-                    String cardText = Files.readAllLines(Paths.get("src/main/resources/chanceCardTexts.txt")).get(2+((cardNum - 1) * 3));
+                    String cardText = Files.readAllLines(Paths.get("src/main/resources/chanceCardTexts.txt")).get(1+((cardNum - 1) * 3));
 
                     switch (cardType) {
                         case "HeldCard":
@@ -112,12 +112,10 @@ public class Utility {
                             }
                             else if(move){
                                 moveDestination = Integer.parseInt(ele.getElementsByTagName("moveTo").item(0).getTextContent());
+                            }
 
-                                chanceCards[i] = new StandardCard(cardText, fine, gift, move, moveDestination, amount);
-                            }
-                            else{
-                                chanceCards[i] = new StandardCard(cardText, fine, gift, move, moveDestination, amount);
-                            }
+                            chanceCards[i] = new StandardCard(cardText, fine, gift, move, moveDestination, amount);
+
                             break;
 
                     }
