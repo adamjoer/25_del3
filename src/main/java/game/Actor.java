@@ -1,6 +1,6 @@
 package game;
 
-public class Actor {
+public abstract class Actor {
 
     final protected Account account;
 
