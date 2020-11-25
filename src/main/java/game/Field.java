@@ -4,10 +4,10 @@ package game;
 public abstract class Field {
 
     // Variables
-    final private String title;
-    final private String subText;
-    final private String description;
-    final private int position;
+    final protected String title;
+    final protected String subText;
+    final protected String description;
+    final protected int position;
 
     // Constructor
     public Field(String title, String subText, String description, int position) {
