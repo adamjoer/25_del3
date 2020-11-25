@@ -17,7 +17,9 @@ public abstract class Field {
         this.position = position;
     }
 
-//    public abstract void fieldAction();
+    public String getField(){
+        return getClass().getSimpleName();
+    }
 
     public String getTitle() {
         return title;
@@ -35,7 +37,4 @@ public abstract class Field {
         return position;
     }
 
-    public String getField(){
-        return getClass().getSimpleName();
-    }
 }
