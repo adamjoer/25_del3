@@ -9,7 +9,7 @@ public class ChanceCardController {
     private static int cardsDrawn = 0;
 
 
-    public ChanceCardController(){
+    public ChanceCardController() {
         drawPile = createPile();
     }
 
@@ -18,7 +18,7 @@ public class ChanceCardController {
         return drawPile[cardsDrawn++];
     }
 
-    public void shufflePile(){
+    public void shufflePile() {
         Random rand = new Random();
 
         for (int i = 0; i < drawPile.length; i++) {
@@ -29,13 +29,8 @@ public class ChanceCardController {
         }
     }
 
-    public ChanceCard[] createPile(){
+    public ChanceCard[] createPile() {
         return Utility.chanceCardGenerator("src/main/resources/chanceCards.xml");
     }
 
-    public void printCards(){
-        for (int j = 0; j < drawPile.length; j++) {
-            System.out.println(drawPile[j].getChanceCardText());
-        }
-    }
 }
