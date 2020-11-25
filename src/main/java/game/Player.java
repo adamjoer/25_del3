@@ -1,11 +1,10 @@
 package game;
 
-public class Player extends Actor{
+public class Player extends Actor {
     //Variable
-    final private String name;
-    private int position = 0;
-    private int oldPosition = 0;
-
+    private final String name;
+    private int currentPosition = 0;
+    private int previousPosition = 0;
 
     //Constructor: Defining variables
     public Player(int startBalance, String name) {
@@ -13,18 +12,28 @@ public class Player extends Actor{
         this.name = name;
     }
 
-    // Relevant setters
-    public String getName() { return this.name; }
-    public int getPosition() { return this.position; }
-
-    // Relevant setters
-
-    public void setPosition(int Increment) {
-        oldPosition = position;
-        position = (position + Increment)%24;
+    // Move player forwards specific number of steps
+    public void movePlayer(int Increment) {
+        previousPosition = currentPosition;
+        currentPosition = (currentPosition + Increment) % 24;
     }
 
+    // Relevant getters
+    public String getName() {
+        return name;
+    }
 
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
 
+    public int getPreviousPosition() {
+        return previousPosition;
+    }
 
+    // Relevant setters
+    public void setCurrentPosition(int position) {
+        previousPosition = currentPosition;
+        currentPosition = position;
+    }
 }
