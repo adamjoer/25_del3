@@ -3,12 +3,12 @@ package game;
 public class GameBoard {
 
     // Declarations
-    final private Field[] gameBoard;
+    final private Field[] fields;
     final private Player[] scoreBoard;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard(int players, String[] playerNames) {
-        this.gameBoard = Utility.fieldGenerator("src/main/resources/tileList.xml");
+        this.fields = Utility.fieldGenerator("src/main/resources/tileList.xml");
         this.scoreBoard = new Player[players];
 
         if (playerNames.length < players) {
@@ -23,32 +23,32 @@ public class GameBoard {
     }
 
     // Move the player on the board.
-    public void movePlayer(int player,int increment){
+    public void movePlayer(int player, int increment) {
         int currentPosition = this.scoreBoard[player].getPosition();
-        int newPosition = (currentPosition + increment) % gameBoard.length;
+        int newPosition = (currentPosition + increment) % fields.length;
         this.scoreBoard[player].setPosition(newPosition);
     }
 
     // Execute action of the tile the player is on
-    public void tileAction(int player){
+    public void tileAction(int player) {
 
         // Get the field that the player has landed on from their position
         int position = scoreBoard[player].getPosition();
-        String field = gameBoard[position].getField();
+        String field = fields[position].getField();
 
         // Act based on which field the player landed on
         switch (field) {
 
             case "Start":
-                startFieldAction();
+                startFieldAction(player);
                 break;
 
             case "Property":
-                propertyFieldAction();
+                propertyFieldAction(player);
                 break;
 
             case "GoToJail":
-                goToJailFieldAction();
+                goToJailFieldAction(player);
                 break;
 
             // If landed on Jail or parking lot, do nothing
@@ -57,7 +57,7 @@ public class GameBoard {
                 break;
 
             case "Chance":
-                chanceFieldAction();
+                chanceFieldAction(player);
                 break;
 
             // Error: Field name not recognised
@@ -100,30 +100,50 @@ public class GameBoard {
 */
     }
 
-    private void startFieldAction() {
+    private void startFieldAction(int player) {
+        Actor owner = fields[player];
 
     }
 
-    private void propertyFieldAction() {
+    private void propertyFieldAction(int player) {
 
     }
 
-    private void goToJailFieldAction() {
+    private void goToJailFieldAction(int player) {
 
     }
 
-    private void chanceFieldAction() {
+    private void chanceFieldAction(int player) {
 
     }
 
     // Relevant getters for players
-    public int getPosition(int player){ return this.scoreBoard[player].getPosition(); }
-    public int getBalance(int player){ return this.scoreBoard[player].getBalance(); }
-    public String getName(int player){ return this.scoreBoard[player].getName(); }
-    public boolean getExtraTurn(int player){ return this.scoreBoard[player].getExtraTurn(); }
+    public int getPosition(int player) {
+        return this.scoreBoard[player].getPosition();
+    }
+
+    public int getBalance(int player) {
+        return this.scoreBoard[player].getBalance();
+    }
+
+    public String getName(int player) {
+        return this.scoreBoard[player].getName();
+    }
+
+    public boolean getExtraTurn(int player) {
+        return this.scoreBoard[player].getExtraTurn();
+    }
 
     // Relevant setters for players
-    public void setPosition(int player,int newPosition){ this.scoreBoard[player].setPosition(newPosition); }
-    public void setBalance(int player,int newBalance){ this.scoreBoard[player].setBalance(newBalance); }
-    public void setExtraTurn(int player, boolean extraTurn){ this.scoreBoard[player].setExtraTurn(extraTurn); }
+    public void setPosition(int player, int newPosition) {
+        this.scoreBoard[player].setPosition(newPosition);
+    }
+
+    public void setBalance(int player, int newBalance) {
+        this.scoreBoard[player].setBalance(newBalance);
+    }
+
+    public void setExtraTurn(int player, boolean extraTurn) {
+        this.scoreBoard[player].setExtraTurn(extraTurn);
+    }
 }
