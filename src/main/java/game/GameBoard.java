@@ -2,7 +2,7 @@ package game;
 
 public class GameBoard {
 
-    // Declarations
+    // Attributes
     private final Field[] fields;
     private final ActorController actorController;
 
@@ -24,12 +24,16 @@ public class GameBoard {
 
     // Move the player on the board.
     public void movePlayer(int player, int increment) {
-/*
-        int currentPosition = this.players[player].getPosition();
-        int newPosition = (currentPosition + increment) % fields.length;
-        this.players[player].setPosition(newPosition);
-*/
+
         actorController.movePlayer(player, increment);
+    }
+
+    // Returns whether player has passed Start field   !!!!!! PROVIDED THAT START FIELD'S POSITION IS 0 !!!!!!
+    public boolean hasPassedStart(int player) {
+
+        // If start field position is zero, player will have passed start if their position has overflowed to a smaller value
+        // a.i. their previous position is larger than their current position
+        return actorController.getPreviousPosition(player) > actorController.getCurrentPosition(player);
     }
 
     // Execute action of the tile the player is on
@@ -104,7 +108,7 @@ public class GameBoard {
     }
 
     private void startFieldAction(int player) {
-
+        // Call hasPassedStart?
     }
 
     private void propertyFieldAction(int position, int player) {
