@@ -29,6 +29,9 @@ public class ChanceCardController {
 
     }
 
+    public void createPile(){
+
+    }
 
 
 }
