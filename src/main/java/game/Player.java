@@ -19,9 +19,9 @@ public class Player extends Actor{
 
     // Relevant setters
 
-    public void setPosition(int newPosition) {
+    public void setPosition(int Increment) {
         oldPosition = position;
-        position = newPosition;
+        position = (position + Increment)%24;
     }
 
 
