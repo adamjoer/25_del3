@@ -18,6 +18,10 @@ public class StandardCard extends ChanceCard {
         AMOUNT = amount;
     }
 
+    /**
+     * determine what type of action this card is going to do.
+     * @return
+     */
     public String getCardAction(){
         if(FINE){
             return "fine";
