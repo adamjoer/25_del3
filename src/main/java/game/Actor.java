@@ -4,15 +4,36 @@ public abstract class Actor {
 
     final protected Account account;
 
-    public Actor(int startBalance){
+    public Actor(int startBalance) {
         account = new Account(startBalance);
     }
 
-    public int getBalance() { return this.account.getBalance(); }
+    // Make transaction on the account - and prevent negative balance. Returns true if transaction is successful.
+    public boolean makeTransaction(Actor receiver, int amount) {
 
+        int senderBalance = getBalance();
+        int receiverBalance = receiver.getBalance();
 
-    public void setBalance(int newBalance) { this.account.setBalance(newBalance); }
+        if (senderBalance < amount) {
+            return false;
+        }
 
-    // Attempt to make a transaction, returns true if successful.
-    public boolean makeTransaction(int points) { return this.account.makeTransaction(points); }
+        senderBalance -= amount;
+        setBalance(senderBalance);
+
+        receiverBalance += amount;
+        receiver.setBalance(receiverBalance);
+
+        return true;
+    }
+
+    // Relevant getters
+    public int getBalance() {
+        return account.getBalance();
+    }
+
+    // Relevant setters
+    public void setBalance(int newBalance) {
+        account.setBalance(newBalance);
+    }
 }
