@@ -14,7 +14,6 @@ public class ChanceCardController {
     }
 
 
-
     public ChanceCard drawChanceCard() {
         return drawPile[cardsDrawn++];
     }

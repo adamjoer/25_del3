@@ -1,0 +1,61 @@
+Card 1:
+On green cars next turn, he or she can move to a square of thier chosing that are not owned by any other player,
+and then buy it. If there are no free squares they buy one from another player. Draw an additional chance card.
+
+Card 2:
+Move to start. Recieve M2.
+
+Card 3:
+Move 5 fields forwards.
+
+Card 4:
+Move to the the next orange field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.
+
+Card 5:
+Move 1 field forward. 
+
+Card 6:
+On blue cars next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.
+
+Card 7:
+You ate to much candy, pay the bank M2.
+
+Card 8:
+Move to the next green field. If it's not owned by anyone, get it for free, otherwise, pay the owner rent. 
+
+Card 9:
+Move to the next lightblue field. If it's not owned by anyone, get it for free, otherwise, pay the owner rent. 
+
+Card 10:
+Keep this card until you need it. 
+When you are in jail you can use this card at the start of your turn to get out for free.
+
+Card 11:
+When drawn move to "Strandpromenaden".
+
+Card 12:
+On orange cars next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.
+
+Card 13:
+On balck cars next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.
+
+Card 14:
+Congrats it your birthday, all the other players will give you M1.
+
+Card 15:
+Move to the the next pink field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.
+
+Card 16:
+You made your homework, you get M2 from the bank.
+
+Card 17:
+Move to the the next pink field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.
+
+Card 18:
+Move to Skaterparken. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.
+
+Card 19:
+Move to the the next darkblue field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.
+
+Card 20:
+Move to the the next brown field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.
