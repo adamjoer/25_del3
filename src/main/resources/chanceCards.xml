@@ -51,7 +51,7 @@
     <chancecard>
         <number>9</number>
         <cardType>MoveToColorCard</cardType>
-        <color>lightblue</color>
+        <color>cyan</color>
     </chancecard>
 
     <chancecard>
@@ -110,7 +110,7 @@
     <chancecard>
         <number>19</number>
         <cardType>MoveToColorCard</cardType>
-        <color>darkblue</color>
+        <color>blue</color>
     </chancecard>
 
     <chancecard>
