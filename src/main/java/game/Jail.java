@@ -78,6 +78,7 @@ public class Jail extends Field {
         // Change prisoner array length
         prisoners = new Player[numberOfPrisoners];
 
+        // Copy temporary array into new prisoner array, excluding the prisoner at index
         System.arraycopy(temp, 0, prisoners, 0, index);
         System.arraycopy(temp, index + 1, prisoners, index, prisoners.length - index);
     }
