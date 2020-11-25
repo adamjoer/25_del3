@@ -5,20 +5,32 @@ import java.awt.*;
 public class Property extends Field {
 
     // Attributes
+    private final int value;
     private final Color color;
     private final int relatedPropertyPosition;
     private Actor owner;
 
     // Constructor
-    public Property(String title, String subText, String description, int position, Color color, int relatedPropertyPosition) {
+    public Property(String title, String subText, String description, int position, int value, Color color, int relatedPropertyPosition) {
         super(title, subText, description, position);
+        this.value = value;
         this.color = color;
         this.relatedPropertyPosition = relatedPropertyPosition;
-        // Set the default owner to be the bank, when property is purchased, players buy it from the bank
     }
 
-    public void sellProperty(Actor buyer) {
+    public boolean sellProperty(Actor buyer) {
+        if (buyer.equals(owner)) {
+            return false;
+        }
 
+        // Make transaction and check if it went through
+        if (!buyer.makeTransaction(owner, value)) {
+            return false;
+        }
+
+        // Assign new owner
+        owner = buyer;
+        return true;
     }
 
     public Color getColor() {

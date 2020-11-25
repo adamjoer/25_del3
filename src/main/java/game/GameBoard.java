@@ -3,8 +3,8 @@ package game;
 public class GameBoard {
 
     // Declarations
-    final private Field[] fields;
-    final private ActorController actorController;
+    private final Field[] fields;
+    private final ActorController actorController;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard(int players) {
@@ -12,6 +12,14 @@ public class GameBoard {
 
 
         actorController = new ActorController(players);
+
+        // Go over each tile and if it is a property, set the owner to the bank
+        Actor[] actors = actorController.getActors();
+        for (Field field : fields) {
+            if (field instanceof Property) {
+                ((Property) field).setOwner(actors[0]);
+            }
+        }
     }
 
     // Move the player on the board.
@@ -21,14 +29,14 @@ public class GameBoard {
         int newPosition = (currentPosition + increment) % fields.length;
         this.players[player].setPosition(newPosition);
 */
-
+        actorController.movePlayer(player, increment);
     }
 
     // Execute action of the tile the player is on
     public void tileAction(int player) {
 
         // Get the field that the player has landed on from their position
-        int position = players[player].getPosition();
+        int position = actorController.getCurrentPosition(player);
         String field = fields[position].getField();
 
         // Act based on which field the player landed on
@@ -46,7 +54,7 @@ public class GameBoard {
                 goToJailFieldAction(player);
                 break;
 
-            // If landed on Jail or parking lot, do nothing
+            // If landed on Jail (just visiting) or parking lot, do nothing
             case "Jail":
             case "ParkingLot":
                 break;
