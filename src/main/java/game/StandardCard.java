@@ -38,8 +38,6 @@ public class StandardCard extends ChanceCard {
         return destination;
     }
 
-
-
     public int getAmount(){
         return AMOUNT;
     }

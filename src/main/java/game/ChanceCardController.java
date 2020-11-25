@@ -18,7 +18,7 @@ public class ChanceCardController {
         return drawPile[cardsDrawn++];
     }
 
-    public void shufflePile() {
+    private void shufflePile() {
         Random rand = new Random();
 
         for (int i = 0; i < drawPile.length; i++) {
@@ -31,6 +31,11 @@ public class ChanceCardController {
 
     public ChanceCard[] createPile() {
         return Utility.chanceCardGenerator("src/main/resources/chanceCards.xml");
+    }
+
+    public void newGame(){
+        shufflePile();
+        cardsDrawn = 0;
     }
 
 }

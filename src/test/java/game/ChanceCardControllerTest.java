@@ -12,7 +12,7 @@ class ChanceCardControllerTest {
         System.out.println(controller.drawChanceCard().getChanceCardText());
         System.out.println(controller.drawChanceCard().getChanceCardText());
 
-        controller.shufflePile();
+        controller.newGame();
 
         System.out.println();
         System.out.println("After shuffle:");
