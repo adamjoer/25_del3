@@ -4,6 +4,7 @@ public class Player extends Actor{
     //Variable
     final private String name;
     private int position = 0;
+    private int oldPosition = 0;
 
 
     //Constructor: Defining variables
@@ -17,9 +18,13 @@ public class Player extends Actor{
     public int getPosition() { return this.position; }
 
     // Relevant setters
-    public void setPosition(int newPosition) { this.position = newPosition; }
 
-    
+    public void setPosition(int newPosition) {
+        oldPosition = position;
+        position = newPosition;
+    }
+
+
 
 
 }
