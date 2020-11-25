@@ -42,6 +42,6 @@ public class ActorController
 
     public void movePlayer(int Player, int Increment)
     {
-        actors[Player].setPosition(Increment);
+        ((Player) actors[Player]).setPosition(Increment);
     }
 }
