@@ -5,16 +5,16 @@ public class StandardCard extends ChanceCard {
     private final boolean FINE;
     private final boolean GIFT;
     private final boolean MOVE;
-    private final int DESTINATION;
+    private int destination;
     private final int AMOUNT;
 
 
-    public StandardCard(String CARD_TEXT, boolean fine, boolean gift, boolean move, int destination, int amount){
+    public StandardCard(String CARD_TEXT, boolean fine, boolean gift, boolean moveDestination, int destination, int amount){
         super(CARD_TEXT);
         FINE = fine;
         GIFT = gift;
-        MOVE = move;
-        DESTINATION = destination;
+        MOVE = moveDestination;
+        this.destination = destination;
         AMOUNT = amount;
     }
 
@@ -30,10 +30,15 @@ public class StandardCard extends ChanceCard {
         }
     }
 
-
-    public int getDestination(){
-        return DESTINATION;
+    public void setDestination(int num){
+        destination = num;
     }
+
+    public int getDestination() {
+        return destination;
+    }
+
+
 
     public int getAmount(){
         return AMOUNT;

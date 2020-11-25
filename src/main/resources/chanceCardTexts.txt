@@ -1,9 +1,8 @@
 Card 1:
-On green cars next turn, he or she can move to a square of thier chosing that are not owned by any other player,
-and then buy it. If there are no free squares they buy one from another player. Draw an additional chance card.
+On green cars next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.
 
 Card 2:
-Move to start. Recieve M2.
+Move to start. Receive M2.
 
 Card 3:
 Move 5 fields forwards.
@@ -27,8 +26,7 @@ Card 9:
 Move to the next lightblue field. If it's not owned by anyone, get it for free, otherwise, pay the owner rent. 
 
 Card 10:
-Keep this card until you need it. 
-When you are in jail you can use this card at the start of your turn to get out for free.
+Keep this card until you need it. When you are in jail you can use this card at the start of your turn to get out for free.
 
 Card 11:
 When drawn move to "Strandpromenaden".
@@ -37,7 +35,7 @@ Card 12:
 On orange cars next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.
 
 Card 13:
-On balck cars next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.
+On black cars next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.
 
 Card 14:
 Congrats it your birthday, all the other players will give you M1.

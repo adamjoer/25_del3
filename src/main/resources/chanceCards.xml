@@ -1,118 +1,123 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <chancecards>
     <chancecard>
         <number>1</number>
-        <cardType>HeldCard</cardType>
+        <cardType>TargetedCard</cardType>
         <targetPlayer>1</targetPlayer>
     </chancecard>
-
     <chancecard>
         <number>2</number>
         <cardType>StandardCard</cardType>
+        <fine>False</fine>
+        <gift>False</gift>
+        <moveDestination>True</moveDestination>
         <moveTo>0</moveTo>
     </chancecard>
-
     <chancecard>
         <number>3</number>
         <cardType>StandardCard</cardType>
+        <fine>False</fine>
+        <gift>False</gift>
+        <moveDestination>False</moveDestination>
         <moveNum>5</moveNum>
     </chancecard>
-
     <chancecard>
         <number>4</number>
         <cardType>MoveToColorCard</cardType>
         <color>orange</color>
     </chancecard>
-
     <chancecard>
         <number>5</number>
         <cardType>StandardCard</cardType>
+        <fine>False</fine>
+        <gift>False</gift>
+        <moveDestination>False</moveDestination>
         <moveNum>1</moveNum>
     </chancecard>
-
     <chancecard>
         <number>6</number>
-        <cardType>HeldCard</cardType>
+        <cardType>TargetedCard</cardType>
         <targetPlayer>2</targetPlayer>
     </chancecard>
-
     <chancecard>
         <number>7</number>
         <cardType>StandardCard</cardType>
-        <fine>2</fine>
+        <fine>True</fine>
+        <gift>False</gift>
+        <move>False</move>
+        <amount>2</amount>
     </chancecard>
-
     <chancecard>
         <number>8</number>
         <cardType>MoveToColorCard</cardType>
         <color>green</color>
     </chancecard>
-
     <chancecard>
         <number>9</number>
         <cardType>MoveToColorCard</cardType>
         <color>cyan</color>
     </chancecard>
-
     <chancecard>
         <number>10</number>
         <cardType>HeldCard</cardType>
     </chancecard>
-
     <chancecard>
         <number>11</number>
         <cardType>StandardCard</cardType>
+        <fine>False</fine>
+        <gift>False</gift>
+        <moveDestination>True</moveDestination>
         <moveTo>23</moveTo>
     </chancecard>
-
     <chancecard>
         <number>12</number>
-        <cardType>HeldCard</cardType>
+        <cardType>TargetedCard</cardType>
         <targetPlayer>3</targetPlayer>
     </chancecard>
-
     <chancecard>
         <number>13</number>
-        <cardType>HeldCard</cardType>
+        <cardType>TargetedCard</cardType>
         <targetPlayer>4</targetPlayer>
     </chancecard>
-
     <chancecard>
         <number>14</number>
         <cardType>StandardCard</cardType>
-        <gift>1</gift>
+        <fine>False</fine>
+        <gift>True</gift>
+        <move>False</move>
+        <amount>1</amount>
     </chancecard>
-
     <chancecard>
         <number>15</number>
         <cardType>MoveToColorCard</cardType>
         <color>pink</color>
     </chancecard>
-
     <chancecard>
         <number>16</number>
         <cardType>StandardCard</cardType>
-        <gift>2</gift>
+        <fine>False</fine>
+        <gift>True</gift>
+        <move>False</move>
+        <amount>2</amount>
     </chancecard>
-
     <chancecard>
         <number>17</number>
         <cardType>MoveToColorCard</cardType>
         <color>red</color>
     </chancecard>
-
     <chancecard>
         <number>18</number>
         <cardType>StandardCard</cardType>
+        <fine>False</fine>
+        <gift>False</gift>
+        <moveDestination>True</moveDestination>
         <moveTo>10</moveTo>
     </chancecard>
-
     <chancecard>
         <number>19</number>
         <cardType>MoveToColorCard</cardType>
         <color>blue</color>
     </chancecard>
-
     <chancecard>
         <number>20</number>
         <cardType>MoveToColorCard</cardType>

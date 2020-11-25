@@ -10,7 +10,7 @@ public class ChanceCardController {
 
 
     public ChanceCardController(){
-        createPile();
+        drawPile = createPile();
     }
 
 
@@ -29,7 +29,7 @@ public class ChanceCardController {
         }
     }
 
-    public void createPile(){
-        //TODO Call Utility.chanceCardGenerator
+    public ChanceCard[] createPile(){
+        return Utility.chanceCardGenerator("src/main/resources/chanceCards.xml");
     }
 }

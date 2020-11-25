@@ -2,14 +2,17 @@ package game;
 
 public class HeldCard extends ChanceCard{
 
-    private final int HELD_BY;
+    private int heldBy;
 
-    public HeldCard(String CARD_TEXT, int heldBy){
+    public HeldCard(String CARD_TEXT){
         super(CARD_TEXT);
-        HELD_BY = heldBy;
+    }
+
+    public void setHELD_BY(int num){
+        heldBy = num;
     }
 
     public int getHeldBy(){
-        return HELD_BY;
+        return heldBy;
     }
 }
