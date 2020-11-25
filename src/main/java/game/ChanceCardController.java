@@ -1,11 +1,13 @@
 package game;
 
-import java.awt.*;
 import java.util.Random;
 
 public class ChanceCardController {
-    private static ChanceCard[] drawPile;
+
+    private ChanceCard[] drawPile;
+
     private static int cardsDrawn = 0;
+
 
     public ChanceCardController(){
         createPile();
@@ -17,7 +19,7 @@ public class ChanceCardController {
         return drawPile[cardsDrawn++];
     }
 
-    public static void shufflePile(){
+    public void shufflePile(){
         Random rand = new Random();
 
         for (int i = 0; i < drawPile.length; i++) {
@@ -26,12 +28,9 @@ public class ChanceCardController {
             drawPile[randomIndexToSwap] = drawPile[i];
             drawPile[i] = temp;
         }
-
     }
 
     public void createPile(){
 
     }
-
-
 }
