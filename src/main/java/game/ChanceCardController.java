@@ -30,6 +30,6 @@ public class ChanceCardController {
     }
 
     public void createPile(){
-
+        //TODO Call Utility.chanceCardGenerator
     }
 }
