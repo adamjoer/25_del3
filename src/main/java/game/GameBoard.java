@@ -28,8 +28,44 @@ public class GameBoard {
         int newPosition = (currentPosition + increment) % gameBoard.length;
         this.scoreBoard[player].setPosition(newPosition);
     }
+
     // Execute action of the tile the player is on
     public void tileAction(int player){
+
+        // Get the field that the player has landed on from their position
+        int position = scoreBoard[player].getPosition();
+        String field = gameBoard[position].getField();
+
+        // Act based on which field the player landed on
+        switch (field) {
+
+            case "Start":
+                startFieldAction();
+                break;
+
+            case "Property":
+                propertyFieldAction();
+                break;
+
+            case "GoToJail":
+                goToJailFieldAction();
+                break;
+
+            // If landed on Jail or parking lot, do nothing
+            case "Jail":
+            case "ParkingLot":
+                break;
+
+            case "Chance":
+                chanceFieldAction();
+                break;
+
+            // Error: Field name not recognised
+            default:
+                throw new IllegalArgumentException();
+        }
+
+/*
         int tile = this.scoreBoard[player].getPosition();
         int value = this.gameBoard[tile].getPoints();
 
@@ -61,6 +97,23 @@ public class GameBoard {
             System.out.println("You get an extra turn.");
             this.scoreBoard[player].setExtraTurn(true);
         }
+*/
+    }
+
+    private void startFieldAction() {
+
+    }
+
+    private void propertyFieldAction() {
+
+    }
+
+    private void goToJailFieldAction() {
+
+    }
+
+    private void chanceFieldAction() {
+
     }
 
     // Relevant getters for players
