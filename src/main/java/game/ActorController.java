@@ -3,9 +3,9 @@ package game;
 public class ActorController
 {
     //Defining variables
-    private int number_player;
+    private final int number_player;
     private final Actor[] actors;
-    private int startBalance;
+    private final int startBalance;
     private final int BANK_BALANCE = 90;
     //Momentary name
     private String nametemp;
@@ -36,12 +36,30 @@ public class ActorController
         }
     }
 
-    public boolean makeTransaction (int sender, int reciever, int amount) {
-        return actors[sender].makeTransaction(actors[reciever], amount);
+    public boolean makeTransaction (int sender, int receiver, int amount) {
+        return actors[sender].makeTransaction(actors[receiver], amount);
     }
 
     public void movePlayer(int Player, int Increment)
     {
-        ((Player) actors[Player]).setPosition(Increment);
+        ((Player) actors[Player]).movePlayer(Increment);
+    }
+
+    // Relevant getters
+    public Actor[] getActors() {
+        return actors;
+    }
+
+    public int getCurrentPosition(int player) {
+        return ((Player) actors[player]).getCurrentPosition();
+    }
+
+    public int getPreviousPosition(int player) {
+        return ((Player) actors[player]).getPreviousPosition();
+    }
+
+    //Relevant setters
+    public void setCurrentPosition(int player, int newPosition) {
+        ((Player) actors[player]).setCurrentPosition(newPosition);
     }
 }
