@@ -8,7 +8,7 @@ public class Property extends Field {
     private final int value;
     private final Color color;
     private final int relatedPropertyPosition;
-    private Actor owner;
+    private int owner = 0;
 
     // Constructor
     public Property(String title, String subText, String description, int position, int value, Color color, int relatedPropertyPosition) {
@@ -17,22 +17,6 @@ public class Property extends Field {
         this.color = color;
         this.relatedPropertyPosition = relatedPropertyPosition;
     }
-
-    public boolean sellProperty(Actor buyer) {
-        if (buyer.equals(owner)) {
-            return false;
-        }
-
-        // Make transaction and check if it went through
-        if (!buyer.makeTransaction(owner, value)) {
-            return false;
-        }
-
-        // Assign new owner
-        owner = buyer;
-        return true;
-    }
-
 
     // Relevant getters
     public int getValue() {
@@ -47,12 +31,12 @@ public class Property extends Field {
         return relatedPropertyPosition;
     }
 
-    public Actor getOwner() {
+    public int getOwner() {
         return owner;
     }
 
     // Relevant setters
-    public void setOwner(Actor owner) {
+    public void setOwner(int owner) {
         this.owner = owner;
     }
 }
