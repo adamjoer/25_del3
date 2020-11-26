@@ -29,6 +29,9 @@ public class StandardCard extends ChanceCard {
         else if(GIFT){
             return "gift";
         }
+        else if(MOVE){
+            return "moveDestination";
+        }
         else{
             return "move";
         }
