@@ -28,13 +28,11 @@ public class GameBoard {
         for (Field field : fields) {
             if (field instanceof Property) {
                 ((Property) field).setOwner(bank);
-            }
-
-            if (field instanceof Jail) {
+            
+            } else if (field instanceof Jail) {
                 jailPosition = field.getPosition();
-            }
-
-            if (field instanceof GoToJail) {
+            
+            } else if (field instanceof GoToJail) {
                 goToJailPosition = field.getPosition();
             }
         }
