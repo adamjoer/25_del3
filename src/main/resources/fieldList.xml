@@ -52,6 +52,7 @@
         <title>Jail</title>
         <subText></subText>
         <description></description>
+        <goToJailPosition>18</goToJailPosition>
         <fine>1</fine>
     </field>
     <field>
