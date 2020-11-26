@@ -86,7 +86,7 @@ public class GameBoard {
                 break;
 
             case "GoToJail":
-                goToJailFieldAction(position, player);
+                success = goToJailFieldAction(position, player);
                 break;
 
             // If player landed on jail (just visiting), start or parking lot field, do nothing
@@ -169,19 +169,30 @@ public class GameBoard {
         return successfulTransaction;
     }
 
-    private void goToJailFieldAction(int position, int player) {
+    private boolean goToJailFieldAction(int position, int player) {
 
-        players[player].setCurrentPosition(((GoToJail) fields[position]).getJailPosition());
+        int jailPos = ((GoToJail) fields[position]).getJailPosition();
+        int bail = ((Jail) fields[jailPos]).getBail();
+
+        players[player].setCurrentPosition(jailPos);
 
         // If player has free card, take it away
         if (playerWithJailCard == player) {
+
+            guiController.displayChanceCard("Card used");
             playerWithJailCard = 0;
+            return true;
 
+        } else { // If player doesn't have free card, try to pay fine (to bank)
+            boolean successfulTransaction = actorController.makeTransaction(player, 0, bail);
 
+            if (successfulTransaction) {
+                guiController.setPlayerBalance(players[player], players[player].getBalance());
+            }
+
+            // Return whether transaction was successful
+            return successfulTransaction;
         }
-
-        // If player doesn't have free card, try to pay fine (to bank)
-        // Return whether transaction was successful
     }
 
     /**
