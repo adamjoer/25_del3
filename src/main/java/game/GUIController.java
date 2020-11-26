@@ -4,43 +4,19 @@ import gui_fields.*;
 import gui_main.GUI;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class GUIController {
 
 
     private static final GUI gui = new GUI();
-    private final List<GUI_Player> guiPlayerList = new ArrayList<>();
-    private final List<String> playerNames = new ArrayList<>();
+    private final int MAX_PLAYER_AMOUNT = 4;
+    private int PLAYER_AMOUNT = 0;
+    private final GUI_Player[] guiPlayerList = new GUI_Player[MAX_PLAYER_AMOUNT];
+    private final String[] playerNames = new String[MAX_PLAYER_AMOUNT];
 
     public GUIController(){
-
-        /*boolean checkPlayerCount = addPlayers(players);
-        if (!checkPlayerCount){
-            String userBtn = getUserButton("The maximum amount of players have been reach, do you want to:",
-                                            "Close game", "Continue");
-            if (userBtn.equals("Close game")){
-                close();
-            }
-        }*/
-    }
-
-    //This part is ONLY for test
-    public static void main(String[] args) {
-        GUIController gct = new GUIController();
-        gct.askForPlayerNames();
-        List<String> playerNames = gct.returnPlayerNames();
-        Player[] playerList = new Player[playerNames.size()];
-
-        for(int i=0; i< gct.returnPlayerNames().size(); i++){
-            Player player = new Player(playerNames.get(i), 1000);
-            playerList[i] = player;
-        }
-
-        gct.addPlayers(playerList);
-
     }
 
     /**
@@ -84,10 +60,11 @@ public class GUIController {
      */
     public void askForPlayerNames(){
         String userInputName;
+        int i = 0;
         while(true) {
             boolean btnPressed = getUserLeftButtonPressed("Opret ny spiller", "Ja", "Nej");
             if(btnPressed) {
-                if (playerNames.size() >= 4) {
+                if (i == 4) {
                     String userBtn = getUserButton("The maximum amount of players have been reach, do you want to:",
                             "Close game", "Continue");
                     if (userBtn.equals("Close game")) {
@@ -97,23 +74,29 @@ public class GUIController {
                 } else {
                     userInputName = getUserString("Skriv dit navn her").toLowerCase();
                     userInputName = userInputName.substring(0,1).toUpperCase() + userInputName.substring(1);
-                    if(playerNames.contains(userInputName)){
+                    if(Arrays.asList(playerNames).contains(userInputName)){
                         showMessage("Det navn er allerede taget!");
                     } else {
-                        playerNames.add(userInputName);
+                        playerNames[i] = (userInputName);
+                        i++;
                     }
                 }
             } else{
-                if(playerNames.size() <2){
+                if(i <2){
                     showMessage("Der skal mindst være 2 spillere for, at man kan starte spillet.");
                 } else{
                     break;
                 }
             }
         }
+        PLAYER_AMOUNT = i;
     }
 
-    public List<String> returnPlayerNames(){
+    /**
+     *
+     * @return Array of the player names that has been entered from the GUI
+     */
+    public String[] returnPlayerNames(){
         return playerNames;
     }
 
@@ -128,10 +111,10 @@ public class GUIController {
             return false;
         }
 
-        for(Player p : players){
-            GUI_Player player = new GUI_Player(p.getName(),p.getBalance());
+        for(int i=0; i < PLAYER_AMOUNT; i++){
+            GUI_Player player = new GUI_Player(players[i].getName(),players[i].getBalance());
             playerCheck = gui.addPlayer(player);
-            guiPlayerList.add(player);
+            guiPlayerList[i] = player;
         }
         return playerCheck;
     }

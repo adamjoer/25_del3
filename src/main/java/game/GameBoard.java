@@ -8,23 +8,37 @@ public class GameBoard {
     private final Field[] fields;
     private final ActorController actorController;
     private final ChanceCardController chanceCardController = new ChanceCardController();
-
     private int[] playersWithMoveCards;
-
     private int playerWithJailCard;
+    private final Player[] players;
+    private final Bank bank;
+    private int jailPosition;
+    private int goToJailPosition;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
-    public GameBoard(int players) {
+    public GameBoard(int numberOfPlayers) {
         this.fields = Utility.fieldGenerator("src/main/resources/tileList.xml");
 
 
-        actorController = new ActorController(players);
+        this.actorController = new ActorController(numberOfPlayers);
+        Actor[] actors = actorController.getActors();
+        this.bank = (Bank) actors[0];
+
+        this.players = new Player[actors.length - 1];
+        for (int i = 1; i < actors.length; i++) {
+            players[i] = (Player) actors[i];
+        }
 
         // Go over each tile and if it is a property, set the owner to the bank
-        Actor[] actors = actorController.getActors();
         for (Field field : fields) {
             if (field instanceof Property) {
-                ((Property) field).setOwner(actors[0]);
+                ((Property) field).setOwner(bank);
+            
+            } else if (field instanceof Jail) {
+                jailPosition = field.getPosition();
+            
+            } else if (field instanceof GoToJail) {
+                goToJailPosition = field.getPosition();
             }
         }
 
@@ -45,6 +59,10 @@ public class GameBoard {
         return actorController.getPreviousPosition(player) > actorController.getCurrentPosition(player);
     }
 
+    public boolean giveStartReward(int player) {
+        return bank.makeTransaction(players[player], ((Start) fields[0]).getReward());
+    }
+
     // Execute action of the tile the player is on
     public void tileAction(int player) {
 
@@ -53,6 +71,7 @@ public class GameBoard {
         String field = fields[position].getField();
 
         // Act based on which field the player landed on
+        boolean success;
         switch (field) {
 
             case "Start":
@@ -60,7 +79,7 @@ public class GameBoard {
                 break;
 
             case "Property":
-                propertyFieldAction(position, player);
+                success = propertyFieldAction(position, player);
                 break;
 
             case "GoToJail":
@@ -69,6 +88,8 @@ public class GameBoard {
 
             // If landed on Jail (just visiting) or parking lot, do nothing
             case "Jail":
+                success = jailFieldAction(player);
+
             case "ParkingLot":
                 break;
 
@@ -120,13 +141,56 @@ public class GameBoard {
         // Call hasPassedStart?
     }
 
-    private void propertyFieldAction(int position, int player) {
-        Actor owner = ((Property) fields[position]).getOwner();
+    private boolean propertyFieldAction(int position, int player) {
 
+        // Get property and owner
+        Property property = ((Property) fields[position]);
+        Actor owner = property.getOwner();
+
+        // If property is owned by player, do nothing
+        if (owner.equals(players[player])) {
+            return true;
+
+        // If property isn't owned by anyone (i.e. is owned by the bank), try to buy it
+        } else if (owner.equals(bank)) {
+
+            // If player failed to buy property, they are broke
+            return property.sellProperty(players[player]);
+
+        // Property is owned by another player
+        } else {
+
+            // Value of fine is the value of property
+            int fine = property.getValue();
+
+            // Check if owner also owns the related property
+            Property relatedProperty = (Property) fields[property.getRelatedPropertyPosition()];
+            if (relatedProperty.getOwner().equals(owner)) {
+
+                // If they do, player needs to pay double the fine
+                fine *= 2;
+            }
+
+            // Try to pay fine to owner, if the failed they are broke
+            return players[player].makeTransaction(owner, fine);
+        }
     }
 
     private void goToJailFieldAction(int player) {
+        players[player].setCurrentPosition(jailPosition);
+    }
 
+    private boolean jailFieldAction(int player) {
+        if (players[player].getPreviousPosition() != goToJailPosition) {
+            return true;
+        }
+
+        // If player has free card, take it away
+
+        // If player doesn't have free card, try to pay fine (to bank)
+        // Return whether transaction was successful
+
+        return false;
     }
 
     /**
