@@ -42,6 +42,11 @@ public class GameBoard {
         playersWithMoveCards = new int[actors.length];
     }
 
+    public void throwDice(int faceValue1, int faceValue2) {
+        guiController.setDiceGui(faceValue1, (int) (Math.random() * 360), faceValue2, ((int) (Math.random() * 360)));
+    }
+
+
     // Move the player on the board.
     public void movePlayer(int player, int increment) {
 
@@ -56,10 +61,9 @@ public class GameBoard {
         // a.i. their previous position is larger than their current position
         return actorController.getPreviousPosition(player) > actorController.getCurrentPosition(player);
     }
-
-//    public boolean giveStartReward(int player) {
-//        return bank.makeTransaction(players[player], ((Start) fields[0]).getReward());
-//    }
+    public boolean giveStartReward(int player) {
+        return actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
+    }
 
     // Execute action of the tile the player is on
     public void tileAction(int player) {
@@ -102,7 +106,7 @@ public class GameBoard {
     }
 
     private void startFieldAction(int player) {
-        // Call hasPassedStart?
+        giveStartReward(player);
     }
 
     private boolean propertyFieldAction(int position, int player) {
@@ -128,7 +132,7 @@ public class GameBoard {
             if (successfulTransaction) {
                 property.setOwner(player);
 
-                // Announce in GUI that property has been bought
+                // Announce in GUI that property has been bought1
                 guiController.fieldOwnable(
                         property.getSubText(),
                         players[player].getName(),
