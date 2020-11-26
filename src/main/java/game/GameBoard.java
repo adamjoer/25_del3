@@ -7,6 +7,8 @@ public class GameBoard {
     private final ActorController actorController;
     private final Player[] players;
     private final Bank bank;
+    private int jailPosition;
+    private int goToJailPosition;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard(int numberOfPlayers) {
@@ -26,6 +28,14 @@ public class GameBoard {
         for (Field field : fields) {
             if (field instanceof Property) {
                 ((Property) field).setOwner(bank);
+            }
+
+            if (field instanceof Jail) {
+                jailPosition = field.getPosition();
+            }
+
+            if (field instanceof GoToJail) {
+                goToJailPosition = field.getPosition();
             }
         }
     }
@@ -52,6 +62,7 @@ public class GameBoard {
         String field = fields[position].getField();
 
         // Act based on which field the player landed on
+        boolean success;
         switch (field) {
 
             case "Start":
@@ -59,7 +70,7 @@ public class GameBoard {
                 break;
 
             case "Property":
-                boolean success = propertyFieldAction(position, player);
+                success = propertyFieldAction(position, player);
                 break;
 
             case "GoToJail":
@@ -68,6 +79,8 @@ public class GameBoard {
 
             // If landed on Jail (just visiting) or parking lot, do nothing
             case "Jail":
+                success = jailFieldAction(player);
+
             case "ParkingLot":
                 break;
 
@@ -155,7 +168,20 @@ public class GameBoard {
     }
 
     private void goToJailFieldAction(int player) {
+        players[player].setCurrentPosition(jailPosition);
+    }
 
+    private boolean jailFieldAction(int player) {
+        if (players[player].getPreviousPosition() != goToJailPosition) {
+            return true;
+        }
+
+        // If player has free card, take it away
+
+        // If player doesn't have free card, try to pay fine (to bank)
+        // Return whether transaction was successful
+
+        return false;
     }
 
     private void chanceFieldAction(int player) {
