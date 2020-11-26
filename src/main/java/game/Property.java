@@ -33,6 +33,12 @@ public class Property extends Field {
         return true;
     }
 
+
+    // Relevant getters
+    public int getValue() {
+        return value;
+    }
+
     public Color getColor() {
         return color;
     }
@@ -45,6 +51,7 @@ public class Property extends Field {
         return owner;
     }
 
+    // Relevant setters
     public void setOwner(Actor owner) {
         this.owner = owner;
     }
