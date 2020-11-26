@@ -121,22 +121,10 @@ public class Utility {
 
                         case "StandardCard":
                             String standardType = getString(ele,"standardType");
-                            int amount = 0, moveDestination = 0, increment = 0;
+                            int moveDestination = getInt(ele,"moveDestination");
+                            int amount = getInt(ele,"amount");
 
-                            switch (standardType){
-                                case ("moveDestination"):
-                                    moveDestination = getInt(ele,"moveDestination");
-
-                                    break;
-                                case ("moveIncrement"):
-                                    increment = getInt(ele,"increment");
-
-                                    break;
-                                default:
-                                    amount = getInt(ele,"amount");
-                            }
-
-                            chanceCards[i] = new StandardCard(cardText, standardType, moveDestination, increment, amount);
+                            chanceCards[i] = new StandardCard(cardText, standardType, moveDestination, amount);
 
                             break;
                     }

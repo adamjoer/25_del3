@@ -3,7 +3,6 @@
     <chancecard>
         <cardText>On green car's next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.</cardText>
         <cardType>TargetedCard</cardType>
-        <color>green</color>
         <targetPlayer>1</targetPlayer>
     </chancecard>
     <chancecard>
@@ -16,7 +15,7 @@
         <cardText>Move 5 fields forward.</cardText>
         <cardType>StandardCard</cardType>
         <standardType>moveIncrement</standardType>
-        <increment>5</increment>
+        <moveDestination>5</moveDestination>
     </chancecard>
     <chancecard>
         <cardText>Move to the the next orange field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.</cardText>
@@ -27,12 +26,11 @@
         <cardText>Move 1 field forward.</cardText>
         <cardType>StandardCard</cardType>
         <standardType>moveIncrement</standardType>
-        <increment>1</increment>
+        <moveDestination>1</moveDestination>
     </chancecard>
     <chancecard>
         <cardText>On blue car's next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.</cardText>
         <cardType>TargetedCard</cardType>
-        <color>blue</color>
         <targetPlayer>2</targetPlayer>
     </chancecard>
     <chancecard>
@@ -64,13 +62,11 @@
     <chancecard>
         <cardText>On orange car's next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.</cardText>
         <cardType>TargetedCard</cardType>
-        <color>orange</color>
         <targetPlayer>3</targetPlayer>
     </chancecard>
     <chancecard>
         <cardText>On black car's next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.</cardText>
         <cardType>TargetedCard</cardType>
-        <color>black</color>
         <targetPlayer>4</targetPlayer>
     </chancecard>
     <chancecard>
