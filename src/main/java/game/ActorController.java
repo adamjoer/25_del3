@@ -3,29 +3,31 @@ package game;
 public class ActorController
 {
     //Defining variables
-    private final int numberPlayer;
+
     private final Actor[] actors;
     private final int startBalance;
     private final int bankBalance = 90;
+    private final String[] playerNames;
     //Momentary name
     private String name;
 
 
     /**
-     * @param numberPlayer
+     * @param playerNames
      */
-    public ActorController(int numberPlayer)
+    public ActorController(String[] playerNames)
     {
+
         //Defining number of players.
-        this.numberPlayer = numberPlayer;
-        actors = new Actor[numberPlayer + 1];
+        this.playerNames = playerNames;
+        actors = new Actor[playerNames.length + 1];
 
         //Calculating each players starting balance, based on the number of players
-        if (numberPlayer == 4)
+        if (playerNames.length == 4)
          {
             startBalance = 16;
          }
-        else if (numberPlayer == 3)
+        else if (playerNames.length == 3)
         {
             startBalance = 18;
         }
@@ -34,9 +36,9 @@ public class ActorController
         }
         //Assigning player names and bank with their starting balance
         actors[0] = new Bank(bankBalance);
-        for (int i = 1; i < numberPlayer; i++)
-        {
-            actors[i] = new Player(startBalance, name);
+        for (int i = 1; i < actors.length; i++)
+            {
+                actors[i] = new Player(startBalance, playerNames[i]);
         }
     }
 
@@ -75,6 +77,7 @@ public class ActorController
     public int getPreviousPosition(int player) {
         return ((Player) actors[player]).getPreviousPosition();
     }
+
 
     //Relevant setters
     public void setCurrentPosition(int player, int newPosition) {
