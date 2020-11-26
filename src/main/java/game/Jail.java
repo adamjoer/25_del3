@@ -2,14 +2,14 @@ package game;
 
 public class Jail extends Field {
 
-    private final int fine;
+    private final int bail;
     private Player[] prisoners;
     private final int goToJailPosition;
     private int numberOfPrisoners = 0;
 
     public Jail(String title, String subText, String description, int position, int fine, int goToJailPosition) {
         super(title, subText, description, position);
-        this.fine = fine;
+        this.bail = fine;
         this.goToJailPosition = goToJailPosition;
     }
 
@@ -40,8 +40,8 @@ public class Jail extends Field {
         shortenArrayLength(index);
     }
 
-    public int getFine() {
-        return fine;
+    public int getBail() {
+        return bail;
     }
 
     public Player[] getPrisoners() {
