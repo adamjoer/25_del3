@@ -50,8 +50,9 @@ public class Utility {
                             break;
                         case "Jail":
                             int fine = getInt(ele,"fine");
+                            int goToJailPosition = getInt(ele,"goToJailPosition");
 
-                            fieldArr[i] = new Jail(title,subText,description,i,fine);
+                            fieldArr[i] = new Jail(title,subText,description,i,fine,goToJailPosition);
 
                             break;
                         case "GoToJail":
@@ -115,8 +116,9 @@ public class Utility {
                             break;
 
                         case "TargetedCard":
+                            Color color1 = Color.getColor(getString(ele,"color"));
                             int targetPlayer = getInt(ele, "targetPlayer");
-                            chanceCards[i] = new TargetedCard(cardText, targetPlayer);
+                            chanceCards[i] = new TargetedCard(cardText, targetPlayer,color1);
                             break;
 
                         case "StandardCard":
