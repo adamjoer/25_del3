@@ -7,8 +7,6 @@ public class GameBoard {
     private final ActorController actorController;
     private final Player[] players;
     private final Bank bank;
-    private int jailPosition;
-    private int goToJailPosition;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard(int numberOfPlayers) {
@@ -76,12 +74,12 @@ public class GameBoard {
                 break;
 
             case "GoToJail":
-                goToJailFieldAction(player);
+                goToJailFieldAction(position, player);
                 break;
 
             // If landed on Jail (just visiting) or parking lot, do nothing
             case "Jail":
-                success = jailFieldAction(player);
+                success = jailFieldAction(position, player);
 
             case "ParkingLot":
                 break;
@@ -169,12 +167,12 @@ public class GameBoard {
         }
     }
 
-    private void goToJailFieldAction(int player) {
-        players[player].setCurrentPosition(jailPosition);
+    private void goToJailFieldAction(int position, int player) {
+        players[player].setCurrentPosition(((GoToJail) fields[position]).getJailPosition());
     }
 
-    private boolean jailFieldAction(int player) {
-        if (players[player].getPreviousPosition() != goToJailPosition) {
+    private boolean jailFieldAction(int position, int player) {
+        if (players[player].getPreviousPosition() != ((Jail) fields[position]).getGoToJailPosition()) {
             return true;
         }
 
