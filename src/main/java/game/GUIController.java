@@ -10,14 +10,50 @@ import java.util.Objects;
 public class GUIController {
 
 
-    private static final GUI gui = new GUI();
+    private final GUI gui;
     private final int MAX_PLAYER_AMOUNT = 4;
-    private int PLAYER_AMOUNT = 0;
+    private int PLAYER_AMOUNT = 0; // The actual number of players in the game
     private final GUI_Player[] guiPlayerList = new GUI_Player[MAX_PLAYER_AMOUNT];
     private final String[] playerNames = new String[MAX_PLAYER_AMOUNT];
 
-    public GUIController(){
+    public GUIController(Field[] fields, int numberOfFields){
+
+        // Predefined number of fields
+        GUI_Field[] guiFields = new GUI_Field[numberOfFields];
+        for(int i = 0; i<fields.length; i++){
+            Field field = fields[i];
+
+            switch (field.getField()){
+                case "Start":
+                    //Opret start felt
+                    guiFields[i] = new GUI_Start(field.getTitle(), field.getSubText(), field.getDescription(), Color.red, Color.BLACK);
+                    break;
+                case "Property":
+                    Property property = (Property) fields[i];
+                    guiFields[i] = new GUI_Street(property.getTitle(), property.getSubText(), property.getDescription(),
+                            String.valueOf(property.getValue()), property.getColor(), property.getColor());
+                    break;
+                case "GoToJail":
+                case "Jail":
+                    guiFields[i] = new GUI_Jail("default",field.getTitle(), field.getSubText(), field.getDescription(),
+                                    Color.WHITE, Color.BLACK);
+                    break;
+                case "ParkingLot":
+                    guiFields[i] = new GUI_Refuge("default", field.getTitle(), field.getSubText(), field.getDescription(),
+                                    Color.white, Color.black);
+                    break;
+                case "Chance":
+                    guiFields[i] = new GUI_Chance(field.getTitle(), field.getSubText(), field.getDescription(),
+                            Color.white, Color.black);
+                    break;
+                // Error: Field name not recognised
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+        gui = new GUI(guiFields);
     }
+
 
     /**
      * Places buttons on the board with a message, and wait for the button pressed
@@ -163,8 +199,21 @@ public class GUIController {
         gui.setDice(faceValue1, rotation1, faceValue2, rotation2);
     }
 
+    /**
+     * Places the dice on the board
+     * @param faceValue1 : Face value of the first dice to be shown on the board
+     * @param faceValue2 : Seconds face of the second dice to be shown on the board
+     */
     public void setDiceGui(int faceValue1, int faceValue2){
         gui.setDice(faceValue1, faceValue2);
+    }
+
+    /**
+     * Shows the face value of a singular dice
+     * @param faceValue : Face value of the dice, to be shown on the board
+     */
+    public void setDiceGui(int faceValue){
+        gui.setDie(faceValue);
     }
 
     /**
