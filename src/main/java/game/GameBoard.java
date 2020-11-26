@@ -15,9 +15,9 @@ public class GameBoard {
 
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard() {
-        fields = Utility.fieldGenerator("src/main/resources/tileList.xml");
+        fields = Utility.fieldGenerator("src/main/resources/fieldList.xml");
 
-        guiController = new GUIController();
+        guiController = new GUIController(fields, fields.length);
 
         guiController.askForPlayerNames();
         actorController = new ActorController(guiController.returnPlayerNames());
@@ -70,8 +70,8 @@ public class GameBoard {
         return actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
     }
 
-    // Execute action of the tile the player is on
-    public void tileAction(int player) {
+    // Execute action of the field the player is on
+    public void fieldAction(int player) {
 
         // Get the field that the player has landed on from their position
         int position = actorController.getCurrentPosition(player);
@@ -223,8 +223,8 @@ public class GameBoard {
                 playersWithMoveCards[player] = 0;
                 guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
 
-                //make sure the player does the action of the tile after moving
-                tileAction(player);
+                //make sure the player does the action of the field after moving
+                fieldAction(player);
                 break;
 
             case "TargetedCard":
@@ -259,33 +259,33 @@ public class GameBoard {
      * @param color  Which color the field they have to move to has
      * @param player Which player is being moved
      */
-    private void moveToColor(Color color, int player, boolean targetedCard){
-      
+    private void moveToColor(Color color, int player, boolean targetedCard) {
+
         //variable used to hold the position of the first field owned by a player
         int firstOwned = 0;
 
         //iterate over all the fields
 
-        for(int i = 0; i < fields.length; i++){
+        for (int i = 0; i < fields.length; i++) {
             int currentField = (i + actorController.getCurrentPosition(player)) % 24;
             //check if the field is of type "Property"
-            if(fields[currentField].getField() == "Property"){
+            if (fields[currentField].getField().equals("Property")) {
                 //check if this method is being used for a targetedCard
-                if(targetedCard){
+                if (targetedCard) {
                     //Check if field is owned by the bank
-                    if(((Property) fields[currentField]).getOwner() == actorController.getActors()[0]){
+                    if (((Property) fields[currentField]).getOwner() == 0) {
                         playersWithMoveCards[player] = currentField;
                         break;
 
-                    } else if(firstOwned == 0){
+                    } else if (firstOwned == 0) {
                         firstOwned = currentField;
                     }
                 }
                 //check if the field has the correct color if it's looking for a color field
-                else if(((Property) fields[currentField]).getColor() == color){
+                else if (((Property) fields[currentField]).getColor() == color) {
                     //check if it's owned by a player, if it not, set the player to move there on their next turn
-                        playersWithMoveCards[player] = currentField;
-                        break;
+                    playersWithMoveCards[player] = currentField;
+                    break;
                 }
             }
         }
@@ -340,14 +340,14 @@ public class GameBoard {
                 //move the player an amount
                 actorController.movePlayer(player, destination);
                 guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
-                tileAction(player);
+                fieldAction(player);
                 break;
 
             case "moveDestination":
                 //move the player to a specific field
                 actorController.setCurrentPosition(player, destination);
                 guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
-                tileAction(player);
+                fieldAction(player);
                 break;
         }
     }
