@@ -11,6 +11,8 @@ public class GameBoard {
 
     private int[] playersWithMoveCards;
 
+    private int playerWithJailCard;
+
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard(int players) {
         this.fields = Utility.fieldGenerator("src/main/resources/tileList.xml");
@@ -146,6 +148,22 @@ public class GameBoard {
 
                 moveToColor(colorTargeted, target);
 
+            case "HeldCard":
+                playerWithJailCard = player;
+
+
+            case "StandardCard":
+                int destination = ((StandardCard) cCard).getDestination();
+                if(((StandardCard) cCard).getCardAction() == "move"){
+                    if(destination != 0){
+                        destination = ((StandardCard) cCard).getDestination();
+                    }
+                    else{
+                        destination = actorController.getCurrentPosition(player) +
+                    }
+                }
+
+
         }
     }
 
@@ -177,6 +195,33 @@ public class GameBoard {
         }
         else{
             return 0;
+        }
+
+    }
+
+    public int getPlayerWithJailCard(){
+        return playerWithJailCard;
+    }
+
+    private void standardCardAction(int player, int destination, int amount, String action){
+        switch(action){
+            case "fine":
+                actorController.makeTransaction(player, 0, amount);
+                break;
+
+            case "gift":
+                actorController.makeTransaction(0, player, amount);
+
+            case "playerGift":
+                playerGift(player, amount);
+        }
+    }
+
+    private void playerGift(int receiver, int amount){
+        for(int j = 1; j < actorController.getActors().length; j++){
+            if(j != receiver){
+                actorController.makeTransaction(j, receiver, amount);
+            }
         }
 
     }
