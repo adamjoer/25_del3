@@ -96,7 +96,7 @@ public class GameBoard {
                 break;
 
             case "Chance":
-                chanceFieldAction(player);
+                success = chanceFieldAction(player);
                 break;
 
             // Error: Field name not recognised
@@ -200,16 +200,15 @@ public class GameBoard {
      *
      * @param player
      */
-    private void chanceFieldAction(int player) {
-        //draw a chancecard
+    private boolean chanceFieldAction(int player) {
+        //draw a chance card
         ChanceCard cCard = chanceCardController.drawChanceCard();
-
         guiController.displayChanceCard(cCard.getChanceCardText());
 
-        //get the type of chancecard
+        //get the type of chance card
         String cardType = cCard.getClass().getSimpleName();
 
-        //check what action to do, based on what chancecard was drawn
+        //check what action to do, based on what chance card was drawn
         switch (cardType) {
             case "MoveToColorCard":
                 //get the color to move to
@@ -225,7 +224,7 @@ public class GameBoard {
 
                 //make sure the player does the action of the field after moving
                 fieldAction(player);
-                break;
+                return true;
 
             case "TargetedCard":
 
@@ -234,12 +233,12 @@ public class GameBoard {
 
                 //update the list of what players have to move at the start of their turn.
                 moveToColor(Color.white, target, true);
-                break;
+                return true;
 
             case "HeldCard":
                 //set what player has the jailcard
                 playerWithJailCard = player;
-                break;
+                return true;
 
             case "StandardCard":
                 //get the destination, amount and the action of the card
@@ -247,8 +246,10 @@ public class GameBoard {
                 int amount = ((StandardCard) cCard).getAmount();
                 String action = ((StandardCard) cCard).getCardAction();
 
-                standardCardAction(player, destination, amount, action);
-                break;
+                return standardCardAction(player, destination, amount, action);
+
+            default:
+                throw new IllegalArgumentException();
         }
     }
 
@@ -315,40 +316,54 @@ public class GameBoard {
         return playerWithJailCard;
     }
 
-    private void standardCardAction(int player, int destination, int amount, String action) {
+    private boolean standardCardAction(int player, int destination, int amount, String action) {
+
+        boolean successfulTransaction;
         //check what action the card has to do
         switch (action) {
             case "fine":
                 //remove some money from the players account
-                actorController.makeTransaction(player, 0, amount);
-                guiController.setPlayerBalance(players[player], players[player].getBalance());
-                break;
+                successfulTransaction = actorController.makeTransaction(player, 0, amount);
+
+                if (successfulTransaction) {
+                    guiController.setPlayerBalance(players[player], players[player].getBalance());
+                }
+                return successfulTransaction;
 
             case "gift":
                 //insert some money into the players account
-                actorController.makeTransaction(0, player, amount);
-                guiController.setPlayerBalance(players[player], players[player].getBalance());
-                break;
+                successfulTransaction = actorController.makeTransaction(0, player, amount);
+
+                if (successfulTransaction) {
+                    guiController.setPlayerBalance(players[player], players[player].getBalance());
+                }
+                return successfulTransaction;
 
             case "playerGift":
                 //insert money into the players account from the other players
-                playerGift(player, amount);
-                guiController.setPlayerBalance(players[player], players[player].getBalance());
-                break;
+                successfulTransaction = playerGift(player, amount);
+
+                if (successfulTransaction) {
+                    guiController.setPlayerBalance(players[player], players[player].getBalance());
+                }
+                return successfulTransaction;
 
             case "moveIncrement":
                 //move the player an amount
                 actorController.movePlayer(player, destination);
                 guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
                 fieldAction(player);
-                break;
+                return true;
 
             case "moveDestination":
                 //move the player to a specific field
                 actorController.setCurrentPosition(player, destination);
                 guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
                 fieldAction(player);
-                break;
+                return true;
+
+            default:
+                throw new IllegalArgumentException();
         }
     }
 
@@ -358,12 +373,17 @@ public class GameBoard {
      * @param receiver The receiver of money
      * @param amount   The amount to receive from every player
      */
-    private void playerGift(int receiver, int amount) {
+    private boolean playerGift(int receiver, int amount) {
+        boolean successfulTransaction;
         for (int j = 1; j < actorController.getActors().length; j++) {
             if (j != receiver) {
-                actorController.makeTransaction(j, receiver, amount);
+                successfulTransaction = actorController.makeTransaction(j, receiver, amount);
+
+                if (!successfulTransaction) {
+                    return false;
+                }
             }
         }
-
+        return true;
     }
 }
