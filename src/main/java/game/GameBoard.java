@@ -5,21 +5,29 @@ public class GameBoard {
     // Attributes
     private final Field[] fields;
     private final ActorController actorController;
+    private final GUIController guiController;
     private final Player[] players;
     private final Bank bank;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
-    public GameBoard(int numberOfPlayers) {
-        this.fields = Utility.fieldGenerator("src/main/resources/tileList.xml");
+    public GameBoard() {
+        fields = Utility.fieldGenerator("src/main/resources/tileList.xml");
 
+        guiController = new GUIController();
 
-        this.actorController = new ActorController(numberOfPlayers);
+        guiController.askForPlayerNames();
+        actorController = new ActorController(guiController.returnPlayerNames());
+
         Actor[] actors = actorController.getActors();
-        this.bank = (Bank) actors[0];
+        bank = (Bank) actors[0];
 
-        this.players = new Player[actors.length - 1];
+        players = new Player[actors.length - 1];
         for (int i = 1; i < actors.length; i++) {
             players[i] = (Player) actors[i];
+        }
+
+        if (!guiController.addPlayers(players)) {
+            return;
         }
 
         // Go over each tile and if it is a property, set the owner to the bank
@@ -29,12 +37,17 @@ public class GameBoard {
             
             }
         }
+
+        for (Player player : players) {
+            guiController.setCar(player, true, 0);
+        }
     }
 
     // Move the player on the board.
     public void movePlayer(int player, int increment) {
 
         actorController.movePlayer(player, increment);
+        guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
     }
 
     // Returns whether player has passed Start field   !!!!!! PROVIDED THAT START FIELD'S POSITION IS 0 !!!!!!
@@ -87,40 +100,6 @@ public class GameBoard {
             default:
                 throw new IllegalArgumentException();
         }
-
-/*
-        int tile = this.scoreBoard[player].getPosition();
-        int value = this.gameBoard[tile].getPoints();
-
-        System.out.printf("You've landed on tile %d: ", tile + 1);
-        System.out.println(this.gameBoard[tile].getName());
-        System.out.println(this.gameBoard[tile].getFlavorText());
-
-        // Announce the coming change in player balance.
-        if (value > 0){ System.out.printf("You get %d gold coins.\n", value); }
-        else if (value < 0){ System.out.printf("You lose %d gold coins.\n", -value); }
-        else { System.out.println("You don't get any gold coins, but you don't lose any either."); }
-
-        // Attempt to make the transaction. If transaction fails, set balance to 0, and announce player broke.
-        boolean transaction = this.scoreBoard[player].makeTransaction(value);
-        if (!transaction){
-            System.out.println("You don't have enough gold coins. You are broke.");
-            this.scoreBoard[player].setBalance(0);
-        }
-
-        // Announce new balance
-        System.out.printf("You now have %d gold coins in total.\n", this.scoreBoard[player].getBalance());
-
-        // Set extra turn false - if
-        this.scoreBoard[player].setExtraTurn(false);
-
-
-        // Set extra turn
-        if (this.gameBoard[tile].getExtraTurn()) {
-            System.out.println("You get an extra turn.");
-            this.scoreBoard[player].setExtraTurn(true);
-        }
-*/
     }
 
     private void startFieldAction(int player) {
@@ -136,12 +115,15 @@ public class GameBoard {
         // If property is owned by player, do nothing
         if (owner.equals(players[player])) {
             return true;
+        }
 
-        // If property isn't owned by anyone (i.e. is owned by the bank), try to buy it
-        } else if (owner.equals(bank)) {
+        // If property isn't owned by any players (i.e. is owned by the bank)
+        boolean bought;
+        if (owner.equals(bank)) {
 
-            // If player failed to buy property, they are broke
-            return property.sellProperty(players[player]);
+            // Try to buy property
+            bought = property.sellProperty(players[player]);
+
 
         // Property is owned by another player
         } else {
@@ -158,7 +140,23 @@ public class GameBoard {
             }
 
             // Try to pay fine to owner, if the failed they are broke
-            return players[player].makeTransaction(owner, fine);
+            bought = players[player].makeTransaction(owner, fine);
+        }
+
+        if (bought) {
+            guiController.setPlayerBalance(players[player], players[player].getBalance());
+
+            guiController.fieldOwnable(
+                    property.getSubText(),
+                    players[player].getName(),
+                    property.getValue(),
+                    property.getColor(),
+                    property.getPosition()
+            );
+            return true;
+
+        } else {
+            return false;
         }
     }
 
