@@ -204,6 +204,8 @@ public class GameBoard {
         //draw a chancecard
         ChanceCard cCard = chanceCardController.drawChanceCard();
 
+        guiController.displayChanceCard(cCard.getChanceCardText());
+
         //get the type of chancecard
         String cardType = cCard.getClass().getSimpleName();
 
@@ -214,25 +216,24 @@ public class GameBoard {
                 Color color = ((MoveToColorCard) cCard).getColor();
 
                 //update the list
-                moveToColor(color, player);
+                moveToColor(color, player, false);
 
                 //move the player to the field
                 actorController.setCurrentPosition(player, playersWithMoveCards[player]);
                 playersWithMoveCards[player] = 0;
+                guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
 
                 //make sure the player does the action of the tile after moving
                 tileAction(player);
                 break;
 
             case "TargetedCard":
-                //get the color to move to
-                Color colorTargeted = ((TargetedCard) cCard).getColor();
 
                 //get the player that is going to be moved
                 int target = ((TargetedCard) cCard).getTargetedPlayer();
 
                 //update the list of what players have to move at the start of their turn.
-                moveToColor(colorTargeted, target);
+                moveToColor(Color.white, target, true);
                 break;
 
             case "HeldCard":
@@ -258,26 +259,33 @@ public class GameBoard {
      * @param color  Which color the field they have to move to has
      * @param player Which player is being moved
      */
-    private void moveToColor(Color color, int player) {
+    private void moveToColor(Color color, int player, boolean targetedCard){
+      
         //variable used to hold the position of the first field owned by a player
         int firstOwned = 0;
 
         //iterate over all the fields
-        for (int i = actorController.getCurrentPosition(player); i < fields.length; i++) {
-            int currentField = i % 24;
+
+        for(int i = 0; i < fields.length; i++){
+            int currentField = (i + actorController.getCurrentPosition(player)) % 24;
             //check if the field is of type "Property"
-            if (fields[currentField].getField() == "Property") {
-                //check if the field has the correct color
-                if (((Property) fields[currentField]).getColor() == color) {
-                    //check if it's owned by a player, if it not, set the player to move there on their next turn
-                    if (((Property) fields[currentField]).getOwner() == 0) {
+            if(fields[currentField].getField() == "Property"){
+                //check if this method is being used for a targetedCard
+                if(targetedCard){
+                    //Check if field is owned by the bank
+                    if(((Property) fields[currentField]).getOwner() == actorController.getActors()[0]){
                         playersWithMoveCards[player] = currentField;
                         break;
-                    }
-                    //If field is owned by a player, set the variable to the position, and go to next iteration
-                    else if (firstOwned == 0) {
+
+                    } else if(firstOwned == 0){
                         firstOwned = currentField;
                     }
+                }
+                //check if the field has the correct color if it's looking for a color field
+                else if(((Property) fields[currentField]).getColor() == color){
+                    //check if it's owned by a player, if it not, set the player to move there on their next turn
+                        playersWithMoveCards[player] = currentField;
+                        break;
                 }
             }
         }
@@ -313,27 +321,32 @@ public class GameBoard {
             case "fine":
                 //remove some money from the players account
                 actorController.makeTransaction(player, 0, amount);
+                guiController.setPlayerBalance(players[player], players[player].getBalance());
                 break;
 
             case "gift":
                 //insert some money into the players account
                 actorController.makeTransaction(0, player, amount);
+                guiController.setPlayerBalance(players[player], players[player].getBalance());
                 break;
 
             case "playerGift":
                 //insert money into the players account from the other players
                 playerGift(player, amount);
+                guiController.setPlayerBalance(players[player], players[player].getBalance());
                 break;
 
-            case "move":
+            case "moveIncrement":
                 //move the player an amount
                 actorController.movePlayer(player, destination);
+                guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
                 tileAction(player);
                 break;
 
-            case "moveDesination":
+            case "moveDestination":
                 //move the player to a specific field
                 actorController.setCurrentPosition(player, destination);
+                guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
                 tileAction(player);
                 break;
         }
