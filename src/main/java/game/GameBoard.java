@@ -192,6 +192,8 @@ public class GameBoard {
         //draw a chancecard
         ChanceCard cCard = chanceCardController.drawChanceCard();
 
+        guiController.displayChanceCard(cCard.getChanceCardText());
+
         //get the type of chancecard
         String cardType = cCard.getClass().getSimpleName();
 
@@ -207,6 +209,7 @@ public class GameBoard {
                 //move the player to the field
                 actorController.setCurrentPosition(player, playersWithMoveCards[player]);
                 playersWithMoveCards[player] = 0;
+                guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
 
                 //make sure the player does the action of the tile after moving
                 tileAction(player);
@@ -238,8 +241,6 @@ public class GameBoard {
 
                 standardCardAction(player, destination, amount, action);
                 break;
-
-
         }
     }
 
@@ -254,8 +255,8 @@ public class GameBoard {
         int firstOwned = 0;
 
         //iterate over all the fields
-        for(int i = actorController.getCurrentPosition(player); i < fields.length; i++){
-            int currentField = i % 24;
+        for(int i = 0; i < fields.length; i++){
+            int currentField = (i + actorController.getCurrentPosition(player)) % 24;
             //check if the field is of type "Property"
             if(fields[currentField].getField() == "Property"){
                 //check if the field has the correct color
@@ -304,27 +305,32 @@ public class GameBoard {
             case "fine":
                 //remove some money from the players account
                 actorController.makeTransaction(player, 0, amount);
+                guiController.setPlayerBalance(players[player], players[player].getBalance());
                 break;
 
             case "gift":
                 //insert some money into the players account
                 actorController.makeTransaction(0, player, amount);
+                guiController.setPlayerBalance(players[player], players[player].getBalance());
                 break;
 
             case "playerGift":
                 //insert money into the players account from the other players
                 playerGift(player, amount);
+                guiController.setPlayerBalance(players[player], players[player].getBalance());
                 break;
 
             case "move":
                 //move the player an amount
                 actorController.movePlayer(player, destination);
+                guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
                 tileAction(player);
                 break;
 
-            case "moveDesination":
+            case "moveDestination":
                 //move the player to a specific field
                 actorController.setCurrentPosition(player, destination);
+                guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
                 tileAction(player);
                 break;
         }
