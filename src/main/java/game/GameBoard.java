@@ -27,11 +27,6 @@ public class GameBoard {
             if (field instanceof Property) {
                 ((Property) field).setOwner(bank);
             
-            } else if (field instanceof Jail) {
-                jailPosition = field.getPosition();
-            
-            } else if (field instanceof GoToJail) {
-                goToJailPosition = field.getPosition();
             }
         }
     }
