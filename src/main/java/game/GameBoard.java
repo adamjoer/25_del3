@@ -5,19 +5,27 @@ public class GameBoard {
     // Attributes
     private final Field[] fields;
     private final ActorController actorController;
+    private final Player[] players;
+    private final Bank bank;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
-    public GameBoard(int players) {
+    public GameBoard(int numberOfPlayers) {
         this.fields = Utility.fieldGenerator("src/main/resources/tileList.xml");
 
 
-        actorController = new ActorController(players);
+        this.actorController = new ActorController(numberOfPlayers);
+        Actor[] actors = actorController.getActors();
+        this.bank = (Bank) actors[0];
+
+        this.players = new Player[actors.length - 1];
+        for (int i = 1; i < actors.length; i++) {
+            players[i] = (Player) actors[i];
+        }
 
         // Go over each tile and if it is a property, set the owner to the bank
-        Actor[] actors = actorController.getActors();
         for (Field field : fields) {
             if (field instanceof Property) {
-                ((Property) field).setOwner(actors[0]);
+                ((Property) field).setOwner(bank);
             }
         }
     }
@@ -51,7 +59,7 @@ public class GameBoard {
                 break;
 
             case "Property":
-                propertyFieldAction(position, player);
+                boolean success = propertyFieldAction(position, player);
                 break;
 
             case "GoToJail":
@@ -111,9 +119,39 @@ public class GameBoard {
         // Call hasPassedStart?
     }
 
-    private void propertyFieldAction(int position, int player) {
-        Actor owner = ((Property) fields[position]).getOwner();
+    private boolean propertyFieldAction(int position, int player) {
 
+        // Get property and owner
+        Property property = ((Property) fields[position]);
+        Actor owner = property.getOwner();
+
+        // If property is owned by player, do nothing
+        if (owner.equals(players[player])) {
+            return true;
+
+        // If property isn't owned by anyone (i.e. is owned by the bank), try to buy it
+        } else if (owner.equals(bank)) {
+
+            // If player failed to buy property, they are broke
+            return property.sellProperty(players[player]);
+
+        // Property is owned by another player
+        } else {
+
+            // Value of fine is the value of property
+            int fine = property.getValue();
+
+            // Check if owner also owns the related property
+            Property relatedProperty = (Property) fields[property.getRelatedPropertyPosition()];
+            if (relatedProperty.getOwner().equals(owner)) {
+
+                // If they do, player needs to pay double the fine
+                fine *= 2;
+            }
+
+            // Try to pay fine to owner, if the failed they are broke
+            return players[player].makeTransaction(owner, fine);
+        }
     }
 
     private void goToJailFieldAction(int player) {
