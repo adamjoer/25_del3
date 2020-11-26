@@ -1,11 +1,16 @@
 package game;
 
+import java.awt.*;
+
 public class GameBoard {
 
     // Attributes
     private final Field[] fields;
     private final ActorController actorController;
     private final GUIController guiController;
+    private final ChanceCardController chanceCardController = new ChanceCardController();
+    private int[] playersWithMoveCards;
+    private int playerWithJailCard;
     private final Player[] players;
     private final Bank bank;
 
@@ -41,6 +46,8 @@ public class GameBoard {
         for (Player player : players) {
             guiController.setCar(player, true, 0);
         }
+
+        playersWithMoveCards = new int[actors.length];
     }
 
     // Move the player on the board.
@@ -177,7 +184,163 @@ public class GameBoard {
         return false;
     }
 
+    /**
+     * Method
+     * @param player
+     */
     private void chanceFieldAction(int player) {
+        //draw a chancecard
+        ChanceCard cCard = chanceCardController.drawChanceCard();
+
+        //get the type of chancecard
+        String cardType = cCard.getClass().getSimpleName();
+
+        //check what action to do, based on what chancecard was drawn
+        switch (cardType){
+            case "MoveToColorCard":
+                //get the color to move to
+                Color color = ((MoveToColorCard) cCard).getColor();
+
+                //update the list
+                moveToColor(color, player);
+
+                //move the player to the field
+                actorController.setCurrentPosition(player, playersWithMoveCards[player]);
+                playersWithMoveCards[player] = 0;
+
+                //make sure the player does the action of the tile after moving
+                tileAction(player);
+                break;
+
+
+            case "TargetedCard":
+                //get the color to move to
+                Color colorTargeted = ((TargetedCard) cCard).getColor();
+
+                //get the player that is going to be moved
+                int target = ((TargetedCard) cCard).getTargetedPlayer();
+
+                //update the list of what players have to move at the start of their turn.
+                moveToColor(colorTargeted, target);
+                break;
+
+            case "HeldCard":
+                //set what player has the jailcard
+                playerWithJailCard = player;
+                break;
+
+
+            case "StandardCard":
+                //get the destination, amount and the action of the card
+                int destination = ((StandardCard) cCard).getDestination();
+                int amount = ((StandardCard) cCard).getAmount();
+                String action = ((StandardCard) cCard).getCardAction();
+
+                standardCardAction(player, destination, amount, action);
+                break;
+
+
+        }
+    }
+
+
+    /**
+     * Method used to indicate what players have to move at the start of their turn.
+     * @param color Which color the field they have to move to has
+     * @param player Which player is being moved
+     */
+    private void moveToColor(Color color, int player){
+        //variable used to hold the position of the first field owned by a player
+        int firstOwned = 0;
+
+        //iterate over all the fields
+        for(int i = actorController.getCurrentPosition(player); i < fields.length; i++){
+            int currentField = i % 24;
+            //check if the field is of type "Property"
+            if(fields[currentField].getField() == "Property"){
+                //check if the field has the correct color
+                if(((Property) fields[currentField]).getColor() == color){
+                    //check if it's owned by a player, if it not, set the player to move there on their next turn
+                    if(((Property) fields[currentField]).getOwner() == actorController.getActors()[0]){
+                        playersWithMoveCards[player] = currentField;
+                        break;
+                    }
+                    //If field is owned by a player, set the variable to the position, and go to next iteration
+                    else if(firstOwned == 0){
+                        firstOwned = currentField;
+                    }
+                }
+            }
+        }
+
+        //If there were no available unowned fields, set it the the first owned field of the color
+        if(firstOwned != 0){
+            playersWithMoveCards[player] = firstOwned;
+        }
+    }
+
+    /**
+     * Used to check if the player has to move on the start of their turn
+     * @param player What player to check
+     * @return Return the field they have to move to, otherwise, return 0
+     */
+    public int checkIfPlayerHasMoveCard(int player){
+        if(playersWithMoveCards[player] != 0){
+            return playersWithMoveCards[player];
+        }
+        else{
+            return 0;
+        }
+
+    }
+
+    public int getPlayerWithJailCard(){
+        return playerWithJailCard;
+    }
+
+    private void standardCardAction(int player, int destination, int amount, String action){
+        //check what action the card has to do
+        switch(action){
+            case "fine":
+                //remove some money from the players account
+                actorController.makeTransaction(player, 0, amount);
+                break;
+
+            case "gift":
+                //insert some money into the players account
+                actorController.makeTransaction(0, player, amount);
+                break;
+
+            case "playerGift":
+                //insert money into the players account from the other players
+                playerGift(player, amount);
+                break;
+
+            case "move":
+                //move the player an amount
+                actorController.movePlayer(player, destination);
+                tileAction(player);
+                break;
+
+            case "moveDesination":
+                //move the player to a specific field
+                actorController.setCurrentPosition(player, destination);
+                tileAction(player);
+                break;
+        }
+    }
+
+    /**
+     * Method to transfer money to a player, from all the other players
+     * @param receiver The receiver of money
+     * @param amount The amount to receive from every player
+     */
+    private void playerGift(int receiver, int amount){
+        for(int j = 1; j < actorController.getActors().length; j++){
+            if(j != receiver){
+                actorController.makeTransaction(j, receiver, amount);
+            }
+        }
 
     }
 }
