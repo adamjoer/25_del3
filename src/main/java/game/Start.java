@@ -9,10 +9,6 @@ public class Start extends Field {
         this.reward = reward;
     }
 
-    public boolean hasPassed(int prevPos, int curPos) {
-        return false;
-    }
-
     public int getReward() {
         return reward;
     }
