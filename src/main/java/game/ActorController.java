@@ -75,6 +75,16 @@ public class ActorController
         return actors;
     }
 
+    public int getPlayerNum(Actor player) {
+        for (int i = 1; i < actors.length; i++) {
+            if (actors[i].equals(player)) {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
     public int getCurrentPosition(int player) {
         return ((Player) actors[player]).getCurrentPosition();
     }
