@@ -10,7 +10,7 @@ public class GameBoard {
     private final GUIController guiController;
     private final ChanceCardController chanceCardController;
     private int[] playersWithMoveCards;
-    private int playerWithJailCard;
+    private int playerWithJailCard = 0;
     private final Player[] players;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
@@ -89,11 +89,8 @@ public class GameBoard {
                 goToJailFieldAction(position, player);
                 break;
 
+            // If player landed on jail (just visiting), start or parking lot field, do nothing
             case "Jail":
-                success = jailFieldAction(position, player);
-                break;
-
-            // If landed on start or parking lot field, do nothing
             case "Start":
             case "ParkingLot":
                 break;
@@ -173,20 +170,18 @@ public class GameBoard {
     }
 
     private void goToJailFieldAction(int position, int player) {
-        players[player].setCurrentPosition(((GoToJail) fields[position]).getJailPosition());
-    }
 
-    private boolean jailFieldAction(int position, int player) {
-        if (players[player].getPreviousPosition() != ((Jail) fields[position]).getGoToJailPosition()) {
-            return true;
-        }
+        players[player].setCurrentPosition(((GoToJail) fields[position]).getJailPosition());
 
         // If player has free card, take it away
+        if (playerWithJailCard == player) {
+            playerWithJailCard = 0;
+
+
+        }
 
         // If player doesn't have free card, try to pay fine (to bank)
         // Return whether transaction was successful
-
-        return false;
     }
 
     /**
