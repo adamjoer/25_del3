@@ -135,19 +135,22 @@ public class GameBoard {
             case "MoveToColorCard":
                 Color color = ((MoveToColorCard) cCard).getColor();
 
-                moveToColorCard(color, player);
+                moveToColor(color, player);
+                actorController.setCurrentPosition(player, playersWithMoveCards[player]);
+                tileAction(player);
                 break;
 
             case "TargetedCard":
                 Color colorTargeted = ((TargetedCard) cCard).getColor();
+                int target = ((TargetedCard) cCard).getTargetedPlayer();
 
-                targetedCard(color, player);
+                moveToColor(colorTargeted, target);
 
         }
     }
 
 
-    private void targetedCard(Color color, int player){
+    private void moveToColor(Color color, int player){
         int firstOwned = 0;
         for(int i = actorController.getCurrentPosition(player); i < fields.length; i++){
             int currentField = i % 24;
