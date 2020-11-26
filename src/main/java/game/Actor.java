@@ -8,7 +8,7 @@ public abstract class Actor {
         account = new Account(startBalance);
     }
 
-    // Make transaction on the account - and prevent negative balance. Returns true if transaction is successful.
+    // Make transaction between two actors - and prevent negative balance. Returns true if transaction is successful.
     public boolean makeTransaction(Actor receiver, int amount) {
 
         int senderBalance = getBalance();
@@ -17,14 +17,15 @@ public abstract class Actor {
         if (senderBalance < amount) {
             return false;
         }
+        else {
+            senderBalance -= amount;
+            setBalance(senderBalance);
 
-        senderBalance -= amount;
-        setBalance(senderBalance);
+            receiverBalance += amount;
+            receiver.setBalance(receiverBalance);
 
-        receiverBalance += amount;
-        receiver.setBalance(receiverBalance);
-
-        return true;
+            return true;
+        }
     }
 
     // Relevant getters
