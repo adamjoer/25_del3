@@ -6,12 +6,19 @@ public class Player extends Actor {
     private int currentPosition = 0;
     private int previousPosition = 0;
 
+    /**
+     * @param startBalance
+     * @param name
+     */
     //Constructor: Defining variables
     public Player(int startBalance, String name) {
         super(startBalance);
         this.name = name;
     }
 
+    /**
+     * @param Increment
+     */
     // Move player forwards specific number of steps
     public void movePlayer(int Increment) {
         previousPosition = currentPosition;

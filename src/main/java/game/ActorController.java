@@ -3,43 +3,68 @@ package game;
 public class ActorController
 {
     //Defining variables
-    private final int number_player;
+
     private final Actor[] actors;
     private final int startBalance;
-    private final int BANK_BALANCE = 90;
+    private final int bankBalance = 90;
+    private final String[] playerNames;
     //Momentary name
-    private String nametemp;
+    private String name;
 
-    public ActorController(int number_player)
+
+    /**
+     * @param playerNames
+     */
+    public ActorController(String[] playerNames)
     {
+
         //Defining number of players.
-        this.number_player = number_player;
-        actors = new Actor[number_player + 1];
+        this.playerNames = playerNames;
+        actors = new Actor[playerNames.length + 1];
 
         //Calculating each players starting balance, based on the number of players
-        if (number_player == 4)
+        if (playerNames.length == 4)
          {
             startBalance = 16;
          }
-        else if (number_player == 3)
+        else if (playerNames.length == 3)
         {
             startBalance = 18;
         }
         else {
             startBalance = 20;
         }
-        //Assigning player names with there starting balance
-        actors[0] = new Bank(BANK_BALANCE);
-        for (int i = 1; i < number_player; i++)
-        {
-            actors[i] = new Player(startBalance, nametemp);
+        //Assigning player names and bank with their starting balance
+        actors[0] = new Bank(bankBalance);
+        for (int i = 1; i < actors.length; i++)
+            {
+                actors[i] = new Player(startBalance, playerNames[i]);
         }
     }
 
+
+    /**
+     * @param sender
+     * @param receiver
+     * @param amount
+     * @return
+     */
+    //makes transaction between two actors and returns false if senders balance is below amount
     public boolean makeTransaction (int sender, int receiver, int amount) {
-        return actors[sender].makeTransaction(actors[receiver], amount);
+        if(actors[sender].makeTransaction(-amount) && amount <91){
+            actors[receiver].makeTransaction(amount);
+            return true;
+        }
+
+        else { return false;}
     }
 
+
+    /**
+     * @param Player
+     * @param Increment
+     */
+    //Calls Player class method with actor array
     public void movePlayer(int Player, int Increment)
     {
         ((Player) actors[Player]).movePlayer(Increment);
@@ -57,6 +82,7 @@ public class ActorController
     public int getPreviousPosition(int player) {
         return ((Player) actors[player]).getPreviousPosition();
     }
+
 
     //Relevant setters
     public void setCurrentPosition(int player, int newPosition) {

@@ -4,11 +4,13 @@ public class Jail extends Field {
 
     private final int fine;
     private Player[] prisoners;
+    private final int goToJailPosition;
     private int numberOfPrisoners = 0;
 
-    public Jail(String title, String subText, String description, int position, int fine) {
+    public Jail(String title, String subText, String description, int position, int fine, int goToJailPosition) {
         super(title, subText, description, position);
         this.fine = fine;
+        this.goToJailPosition = goToJailPosition;
     }
 
     public void incarcerate(Player player) {
@@ -44,6 +46,10 @@ public class Jail extends Field {
 
     public Player[] getPrisoners() {
         return prisoners;
+    }
+
+    public int getGoToJailPosition() {
+        return goToJailPosition;
     }
 
     private void extendArrayLength(Player player) {
