@@ -54,6 +54,10 @@ public class GameBoard {
         return actorController.getPreviousPosition(player) > actorController.getCurrentPosition(player);
     }
 
+    public boolean giveStartReward(int player) {
+        return bank.makeTransaction(players[player], ((Start) fields[0]).getReward());
+    }
+
     // Execute action of the tile the player is on
     public void tileAction(int player) {
 
