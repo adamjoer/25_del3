@@ -9,4 +9,7 @@ public class GoToJail extends Field {
         this.jailPosition = jailPosition;
     }
 
+    public int getJailPosition() {
+        return jailPosition;
+    }
 }
