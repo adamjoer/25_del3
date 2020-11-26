@@ -42,25 +42,30 @@ public class GameBoard {
         playersWithMoveCards = new int[actors.length];
     }
 
-    public void throwDice(int faceValue1, int faceValue2) {
+    public void castDice(int faceValue1, int faceValue2) {
+
+        // Show 2 dice being cast, with randomized spins
         guiController.setDiceGui(faceValue1, (int) (Math.random() * 360), faceValue2, ((int) (Math.random() * 360)));
     }
-
 
     // Move the player on the board.
     public void movePlayer(int player, int increment) {
 
+        // Move player forward by the specified amount of steps
         actorController.movePlayer(player, increment);
+
+        // Show player moving forward in GUI
         guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
     }
 
-    // Returns whether player has passed Start field   !!!!!! PROVIDED THAT START FIELD'S POSITION IS 0 !!!!!!
+    // Returns whether player has passed Start field
     public boolean hasPassedStart(int player) {
 
         // If start field position is zero, player will have passed start if their position has overflowed to a smaller value
         // a.i. their previous position is larger than their current position
         return actorController.getPreviousPosition(player) > actorController.getCurrentPosition(player);
     }
+
     public boolean giveStartReward(int player) {
         return actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
     }
@@ -76,10 +81,6 @@ public class GameBoard {
         boolean success;
         switch (field) {
 
-            case "Start":
-                startFieldAction(player);
-                break;
-
             case "Property":
                 success = propertyFieldAction(position, player);
                 break;
@@ -88,10 +89,12 @@ public class GameBoard {
                 goToJailFieldAction(position, player);
                 break;
 
-            // If landed on Jail (just visiting) or parking lot, do nothing
             case "Jail":
                 success = jailFieldAction(position, player);
+                break;
 
+            // If landed on start or parking lot field, do nothing
+            case "Start":
             case "ParkingLot":
                 break;
 
@@ -105,24 +108,21 @@ public class GameBoard {
         }
     }
 
-    private void startFieldAction(int player) {
-        giveStartReward(player);
-    }
-
     private boolean propertyFieldAction(int position, int player) {
 
         // Get property and owner
         Property property = ((Property) fields[position]);
+        int owner = property.getOwner();
 
         // If property is owned by player, do nothing
-        if (property.getOwner() == player) {
+        if (owner == player) {
             return true;
         }
 
         boolean successfulTransaction;
 
         // Property isn't owned by any players (i.e. is owned by the bank)
-        if (property.getOwner() == 0) {
+        if (owner == 0) {
 
             // Try to buy property
             // Make transaction and check if it went through
@@ -132,7 +132,7 @@ public class GameBoard {
             if (successfulTransaction) {
                 property.setOwner(player);
 
-                // Announce in GUI that property has been bought1
+                // Announce in GUI that property has been bought
                 guiController.fieldOwnable(
                         property.getSubText(),
                         players[player].getName(),
@@ -145,7 +145,6 @@ public class GameBoard {
         } else { // Property is owned by another player
 
             // Value of rent is the value of property
-            int owner = property.getOwner();
             int rent = property.getValue();
 
             // Check if owner also owns the related property
@@ -219,7 +218,6 @@ public class GameBoard {
                 tileAction(player);
                 break;
 
-
             case "TargetedCard":
                 //get the color to move to
                 Color colorTargeted = ((TargetedCard) cCard).getColor();
@@ -236,7 +234,6 @@ public class GameBoard {
                 playerWithJailCard = player;
                 break;
 
-
             case "StandardCard":
                 //get the destination, amount and the action of the card
                 int destination = ((StandardCard) cCard).getDestination();
@@ -245,8 +242,6 @@ public class GameBoard {
 
                 standardCardAction(player, destination, amount, action);
                 break;
-
-
         }
     }
 
