@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class GUIController {
 
-
     private final GUI gui;
     private final int MAX_PLAYER_AMOUNT = 4;
     private int PLAYER_AMOUNT = 0; // The actual number of players in the game
@@ -53,7 +52,6 @@ public class GUIController {
         }
         gui = new GUI(guiFields);
     }
-
 
     /**
      * Places buttons on the board with a message, and wait for the button pressed
@@ -182,6 +180,11 @@ public class GUIController {
     public void setCarPlacement(Player player, int fieldPlacement, int newFieldPlacement){
         gui.getFields()[fieldPlacement].setCar(getGuiPlayer(player),false);
         gui.getFields()[newFieldPlacement].setCar(getGuiPlayer(player), true);
+    }
+
+    public void setCarPlacement(Player player, int newFieldPlacement){
+        gui.getFields()[player.getCurrentPosition()].setCar(getGuiPlayer(player),false);
+        gui.getFields()[newFieldPlacement].setCar(getGuiPlayer(player),true);
     }
 
     /**
