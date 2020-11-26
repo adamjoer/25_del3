@@ -9,6 +9,8 @@ public class GameBoard {
     private final ActorController actorController;
     private final ChanceCardController chanceCardController = new ChanceCardController();
 
+    private int[] playersWithMoveCards;
+
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard(int players) {
         this.fields = Utility.fieldGenerator("src/main/resources/tileList.xml");
@@ -23,6 +25,8 @@ public class GameBoard {
                 ((Property) field).setOwner(actors[0]);
             }
         }
+
+        playersWithMoveCards = new int[actors.length];
     }
 
     // Move the player on the board.
@@ -91,7 +95,7 @@ public class GameBoard {
         // Attempt to make the transaction. If transaction fails, set balance to 0, and announce player broke.
         boolean transaction = this.scoreBoard[player].makeTransaction(value);
         if (!transaction){
-            System.out.println("You don't have enough gold coins. You are broke.");
+            System.out.println("You don't have   enough gold coins. You are broke.");
             this.scoreBoard[player].setBalance(0);
         }
 
@@ -124,23 +128,53 @@ public class GameBoard {
     }
 
     private void chanceFieldAction(int player) {
-
-    }
-
-
-    public void drawChanceCard(int player){
         ChanceCard cCard = chanceCardController.drawChanceCard();
         String cardType = cCard.getClass().getSimpleName();
 
         switch (cardType){
             case "MoveToColorCard":
                 Color color = ((MoveToColorCard) cCard).getColor();
-        }
 
+                moveToColorCard(color, player);
+                break;
+
+            case "TargetedCard":
+                Color colorTargeted = ((TargetedCard) cCard).getColor();
+
+                targetedCard(color, player);
+
+        }
     }
 
 
-    private void moveToColorCard(Color color, int player){
+    private void targetedCard(Color color, int player){
+        int firstOwned = 0;
+        for(int i = actorController.getCurrentPosition(player); i < fields.length; i++){
+            int currentField = i % 24;
+            if(fields[currentField].getField() == "Property"){
+                if(((Property) fields[currentField]).getColor() == color){
+                    if(((Property) fields[currentField]).getOwner() != actorController.getActors()[0]){
+                        playersWithMoveCards[player] = currentField;
+                        break;
+                    }
+                    else if(firstOwned == 0){
+                        firstOwned = currentField;
+                    }
+                }
+            }
+        }
+
+        //If there were no available unowned fields, set it the the first owned field of the color
+        playersWithMoveCards[player] = firstOwned;
+    }
+
+    public int checkIfPlayerHasMoveCard(int player){
+        if(playersWithMoveCards[player] != 0){
+            return playersWithMoveCards[player];
+        }
+        else{
+            return 0;
+        }
 
     }
 }
