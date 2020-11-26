@@ -2,34 +2,77 @@ package game;
 
 public class GameBoard {
 
-    // Declarations
-    final private Field[] gameBoard;
-    final private Player[] scoreBoard;
+    // Attributes
+    private final Field[] fields;
+    private final ActorController actorController;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
-    public GameBoard(int players, String[] playerNames) {
-        this.gameBoard = Utility.fieldGenerator("src/main/resources/tileList.xml");
-        this.scoreBoard = new Player[players];
+    public GameBoard(int players) {
+        this.fields = Utility.fieldGenerator("src/main/resources/tileList.xml");
 
-        if (playerNames.length < players) {
-            System.out.println("Number of player names doesn't match number of players!");
-            return;
-        }
 
-        // Make an array with the requested number of players.
-        for (int i = 0; i < players; i++) {
-            this.scoreBoard[i] = new Player(playerNames[i], 1000);
+        actorController = new ActorController(players);
+
+        // Go over each tile and if it is a property, set the owner to the bank
+        Actor[] actors = actorController.getActors();
+        for (Field field : fields) {
+            if (field instanceof Property) {
+                ((Property) field).setOwner(actors[0]);
+            }
         }
     }
 
     // Move the player on the board.
-    public void movePlayer(int player,int increment){
-        int currentPosition = this.scoreBoard[player].getPosition();
-        int newPosition = (currentPosition + increment) % gameBoard.length;
-        this.scoreBoard[player].setPosition(newPosition);
+    public void movePlayer(int player, int increment) {
+
+        actorController.movePlayer(player, increment);
     }
+
+    // Returns whether player has passed Start field   !!!!!! PROVIDED THAT START FIELD'S POSITION IS 0 !!!!!!
+    public boolean hasPassedStart(int player) {
+
+        // If start field position is zero, player will have passed start if their position has overflowed to a smaller value
+        // a.i. their previous position is larger than their current position
+        return actorController.getPreviousPosition(player) > actorController.getCurrentPosition(player);
+    }
+
     // Execute action of the tile the player is on
-    public void tileAction(int player){
+    public void tileAction(int player) {
+
+        // Get the field that the player has landed on from their position
+        int position = actorController.getCurrentPosition(player);
+        String field = fields[position].getField();
+
+        // Act based on which field the player landed on
+        switch (field) {
+
+            case "Start":
+                startFieldAction(player);
+                break;
+
+            case "Property":
+                propertyFieldAction(position, player);
+                break;
+
+            case "GoToJail":
+                goToJailFieldAction(player);
+                break;
+
+            // If landed on Jail (just visiting) or parking lot, do nothing
+            case "Jail":
+            case "ParkingLot":
+                break;
+
+            case "Chance":
+                chanceFieldAction(player);
+                break;
+
+            // Error: Field name not recognised
+            default:
+                throw new IllegalArgumentException();
+        }
+
+/*
         int tile = this.scoreBoard[player].getPosition();
         int value = this.gameBoard[tile].getPoints();
 
@@ -61,16 +104,23 @@ public class GameBoard {
             System.out.println("You get an extra turn.");
             this.scoreBoard[player].setExtraTurn(true);
         }
+*/
     }
 
-    // Relevant getters for players
-    public int getPosition(int player){ return this.scoreBoard[player].getPosition(); }
-    public int getBalance(int player){ return this.scoreBoard[player].getBalance(); }
-    public String getName(int player){ return this.scoreBoard[player].getName(); }
-    public boolean getExtraTurn(int player){ return this.scoreBoard[player].getExtraTurn(); }
+    private void startFieldAction(int player) {
+        // Call hasPassedStart?
+    }
 
-    // Relevant setters for players
-    public void setPosition(int player,int newPosition){ this.scoreBoard[player].setPosition(newPosition); }
-    public void setBalance(int player,int newBalance){ this.scoreBoard[player].setBalance(newBalance); }
-    public void setExtraTurn(int player, boolean extraTurn){ this.scoreBoard[player].setExtraTurn(extraTurn); }
+    private void propertyFieldAction(int position, int player) {
+        Actor owner = ((Property) fields[position]).getOwner();
+
+    }
+
+    private void goToJailFieldAction(int player) {
+
+    }
+
+    private void chanceFieldAction(int player) {
+
+    }
 }

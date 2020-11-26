@@ -1,26 +1,40 @@
 package game;
 
-public class Field {
+
+public abstract class Field {
+
     // Variables
-    final private String name;
-    final private String flavorText;
-    private int points;
-    final private boolean extraTurn;
+    final protected String title;
+    final protected String subText;
+    final protected String description;
+    final protected int position;
 
     // Constructor
-    public Field(String iName, String iFlavorText, int iPoints, boolean iExtraTurn){
-        name = iName;
-        flavorText = iFlavorText;
-        points = iPoints;
-        extraTurn = iExtraTurn;
+    public Field(String title, String subText, String description, int position) {
+        this.title = title;
+        this.subText = subText;
+        this.description = description;
+        this.position = position;
     }
 
-    // Relevant setters
-    public void setPoints (int add) { this.points = this.points + add; }
+    public String getField(){
+        return getClass().getSimpleName();
+    }
 
-    // Relevant getters
-    public String getName () { return this.name; }
-    public String getFlavorText () { return this.flavorText; }
-    public boolean getExtraTurn () { return this.extraTurn; }
-    public int getPoints () { return this.points; }
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSubText() {
+        return subText;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
 }
