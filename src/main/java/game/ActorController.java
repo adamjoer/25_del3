@@ -49,9 +49,14 @@ public class ActorController
      * @param amount
      * @return
      */
-    //calls method to make transactions
+    //makes transaction between two actors and returns false if senders balance is below amount
     public boolean makeTransaction (int sender, int receiver, int amount) {
-        return actors[sender].makeTransaction(actors[receiver], amount);
+        if(actors[sender].makeTransaction(-amount) && amount <91){
+            actors[receiver].makeTransaction(amount);
+            return true;
+        }
+
+        else { return false;}
     }
 
 
