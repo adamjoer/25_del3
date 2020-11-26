@@ -23,7 +23,46 @@ public class PlayerTest extends Actor {
 
     @Test
     void testMakeTransaction() {
+        Actor[] actors;
+        actors = new Actor[2];
+        boolean transactionSucces;
+        for (int i = 0; i < 2; i++)
+        {
+            String name = "bo"+i;
+            actors[i] = new Player(16, name);
+        }
 
+        transactionSucces = actors[0].makeTransaction(actors[1], 16);
+        assertTrue(transactionSucces);
+
+        ((Player)actors[0]).setBalance(100);
+        transactionSucces = actors[0].makeTransaction(actors[1], 17);
+        assertFalse(transactionSucces);
+
+        ((Player)actors[0]).setBalance(100);
+        transactionSucces = actors[0].makeTransaction(actors[1], Integer.MAX_VALUE);
+        assertFalse(transactionSucces);
+
+        ((Player)actors[0]).setBalance(100);
+        transactionSucces = actors[0].makeTransaction(actors[1], Integer.MAX_VALUE);
+        assertFalse(transactionSucces);
+
+
+
+
+
+        for (int i = 0; i < 3; i++) {
+            System.out.println(actors[i].getBalance());
+        }
+
+        actors[1].makeTransaction(actors[2], 100);
+        System.out.println(transactionSucces);
+
+        System.out.println();
+        for (int i = 0; i < 3; i++) {
+            System.out.println(actors[i].getBalance());
+
+        }
 
 
     }
