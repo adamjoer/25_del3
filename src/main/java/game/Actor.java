@@ -25,7 +25,6 @@ public abstract class Actor {
             return true;
         }
         else {
-            System.out.println("There is insufficient funds on the account to make the transaction.");
             return false;
         }
     }
