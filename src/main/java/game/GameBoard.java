@@ -147,21 +147,20 @@ public class GameBoard {
                 int target = ((TargetedCard) cCard).getTargetedPlayer();
 
                 moveToColor(colorTargeted, target);
+                break;
 
             case "HeldCard":
                 playerWithJailCard = player;
+                break;
 
 
             case "StandardCard":
                 int destination = ((StandardCard) cCard).getDestination();
-                if(((StandardCard) cCard).getCardAction() == "move"){
-                    if(destination != 0){
-                        destination = ((StandardCard) cCard).getDestination();
-                    }
-                    else{
-                        destination = actorController.getCurrentPosition(player) +
-                    }
-                }
+                int amount = ((StandardCard) cCard).getAmount();
+                String action = ((StandardCard) cCard).getCardAction();
+
+                standardCardAction(player, destination, amount, action);
+                break;
 
 
         }
@@ -211,9 +210,21 @@ public class GameBoard {
 
             case "gift":
                 actorController.makeTransaction(0, player, amount);
+                break;
 
             case "playerGift":
                 playerGift(player, amount);
+                break;
+
+            case "move":
+                actorController.movePlayer(player, destination);
+                tileAction(player);
+                break;
+
+            case "moveDesination":
+                actorController.setCurrentPosition(player, destination);
+                tileAction(player);
+                break;
         }
     }
 
