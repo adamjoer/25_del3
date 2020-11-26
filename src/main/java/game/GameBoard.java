@@ -1,10 +1,13 @@
 package game;
 
+import java.awt.*;
+
 public class GameBoard {
 
     // Attributes
     private final Field[] fields;
     private final ActorController actorController;
+    private final ChanceCardController chanceCardController = new ChanceCardController();
 
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard(int players) {
@@ -121,6 +124,23 @@ public class GameBoard {
     }
 
     private void chanceFieldAction(int player) {
+
+    }
+
+
+    public void drawChanceCard(int player){
+        ChanceCard cCard = chanceCardController.drawChanceCard();
+        String cardType = cCard.getClass().getSimpleName();
+
+        switch (cardType){
+            case "MoveToColorCard":
+                Color color = ((MoveToColorCard) cCard).getColor();
+        }
+
+    }
+
+
+    private void moveToColorCard(Color color, int player){
 
     }
 }
