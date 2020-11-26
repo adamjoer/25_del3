@@ -2,51 +2,24 @@ package game;
 
 public class StandardCard extends ChanceCard {
 
-    private final boolean FINE;
-    private final boolean GIFT;
-    private final boolean MOVE;
-    private int destination;
+    private final String CARD_TYPE;
+    private final int DESTINATION;
+    private final int INCREMENT;
     private final int AMOUNT;
 
 
-    public StandardCard(String CARD_TEXT, boolean fine, boolean gift, boolean moveDestination, int destination, int amount){
+    public StandardCard(String CARD_TEXT, String cardType, int destination, int increment, int amount){
         super(CARD_TEXT);
-        FINE = fine;
-        GIFT = gift;
-        MOVE = moveDestination;
-        this.destination = destination;
+        CARD_TYPE = cardType;
+        DESTINATION = destination;
         AMOUNT = amount;
+        INCREMENT = increment;
     }
 
-    /**
-     * determine what type of action this card is going to do.
-     * @return
-     */
-    public String getCardAction(){
-        if(FINE){
-            return "fine";
-        }
-        else if(GIFT){
-            return "gift";
-        }
-        else if(MOVE){
-            return "moveDestination";
-        }
-        else{
-            return "move";
-        }
-    }
+    // Getters
 
-    public void setDestination(int num){
-        destination = num;
-    }
-
-    public int getDestination() {
-        return destination;
-    }
-
-    public int getAmount(){
-        return AMOUNT;
-    }
-
+    public String getCardAction(){ return CARD_TYPE; }
+    public int getDestination() { return DESTINATION; }
+    public int getIncrement() {return INCREMENT; }
+    public int getAmount(){ return AMOUNT; }
 }

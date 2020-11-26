@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fieldList>
+    <field>
+        <fieldType>Start</fieldType>
+        <title>Start</title>
+        <subText></subText>
+        <description></description>
+        <reward>2</reward>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Street Food</title>
+        <subText></subText>
+        <description></description>
+        <value>1</value>
+        <color>brown</color>
+        <relatedPropertyPosition>2</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Pizza Parlor</title>
+        <subText></subText>
+        <description></description>
+        <value>1</value>
+        <color>brown</color>
+        <relatedPropertyPosition>1</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Chance</fieldType>
+        <title>Chance</title>
+        <subText></subText>
+        <description></description>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Candy Store</title>
+        <value>1</value>
+        <color>cyan</color>
+        <relatedPropertyPosition>5</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Ice Cream Store</title>
+        <subText></subText>
+        <description></description>
+        <value>1</value>
+        <color>cyan</color>
+        <relatedPropertyPosition>4</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Jail</fieldType>
+        <title>Jail</title>
+        <subText></subText>
+        <description></description>
+        <fine>1</fine>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Museum</title>
+        <subText></subText>
+        <description></description>
+        <value>2</value>
+        <color>magenta</color>
+        <relatedPropertyPosition>8</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Library</title>
+        <subText></subText>
+        <description></description>
+        <value>2</value>
+        <color>magenta</color>
+        <relatedPropertyPosition>7</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Chance</fieldType>
+        <title>Chance</title>
+        <subText></subText>
+        <description></description>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Skate Park</title>
+        <subText></subText>
+        <description></description>
+        <value>2</value>
+        <color>orange</color>
+        <relatedPropertyPosition>11</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Swimming Pool</title>
+        <subText></subText>
+        <description></description>
+        <value>2</value>
+        <color>orange</color>
+        <relatedPropertyPosition>10</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>ParkingLot</fieldType>
+        <title>Parking Lot</title>
+        <subText></subText>
+        <description></description>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Arcade</title>
+        <subText></subText>
+        <description></description>
+        <value>3</value>
+        <color>red</color>
+        <relatedPropertyPosition>14</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Cinema</title>
+        <subText></subText>
+        <description></description>
+        <value>3</value>
+        <color>red</color>
+        <relatedPropertyPosition>13</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Chance</fieldType>
+        <title>Chance</title>
+        <subText></subText>
+        <description></description>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Toy Store</title>
+        <subText></subText>
+        <description></description>
+        <value>3</value>
+        <color>yellow</color>
+        <relatedPropertyPosition>17</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Pet Store</title>
+        <subText></subText>
+        <description></description>
+        <value>3</value>
+        <color>yellow</color>
+        <relatedPropertyPosition>16</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>GoToJail</fieldType>
+        <title>Go To Jail</title>
+        <subText></subText>
+        <description></description>
+        <jailPosition>6</jailPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Bowling Alley</title>
+        <subText></subText>
+        <description></description>
+        <value>4</value>
+        <color>green</color>
+        <relatedPropertyPosition>20</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Zoo</title>
+        <subText></subText>
+        <description></description>
+        <value>4</value>
+        <color>green</color>
+        <relatedPropertyPosition>19</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Chance</fieldType>
+        <title>Chance</title>
+        <subText></subText>
+        <description></description>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Water Park</title>
+        <subText></subText>
+        <description></description>
+        <value>5</value>
+        <color>blue</color>
+        <relatedPropertyPosition>23</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Esplanade</title>
+        <value>5</value>
+        <color>blue</color>
+        <relatedPropertyPosition>22</relatedPropertyPosition>
+    </field>
+</fieldList>
