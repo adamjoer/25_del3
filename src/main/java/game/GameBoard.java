@@ -8,11 +8,10 @@ public class GameBoard {
     private final Field[] fields;
     private final ActorController actorController;
     private final GUIController guiController;
-    private final ChanceCardController chanceCardController = new ChanceCardController();
+    private final ChanceCardController chanceCardController;
     private int[] playersWithMoveCards;
     private int playerWithJailCard;
     private final Player[] players;
-    private final Bank bank;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard() {
@@ -23,8 +22,9 @@ public class GameBoard {
         guiController.askForPlayerNames();
         actorController = new ActorController(guiController.returnPlayerNames());
 
+        chanceCardController = new ChanceCardController();
+
         Actor[] actors = actorController.getActors();
-        bank = (Bank) actors[0];
 
         players = new Player[actors.length - 1];
         for (int i = 1; i < actors.length; i++) {
