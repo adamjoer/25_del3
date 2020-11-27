@@ -30,8 +30,9 @@ public class GUIController {
                     break;
                 case "Property":
                     Property property = (Property) fields[i];
+                    Color color = property.getColor();
                     guiFields[i] = new GUI_Street(property.getTitle(), property.getSubText(), property.getDescription(),
-                            String.valueOf(property.getValue()), property.getColor(), property.getColor());
+                            String.valueOf(property.getValue()), color, Color.white);
                     break;
                 case "GoToJail":
                 case "Jail":
@@ -151,13 +152,16 @@ public class GUIController {
      * @return true if the players are created otherwise false, can also return false if the player array size is over 4
      */
     public boolean addPlayers(Player[] players){
+        Color[] color = new Color[]{Color.black, Color.blue, Color.red, Color.yellow};
+        GUI_Car car;
         boolean playerCheck = false;
         if (players.length > 4 || players.length < 2){
             return false;
         }
 
         for(int i = 0; i < playerAmount; i++){
-            GUI_Player player = new GUI_Player(players[i].getName(),players[i].getBalance());
+            car = new GUI_Car(color[i], null, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
+            GUI_Player player = new GUI_Player(players[i].getName(),players[i].getBalance(), car);
             playerCheck = gui.addPlayer(player);
             guiPlayerList[i] = player;
         }
@@ -196,6 +200,26 @@ public class GUIController {
     public void setCarPlacement(Player player, int newFieldPlacement){
         gui.getFields()[player.getCurrentPosition()].setCar(getGuiPlayer(player),false);
         gui.getFields()[newFieldPlacement].setCar(getGuiPlayer(player),true);
+    }
+
+    /**
+     * Check if a GUI player object has a car on a specified field position
+     * @param player : Gui player object whose car should be on the field
+     * @param fieldPosition : The field which the players car should be on
+     * @return : boolean, true if car is on the field otherwise false
+     */
+    public boolean hasCarGuiPlayer(GUI_Player player, int fieldPosition){
+        return gui.getFields()[fieldPosition].hasCar(player);
+    }
+
+    /**
+     * Check if a player object has a car on a specified field position
+     * @param player : Player object whose car should be on the field
+     * @param fieldPosition : The field which the players car should be on
+     * @return : boolean, true if car is on the field otherwise false
+     */
+    public boolean hasCarPlayer(Player player, int fieldPosition){
+        return gui.getFields()[fieldPosition].hasCar(getGuiPlayer(player));
     }
 
     /**
