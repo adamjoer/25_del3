@@ -196,9 +196,9 @@ public class GameBoard {
     }
 
     /**
-     * Method
+     * Method to handle what happens when a player lands on a chance card field
      *
-     * @param player
+     * @param player : The current players turn
      */
     private void chanceFieldAction(int player) {
         //draw a chancecard
