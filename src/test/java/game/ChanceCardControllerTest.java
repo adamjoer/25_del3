@@ -8,8 +8,6 @@ class ChanceCardControllerTest {
         ChanceCardController controller = new ChanceCardController();
 
 
-
-
         System.out.println(controller.drawChanceCard().getChanceCardText());
         System.out.println(controller.drawChanceCard().getChanceCardText());
         System.out.println(controller.drawChanceCard().getChanceCardText());
