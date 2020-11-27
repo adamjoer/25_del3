@@ -104,7 +104,6 @@ public class GameBoard {
     }
 
     public boolean giveStartReward(int player) {
-//        boolean successfulTransaction = actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
         boolean successfulTransaction = actorController.makeBankTransaction(false, player, ((Start) fields[0]).getReward());
 
         // Show in GUI that money has been withdrawn from player
@@ -178,11 +177,9 @@ public class GameBoard {
 
             } else {
                 // Announce which player has gone broke
-                // playerWithMinBalance = players[playerWithMinBalance]
                 guiController.showMessage(String.format("%s has gone bankrupt.", players[playerWithMinBalance].getName()));
             }
 
-            // Winner is players[playerWithMaxBalance]
             // Announce that winner
             guiController.showMessage(String.format("%s wins as the player with the most money. Congratulations!", players[playerWithMaxBalance].getName()));
         }
@@ -271,7 +268,6 @@ public class GameBoard {
             return true;
 
         } else { // If player doesn't have free card, try to pay fine (to bank)
-//            boolean successfulTransaction = actorController.makeTransaction(player, 0, bail);
             boolean successfulTransaction = actorController.makeBankTransaction(true, player, bail);
 
             // Show in GUI that money has been withdrawn from player
@@ -414,7 +410,6 @@ public class GameBoard {
         switch (action) {
             case "fine":
                 //remove some money from the players account
-//                successfulTransaction = actorController.makeTransaction(player, 0, amount);
                 successfulTransaction = actorController.makeBankTransaction(true, player, amount);
 
                 // Show in GUI that money has been withdrawn from player
@@ -424,7 +419,6 @@ public class GameBoard {
 
             case "gift":
                 //insert some money into the players account
-//                successfulTransaction = actorController.makeTransaction(0, player, amount);
                 successfulTransaction = actorController.makeBankTransaction(false, player, amount);
 
                 if (successfulTransaction) {
