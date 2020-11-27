@@ -51,6 +51,12 @@ public class GameBoard {
         guiController.setDiceGui(faceValue1, (int) (Math.random() * 360), faceValue2, ((int) (Math.random() * 360)));
     }
 
+    public void castDie(int faceValue) {
+
+        // Show a die being cast
+        guiController.setDiceGui(faceValue);
+    }
+
     // Move the player on the board.
     public void movePlayer(int player, int increment) {
 
