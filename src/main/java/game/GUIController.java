@@ -31,7 +31,7 @@ public class GUIController {
                 case "Property":
                     Property property = (Property) fields[i];
                     guiFields[i] = new GUI_Street(property.getTitle(), property.getSubText(), property.getDescription(),
-                            String.valueOf(property.getValue()), property.getColor(), property.getColor());
+                            String.valueOf(property.getValue()), property.getColor(), Color.BLACK);
                     break;
                 case "GoToJail":
                 case "Jail":
