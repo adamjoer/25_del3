@@ -108,7 +108,7 @@ public class GameBoard {
         // Get the field that the player has landed on from their position
         int position = actorController.getCurrentPosition(player);
         String field = fields[position].getField();
-        System.out.println("Field: " + field);
+
         // Act based on which field the player landed on
         boolean doNothing = false;
         switch (field) {
