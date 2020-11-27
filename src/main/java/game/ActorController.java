@@ -81,16 +81,15 @@ public class ActorController {
     }
 
     public int getCurrentPosition(int player) {
-        return ((Player) actors[player]).getCurrentPosition();
+        return ((Player) actors[player - 1]).getCurrentPosition();
     }
 
     public int getPreviousPosition(int player) {
-        return ((Player) actors[player]).getPreviousPosition();
+        return ((Player) actors[player - 1]).getPreviousPosition();
     }
-
 
     //Relevant setters
     public void setCurrentPosition(int player, int newPosition) {
-        ((Player) actors[player]).setCurrentPosition(newPosition);
+        ((Player) actors[player - 1]).setCurrentPosition(newPosition);
     }
 }
