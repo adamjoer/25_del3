@@ -28,8 +28,8 @@
     <field>
         <fieldType>Chance</fieldType>
         <title>?</title>
-        <subText>Prøv lykken</subText>
-        <description>Ta' et chance kort</description>
+        <subText>Chance</subText>
+        <description>Take a chance card</description>
     </field>
     <field>
         <fieldType>Property</fieldType>
@@ -78,8 +78,8 @@
     <field>
         <fieldType>Chance</fieldType>
         <title>?</title>
-        <subText>Prøv lykken</subText>
-        <description>Ta' et chance kort</description>
+        <subText>Chance</subText>
+        <description>Take a chance card</description>
     </field>
     <field>
         <fieldType>Property</fieldType>
@@ -126,8 +126,8 @@
     <field>
         <fieldType>Chance</fieldType>
         <title>?</title>
-        <subText>Prøv lykken</subText>
-        <description>Ta' et chance kort</description>
+        <subText>Chance</subText>
+        <description>Take a chance card</description>
     </field>
     <field>
         <fieldType>Property</fieldType>
@@ -175,8 +175,8 @@
     <field>
         <fieldType>Chance</fieldType>
         <title>?</title>
-        <subText>Prøv lykken</subText>
-        <description>Ta' et chance kort</description>
+        <subText>Chance</subText>
+        <description>Take a chance card</description>
     </field>
     <field>
         <fieldType>Property</fieldType>
