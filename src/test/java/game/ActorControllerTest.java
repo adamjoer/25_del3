@@ -18,7 +18,7 @@ public class ActorControllerTest {
         int balance1Before = actor1.getBalance();
         int balance2Before = actor2.getBalance();
 
-        act.makeTransaction(1, 2, amountToSend);
+        act.makeTransaction(0, 1, amountToSend);
 
         assertEquals(balance1Before - amountToSend, actor1.getBalance());
         assertEquals(balance2Before + amountToSend, actor2.getBalance());
