@@ -272,6 +272,8 @@ public class GameBoard {
 
                 //update the list of what players have to move at the start of their turn.
                 moveToColor(Color.white, target, true);
+
+                chanceFieldAction(player);
                 return true;
 
             case "HeldCard":
