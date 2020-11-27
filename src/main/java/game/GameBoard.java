@@ -1,5 +1,7 @@
 package game;
 
+import gui_main.GUI;
+
 import java.awt.*;
 
 public class GameBoard {
@@ -64,7 +66,7 @@ public class GameBoard {
 
         // If start field position is zero, player will have passed start if their position has overflowed to a smaller value
         // a.i. their previous position is larger than their current position
-        return actorController.getPreviousPosition(player) > actorController.getCurrentPosition(player);
+        return players[player].getPreviousPosition() > players[player].getCurrentPosition();
     }
 
     public boolean giveStartReward(int player) {
@@ -78,6 +80,11 @@ public class GameBoard {
 
     // Execute action of the field the player is on
     public void fieldAction(int player) {
+
+        // Give player start reward if they have passed start
+        if (hasPassedStart(player)) {
+            giveStartReward(player);
+        }
 
         // Get the field that the player has landed on from their position
         int position = actorController.getCurrentPosition(player);
@@ -120,8 +127,8 @@ public class GameBoard {
 
             // The bank has gone broke, the winner is the player with the most money
 
-            // Find the player with the most money and the player with the least money (loser)
-            int playerWithMaxBalance = 0, loser = 0, maxBalance = 0, currentBalance;
+            // Find the player with the most money and the player with the least money (playerWithMinBalance)
+            int playerWithMaxBalance = 0, playerWithMinBalance = 0, maxBalance = 0, currentBalance;
             for (int i = 0; i < players.length; i++) {
 
                 currentBalance = players[i].getBalance();
@@ -130,20 +137,24 @@ public class GameBoard {
                     playerWithMaxBalance = i;
 
                 } else if (currentBalance == 0) {
-                    loser = 0;
+                    playerWithMinBalance = i;
                 }
             }
 
             if (actorController.getActors()[0].getBalance() == 0) {
+
                 // Announce that bank has gone broke
+                guiController.showMessage("The bank has gone bankrupt.");
 
             } else {
                 // Announce which player has gone broke
-                // loser = players[loser]
+                // playerWithMinBalance = players[playerWithMinBalance]
+                guiController.showMessage(String.format("%s has gone bankrupt.", players[playerWithMinBalance].getName()));
             }
 
             // Winner is players[playerWithMaxBalance]
             // Announce that winner
+            guiController.showMessage(String.format("%s wins as the player with the most money. Congratulations!", players[playerWithMaxBalance]));
         }
     }
 
@@ -217,7 +228,7 @@ public class GameBoard {
         players[player].setCurrentPosition(jailPos);
 
         // If player has free card, take it away
-        if (playerWithJailCard == player) {
+        if (getPlayerWithJailCard() == player) {
 
             guiController.displayChanceCard("Card used");
             playerWithJailCard = 0;
@@ -275,7 +286,7 @@ public class GameBoard {
                 return true;
 
             case "HeldCard":
-                //set what player has the jailcard
+                //set which player has the jail card
                 playerWithJailCard = player;
                 return true;
 
