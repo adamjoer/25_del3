@@ -27,9 +27,9 @@
     </field>
     <field>
         <fieldType>Chance</fieldType>
-        <title>Chance</title>
-        <subText></subText>
-        <description></description>
+        <title>?</title>
+        <subText>Chance</subText>
+        <description>Take a chance card</description>
     </field>
     <field>
         <fieldType>Property</fieldType>
@@ -77,9 +77,9 @@
     </field>
     <field>
         <fieldType>Chance</fieldType>
-        <title>Chance</title>
-        <subText></subText>
-        <description></description>
+        <title>?</title>
+        <subText>Chance</subText>
+        <description>Take a chance card</description>
     </field>
     <field>
         <fieldType>Property</fieldType>
@@ -92,7 +92,7 @@
     </field>
     <field>
         <fieldType>Property</fieldType>
-        <title>The Swimming Pool</title>
+        <title>Swimming Pool</title>
         <subText>2M</subText>
         <description></description>
         <value>2</value>
@@ -125,9 +125,9 @@
     </field>
     <field>
         <fieldType>Chance</fieldType>
-        <title>Chance</title>
-        <subText></subText>
-        <description></description>
+        <title>?</title>
+        <subText>Chance</subText>
+        <description>Take a chance card</description>
     </field>
     <field>
         <fieldType>Property</fieldType>
@@ -174,9 +174,9 @@
     </field>
     <field>
         <fieldType>Chance</fieldType>
-        <title>Chance</title>
-        <subText></subText>
-        <description></description>
+        <title>?</title>
+        <subText>Chance</subText>
+        <description>Take a chance card</description>
     </field>
     <field>
         <fieldType>Property</fieldType>

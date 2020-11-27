@@ -39,8 +39,8 @@ public class GUIController {
                     break;
                 case "GoToJail":
                 case "Jail":
-                    guiFields[i] = new GUI_Jail("default",field.getTitle(), field.getSubText(), field.getDescription(),
-                                    Color.WHITE, Color.BLACK);
+                    guiFields[i] = new GUI_Jail("default",field.getTitle(), field.getTitle(), field.getTitle(),
+                            new Color(125, 125, 125), Color.BLACK);
                     break;
                 case "ParkingLot":
                     guiFields[i] = new GUI_Refuge("default", field.getTitle(), field.getSubText(), field.getDescription(),
