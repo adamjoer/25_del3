@@ -30,6 +30,7 @@ public class ChanceCardController {
         }
         else{
             newGame();
+            return drawPile[cardsDrawn++];
         }
 
     }
