@@ -10,7 +10,7 @@ public class GameBoard {
     private final GUIController guiController;
     private final ChanceCardController chanceCardController;
     private int[] playersWithMoveCards;
-    private int playerWithJailCard = 0;
+    private int playerWithJailCard = 4;
     private final Player[] players;
     private int playerTurn;
     private boolean hasWinner = false;
@@ -187,7 +187,7 @@ public class GameBoard {
         int owner = property.getOwner();
 
         // If property is owned by player, do nothing
-        if (owner == player) {
+        if (owner == player + 1) {
             return true;
         }
 
@@ -253,11 +253,12 @@ public class GameBoard {
         int bail = ((Jail) fields[jailPos]).getBail();
 
         players[player].setCurrentPosition(jailPos);
+        guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
 
         // If player has free card, take it away
         if (getPlayerWithJailCard() == player) {
 
-            guiController.displayChanceCard("Card used");
+            guiController.displayChanceCard("'Get out of jail free' card used");
             playerWithJailCard = 0;
             return true;
 
@@ -444,6 +445,9 @@ public class GameBoard {
                 actorController.setCurrentPosition(player, destination);
                 guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
                 fieldAction(player);
+                if (players[player].getCurrentPosition() == 0) {
+                    actorController.makeBankTransaction(false, player, ((Start) fields[0]).getReward());
+                }
                 return true;
 
             default:
