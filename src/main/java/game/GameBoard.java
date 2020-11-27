@@ -108,7 +108,7 @@ public class GameBoard {
         // Get the field that the player has landed on from their position
         int position = actorController.getCurrentPosition(player);
         String field = fields[position].getField();
-
+        System.out.println("Field: " + field);
         // Act based on which field the player landed on
         boolean doNothing = false;
         switch (field) {
@@ -291,7 +291,7 @@ public class GameBoard {
                 moveToColor(color, player, false);
 
                 //move the player to the field
-                actorController.setCurrentPosition(player, playersWithMoveCards[player]);
+                actorController.setCurrentPosition(player, playersWithMoveCards[player + 1]);
                 playersWithMoveCards[player] = 0;
                 guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
 
@@ -302,7 +302,7 @@ public class GameBoard {
             case "TargetedCard":
 
                 //get the player that is going to be moved
-                int target = ((TargetedCard) cCard).getTargetedPlayer();
+                int target = ((TargetedCard) cCard).getTargetedPlayer() - 1;
                 if(target > players.length){
                     target = player;
                 }
