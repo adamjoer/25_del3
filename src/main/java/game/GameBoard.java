@@ -1,7 +1,5 @@
 package game;
 
-import gui_main.GUI;
-
 import java.awt.*;
 
 public class GameBoard {
@@ -23,9 +21,7 @@ public class GameBoard {
 
         guiController = new GUIController(fields, fields.length);
 
-//        guiController.askForPlayerNames();
         actorController = new ActorController(guiController.returnPlayerNames());
-
 
         chanceCardController = new ChanceCardController();
 
@@ -57,7 +53,7 @@ public class GameBoard {
 
     public void castDie(int faceValue) {
 
-        guiController.showMessage("Press OK to cast die");
+        guiController.showMessage(String.format("It is %s's turn Press OK to cast die", players[playerTurn].getName()));
 
         // Show a die being cast
         guiController.setDiceGui(faceValue);
@@ -175,7 +171,7 @@ public class GameBoard {
 
             // Winner is players[playerWithMaxBalance]
             // Announce that winner
-            guiController.showMessage(String.format("%s wins as the player with the most money. Congratulations!", players[playerWithMaxBalance]));
+            guiController.showMessage(String.format("%s wins as the player with the most money. Congratulations!", players[playerWithMaxBalance].getName()));
         }
     }
 
@@ -195,6 +191,8 @@ public class GameBoard {
         // Property isn't owned by any players (i.e. is owned by the bank)
         if (owner == 0) {
 
+            guiController.showMessage(String.format("%s has landed on an unowned property and need to buy it.", players[player].getName()));
+
             // Try to buy property
             // Make transaction and check if it went through
             successfulTransaction = actorController.makeTransaction(player, 0, property.getValue());
@@ -208,12 +206,14 @@ public class GameBoard {
                         property.getSubText(),
                         players[player].getName(),
                         property.getValue(),
-                        property.getColor(),
+                        Color.DARK_GRAY,
                         property.getPosition()
                 );
             }
 
         } else { // Property is owned by another player
+
+            guiController.showMessage(String.format("%s has landed on an owned property and needs to pay rent to %s.", players[player].getName(), players[owner].getName()));
 
             // Value of rent is the value of property
             int rent = property.getValue();
