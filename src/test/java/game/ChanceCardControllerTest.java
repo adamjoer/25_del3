@@ -31,5 +31,16 @@ class ChanceCardControllerTest {
     void newGame() {
         controller.newGame();
 
+
+        boolean works = true;
+        try {
+            for(int i = 0; i < 50; i++){
+                controller.drawChanceCard();
+            }
+        } catch (Exception e) {
+            works = false;
+        }
+
+        assertTrue(works);
     }
 }
