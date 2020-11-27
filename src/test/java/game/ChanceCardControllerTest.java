@@ -1,25 +1,46 @@
 package game;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChanceCardControllerTest {
 
-    public static void main(String[] args){
-        ChanceCardController controller = new ChanceCardController();
+    ChanceCardController controller = new ChanceCardController();
 
+    @Test
+    void drawChanceCard() {
+        ChanceCard cCard = controller.drawChanceCard();
+        assertEquals("TargetedCard", cCard.getClass().getSimpleName());
 
-        System.out.println(controller.drawChanceCard().getChanceCardText());
-        System.out.println(controller.drawChanceCard().getChanceCardText());
-        System.out.println(controller.drawChanceCard().getChanceCardText());
+        boolean works = true;
+        try {
+            for(int i = 0; i < 50; i++){
+                controller.drawChanceCard();
+            }
+        } catch (Exception e) {
+            works = false;
+        }
 
-        controller.newGame();
-
-        System.out.println();
-        System.out.println("After shuffle:");
-        System.out.println(controller.drawChanceCard().getChanceCardText());
-        System.out.println(controller.drawChanceCard().getChanceCardText());
-        System.out.println(controller.drawChanceCard().getChanceCardText());
+        assertTrue(works);
 
     }
 
+
+    @Test
+    void newGame() {
+        controller.newGame();
+
+
+        boolean works = true;
+        try {
+            for(int i = 0; i < 50; i++){
+                controller.drawChanceCard();
+            }
+        } catch (Exception e) {
+            works = false;
+        }
+
+        assertTrue(works);
+    }
 }
