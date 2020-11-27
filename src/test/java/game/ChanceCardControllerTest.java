@@ -1,25 +1,25 @@
 package game;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChanceCardControllerTest {
 
-    public static void main(String[] args){
-        ChanceCardController controller = new ChanceCardController();
+    ChanceCardController controller = new ChanceCardController();
 
+    @Test
+    void drawChanceCard() {
+        ChanceCard cCard = controller.drawChanceCard();
+        assertEquals("TargetedCard", cCard.getClass().getSimpleName());
 
-        System.out.println(controller.drawChanceCard().getChanceCardText());
-        System.out.println(controller.drawChanceCard().getChanceCardText());
-        System.out.println(controller.drawChanceCard().getChanceCardText());
-
-        controller.newGame();
-
-        System.out.println();
-        System.out.println("After shuffle:");
-        System.out.println(controller.drawChanceCard().getChanceCardText());
-        System.out.println(controller.drawChanceCard().getChanceCardText());
-        System.out.println(controller.drawChanceCard().getChanceCardText());
-
+        for
     }
 
+
+    @Test
+    void newGame() {
+        controller.newGame();
+
+    }
 }

@@ -25,7 +25,13 @@ public class ChanceCardController {
      * @return
      */
     public ChanceCard drawChanceCard() {
-        return drawPile[cardsDrawn++];
+        if(cardsDrawn < drawPile.length) {
+            return drawPile[cardsDrawn++];
+        }
+        else{
+            newGame();
+        }
+
     }
 
     /**
@@ -42,7 +48,7 @@ public class ChanceCardController {
         }
     }
 
-    public ChanceCard[] createPile() {
+    private ChanceCard[] createPile() {
         return Utility.chanceCardGenerator("src/main/resources/chanceCards.xml");
     }
 
