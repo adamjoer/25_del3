@@ -67,7 +67,12 @@ public class GameBoard {
     }
 
     public boolean giveStartReward(int player) {
-        return actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
+        boolean successfulTransaction = actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
+
+        // Show in GUI that money has been withdrawn from player
+        guiController.setPlayerBalance(players[player], players[player].getBalance());
+
+        return successfulTransaction;
     }
 
     // Execute action of the field the player is on
@@ -78,7 +83,7 @@ public class GameBoard {
         String field = fields[position].getField();
 
         // Act based on which field the player landed on
-        boolean success;
+        boolean success = false, doNothing = false;
         switch (field) {
 
             case "Property":
@@ -93,6 +98,7 @@ public class GameBoard {
             case "Jail":
             case "Start":
             case "ParkingLot":
+                doNothing = true;
                 break;
 
             case "Chance":
@@ -102,6 +108,41 @@ public class GameBoard {
             // Error: Field name not recognised
             default:
                 throw new IllegalArgumentException();
+        }
+
+        if (doNothing) {
+            return;
+        }
+
+        // A transaction didn't go through, someone is broke
+        if (!success) {
+
+            // The bank has gone broke, the winner is the player with the most money
+
+            // Find the player with the most money and the player with the least money (loser)
+            int playerWithMaxBalance = 0, loser = 0, maxBalance = 0, currentBalance;
+            for (int i = 0; i < players.length; i++) {
+
+                currentBalance = players[i].getBalance();
+
+                if (currentBalance > maxBalance) {
+                    playerWithMaxBalance = i;
+
+                } else if (currentBalance == 0) {
+                    loser = 0;
+                }
+            }
+
+            if (actorController.getActors()[0].getBalance() == 0) {
+                // Announce that bank has gone broke
+
+            } else {
+                // Announce which player has gone broke
+                // loser = players[loser]
+            }
+
+            // Winner is players[playerWithMaxBalance]
+            // Announce that winner
         }
     }
 
@@ -129,7 +170,7 @@ public class GameBoard {
             if (successfulTransaction) {
                 property.setOwner(player);
 
-                // Announce in GUI that property has been bought
+                // Show in GUI that property has been bought
                 guiController.fieldOwnable(
                         property.getSubText(),
                         players[player].getName(),
@@ -155,16 +196,14 @@ public class GameBoard {
             // Make transaction and check if it went through
             successfulTransaction = actorController.makeTransaction(player, owner, rent);
 
-            // Announce in GUI that money has been deposited to owner
+            // Show in GUI that money has been deposited to owner
             if (successfulTransaction) {
                 guiController.setPlayerBalance(players[owner], players[owner].getBalance());
             }
         }
 
-        // Announce in GUI that money has been withdrawn from player
-        if (successfulTransaction) {
-            guiController.setPlayerBalance(players[player], players[player].getBalance());
-        }
+        // Show in GUI that money has been withdrawn from player
+        guiController.setPlayerBalance(players[player], players[player].getBalance());
 
         return successfulTransaction;
     }
@@ -186,9 +225,8 @@ public class GameBoard {
         } else { // If player doesn't have free card, try to pay fine (to bank)
             boolean successfulTransaction = actorController.makeTransaction(player, 0, bail);
 
-            if (successfulTransaction) {
-                guiController.setPlayerBalance(players[player], players[player].getBalance());
-            }
+            // Show in GUI that money has been withdrawn from player
+            guiController.setPlayerBalance(players[player], players[player].getBalance());
 
             // Return whether transaction was successful
             return successfulTransaction;
@@ -325,9 +363,9 @@ public class GameBoard {
                 //remove some money from the players account
                 successfulTransaction = actorController.makeTransaction(player, 0, amount);
 
-                if (successfulTransaction) {
-                    guiController.setPlayerBalance(players[player], players[player].getBalance());
-                }
+                // Show in GUI that money has been withdrawn from player
+                guiController.setPlayerBalance(players[player], players[player].getBalance());
+
                 return successfulTransaction;
 
             case "gift":
@@ -378,6 +416,9 @@ public class GameBoard {
         for (int j = 1; j < actorController.getActors().length; j++) {
             if (j != receiver) {
                 successfulTransaction = actorController.makeTransaction(j, receiver, amount);
+
+                // Show in GUI that money has been withdrawn from player
+                guiController.setPlayerBalance(players[j], players[j].getBalance());
 
                 if (!successfulTransaction) {
                     return false;
