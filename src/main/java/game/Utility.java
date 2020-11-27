@@ -140,13 +140,12 @@ public class Utility {
         return chanceCards;
     }
 
-    /**
+    /*
      * Extracts a boolean from an XML element.
      * @param ele An XML element extracted from a document.
      * @param tag The XML tag to extract a boolean value from.
      * @return The boolean requested.
-     */
-    /*
+
     private static boolean getBool (Element ele, String tag){
         boolean bool = false;
         try{
@@ -164,7 +163,7 @@ public class Utility {
      * @return The String requested.
      */
     private static String getString (Element ele, String tag){
-        String str = new String();
+        String str = new String(); // IntelliJ says this is a redundant initialization, but also produces a warning if removed.
         try{
             str = ele.getElementsByTagName(tag).item(0).getTextContent();
         } catch (Exception e){
