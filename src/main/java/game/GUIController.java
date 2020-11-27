@@ -1,5 +1,8 @@
 package game;
 
+import game.actor.Player;
+import game.field.Field;
+import game.field.Property;
 import gui_fields.*;
 import gui_main.GUI;
 

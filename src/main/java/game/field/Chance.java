@@ -1,4 +1,4 @@
-package game;
+package game.field;
 
 public class Chance extends Field {
 

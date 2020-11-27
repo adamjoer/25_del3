@@ -1,5 +1,9 @@
 package game;
 
+import game.actor.Actor;
+import game.actor.Player;
+import game.field.*;
+
 import java.awt.*;
 
 public class GameBoard {
