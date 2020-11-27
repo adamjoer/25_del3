@@ -61,7 +61,7 @@ public class GameBoard {
 
     public void castDie(int faceValue) {
 
-        guiController.showMessage(String.format("It is %s's turn Press OK to cast die", players[playerTurn].getName()));
+        guiController.showMessage(String.format("It is %s's turn. Press OK to cast die", players[playerTurn].getName()));
 
         // Show a die being cast
         guiController.setDiceGui(faceValue);
@@ -182,6 +182,9 @@ public class GameBoard {
 
             // Announce that winner
             guiController.showMessage(String.format("%s wins as the player with the most money. Congratulations!", players[playerWithMaxBalance].getName()));
+
+            // Close window after player has pressed OK
+            guiController.close();
         }
     }
 
@@ -201,7 +204,7 @@ public class GameBoard {
         // Property isn't owned by any players (i.e. is owned by the bank)
         if (owner == 0) {
 
-            guiController.showMessage(String.format("%s has landed on an unowned property and need to buy it.", players[player].getName()));
+            guiController.showMessage(String.format("%s has landed on an unowned property and needs to buy it.", players[player].getName()));
 
             // Try to buy property
             // Make transaction and check if it went through
