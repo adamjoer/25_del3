@@ -22,6 +22,7 @@ public class GameBoard {
         guiController.askForPlayerNames();
         actorController = new ActorController(guiController.returnPlayerNames());
 
+
         chanceCardController = new ChanceCardController();
 
         Actor[] actors = actorController.getActors();
