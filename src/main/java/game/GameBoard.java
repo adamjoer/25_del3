@@ -14,6 +14,8 @@ public class GameBoard {
     private int[] playersWithMoveCards;
     private int playerWithJailCard = 0;
     private final Player[] players;
+    private int playerTurn;
+    private boolean hasWinner = false;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard() {
@@ -21,7 +23,7 @@ public class GameBoard {
 
         guiController = new GUIController(fields, fields.length);
 
-        guiController.askForPlayerNames();
+//        guiController.askForPlayerNames();
         actorController = new ActorController(guiController.returnPlayerNames());
 
 
@@ -31,7 +33,7 @@ public class GameBoard {
 
         players = new Player[actors.length - 1];
         for (int i = 1; i < actors.length; i++) {
-            players[i] = (Player) actors[i];
+            players[i - 1] = (Player) actors[i];
         }
 
         if (!guiController.addPlayers(players)) {
@@ -41,6 +43,8 @@ public class GameBoard {
         for (Player player : players) {
             guiController.setCar(player, true, 0);
         }
+
+        playerTurn = (int) (Math.random() * (players.length - 1));
 
         playersWithMoveCards = new int[actors.length];
     }
@@ -53,8 +57,15 @@ public class GameBoard {
 
     public void castDie(int faceValue) {
 
+        guiController.showMessage("Press OK to cast die");
+
         // Show a die being cast
         guiController.setDiceGui(faceValue);
+    }
+
+    public int getNextPlayerTurn() {
+        playerTurn = (playerTurn + 1) % players.length;
+        return playerTurn;
     }
 
     // Move the player on the board.
@@ -65,6 +76,10 @@ public class GameBoard {
 
         // Show player moving forward in GUI
         guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
+    }
+
+    public void setPlayerPosition(int player, int position) {
+        players[player].setCurrentPosition(position);
     }
 
     // Returns whether player has passed Start field
@@ -97,15 +112,15 @@ public class GameBoard {
         String field = fields[position].getField();
 
         // Act based on which field the player landed on
-        boolean success = false, doNothing = false;
+        boolean doNothing = false;
         switch (field) {
 
             case "Property":
-                success = propertyFieldAction(position, player);
+                hasWinner = !propertyFieldAction(position, player);
                 break;
 
             case "GoToJail":
-                success = goToJailFieldAction(position, player);
+                hasWinner = !goToJailFieldAction(position, player);
                 break;
 
             // If player landed on jail (just visiting), start or parking lot field, do nothing
@@ -116,7 +131,7 @@ public class GameBoard {
                 break;
 
             case "Chance":
-                success = chanceFieldAction(player);
+                hasWinner = !chanceFieldAction(player);
                 break;
 
             // Error: Field name not recognised
@@ -129,7 +144,7 @@ public class GameBoard {
         }
 
         // A transaction didn't go through, someone is broke
-        if (!success) {
+        if (hasWinner) {
 
             // The bank has gone broke, the winner is the player with the most money
 
@@ -373,21 +388,6 @@ public class GameBoard {
 
     }
 
-    public int getPlayerWithJailCard() {
-        return playerWithJailCard;
-    }
-
-    public String toString() {
-
-        StringBuilder output = new StringBuilder();
-        for (Field field : fields) {
-            output.append(field.toString());
-            output.append("\n\n");
-        }
-
-        return output.toString();
-    }
-
     private boolean standardCardAction(int player, int destination, int amount, String action) {
 
         boolean successfulTransaction;
@@ -460,5 +460,29 @@ public class GameBoard {
             }
         }
         return true;
+    }
+
+    // Relevant getters
+    public int getPlayerWithJailCard() {
+        return playerWithJailCard;
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public boolean hasWinner() {
+        return hasWinner;
+    }
+
+    public String toString() {
+
+        StringBuilder output = new StringBuilder();
+        for (Field field : fields) {
+            output.append(field.toString());
+            output.append("\n\n");
+        }
+
+        return output.toString();
     }
 }

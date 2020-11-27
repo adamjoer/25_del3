@@ -200,8 +200,8 @@ public class Utility {
         String str = new String(); // IntelliJ says this is a redundant initialization, but also produces a warning if removed.
         try{
             str = ele.getElementsByTagName(tag).item(0).getTextContent();
-        } catch (Exception e){
-            e.printStackTrace();
+        } catch (NullPointerException e){
+            str = " ";
         }
         return str;
     }
