@@ -89,7 +89,7 @@ public class Utility {
 
     public static ChanceCard[] chanceCardGenerator(String filePath){
         // Load XML and extract a list of chanceCard data.
-        NodeList cardList = getXmlContent(filePath,"chanceCard");
+        NodeList cardList = getXmlContent(filePath,"chancecard");
         ChanceCard[] chanceCards = new ChanceCard[cardList.getLength()];
 
         try {
@@ -122,8 +122,18 @@ public class Utility {
 
                         case "StandardCard":
                             String standardType = getString(ele,"standardType");
-                            int moveDestination = getInt(ele,"moveDestination");
-                            int amount = getInt(ele,"amount");
+                            int moveDestination = 0;
+                            int amount = 0;
+
+
+                            if(standardType == "gift" || standardType == "playerGift"){
+                                amount = getInt(ele,"amount");
+                            }
+                            else if(standardType == "moveDestination" || standardType == "moveIncrement"){
+                                moveDestination = getInt(ele,"moveDestination");
+                            }
+
+
 
                             chanceCards[i] = new StandardCard(cardText, standardType, moveDestination, amount);
 
@@ -190,8 +200,8 @@ public class Utility {
         String str = new String(); // IntelliJ says this is a redundant initialization, but also produces a warning if removed.
         try{
             str = ele.getElementsByTagName(tag).item(0).getTextContent();
-        } catch (Exception e){
-            e.printStackTrace();
+        } catch (NullPointerException e){
+            str = " ";
         }
         return str;
     }

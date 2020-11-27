@@ -32,7 +32,7 @@ public class ActorController {
 
         //Assigning player names and bank with their starting balance
         for (int i = 1; i < actors.length; i++) {
-            actors[i] = new Player(startBalance, playerNames[i]);
+            actors[i] = new Player(startBalance, playerNames[i - 1]);
         }
     }
 
@@ -57,12 +57,12 @@ public class ActorController {
 
 
     /**
-     * @param Player
-     * @param Increment
+     * @param player
+     * @param increment
      */
     //Calls Player class method with actor array
-    public void movePlayer(int Player, int Increment) {
-        ((Player) actors[Player]).movePlayer(Increment);
+    public void movePlayer(int player, int increment) {
+        ((Player) actors[player + 1]).movePlayer(increment);
     }
 
     // Relevant getters
@@ -81,16 +81,15 @@ public class ActorController {
     }
 
     public int getCurrentPosition(int player) {
-        return ((Player) actors[player]).getCurrentPosition();
+        return ((Player) actors[player + 1]).getCurrentPosition();
     }
 
     public int getPreviousPosition(int player) {
-        return ((Player) actors[player]).getPreviousPosition();
+        return ((Player) actors[player + 1]).getPreviousPosition();
     }
-
 
     //Relevant setters
     public void setCurrentPosition(int player, int newPosition) {
-        ((Player) actors[player]).setCurrentPosition(newPosition);
+        ((Player) actors[player + 1]).setCurrentPosition(newPosition);
     }
 }

@@ -11,9 +11,9 @@ public class GUIController {
 
     private final GUI gui;
     private final int MAX_PLAYER_AMOUNT = 4;
-    private int PLAYER_AMOUNT = 0; // The actual number of players in the game
-    private final GUI_Player[] guiPlayerList = new GUI_Player[MAX_PLAYER_AMOUNT];
-    private final String[] playerNames = new String[MAX_PLAYER_AMOUNT];
+    private final int playerAmount; // The actual number of players in the game
+    private final GUI_Player[] guiPlayerList;
+    private final String[] playerNames;
     private final StringHandler stringHandler = new StringHandler("src/main/resources/stringRefs.xml");
 
     public GUIController(Field[] fields, int numberOfFields){
@@ -52,6 +52,10 @@ public class GUIController {
             }
         }
         gui = new GUI(guiFields);
+
+        playerNames = askForPlayerNames();
+        playerAmount = playerNames.length;
+        this.guiPlayerList = new GUI_Player[playerAmount];
     }
 
     /**
@@ -93,9 +97,11 @@ public class GUIController {
      * Checks for the max. and min. amount of players.
      * Checks also if the name is already in use.
      */
-    public void askForPlayerNames(){
+    private String[] askForPlayerNames(){
         String userInputName;
         int i = 0;
+
+        String[] names = new String[MAX_PLAYER_AMOUNT];
         while(true) {
             boolean btnPressed = getUserLeftButtonPressed(getString("createPlayer"), getString("yes"), getString("no"));
             if(btnPressed) {
@@ -109,10 +115,11 @@ public class GUIController {
                 } else {
                     userInputName = getUserString(getString("inputNamePrompt")).toLowerCase();
                     userInputName = userInputName.substring(0,1).toUpperCase() + userInputName.substring(1);
-                    if(Arrays.asList(playerNames).contains(userInputName)){
+
+                    if(Arrays.asList(names).contains(userInputName)){
                         showMessage(getString("nameNotUniqueError"));
                     } else {
-                        playerNames[i] = (userInputName);
+                        names[i] = (userInputName);
                         i++;
                     }
                 }
@@ -124,7 +131,10 @@ public class GUIController {
                 }
             }
         }
-        PLAYER_AMOUNT = i;
+
+        String[] tempNames = new String[i];
+        System.arraycopy(names, 0, tempNames, 0, i);
+        return tempNames;
     }
 
     /**
@@ -146,7 +156,7 @@ public class GUIController {
             return false;
         }
 
-        for(int i=0; i < PLAYER_AMOUNT; i++){
+        for(int i = 0; i < playerAmount; i++){
             GUI_Player player = new GUI_Player(players[i].getName(),players[i].getBalance());
             playerCheck = gui.addPlayer(player);
             guiPlayerList[i] = player;
