@@ -14,6 +14,7 @@ public class GameBoard {
     private int[] playersWithMoveCards;
     private int playerWithJailCard = 0;
     private final Player[] players;
+    private int playerTurn = 0;
 
     // Constructor. Loads XML info into Field array. Sets Player names.
     public GameBoard() {
@@ -55,6 +56,11 @@ public class GameBoard {
 
         // Show a die being cast
         guiController.setDiceGui(faceValue);
+    }
+
+    public int getNextPlayerTurn() {
+        playerTurn = (playerTurn + 1) % players.length;
+        return playerTurn;
     }
 
     // Move the player on the board.
@@ -373,21 +379,6 @@ public class GameBoard {
 
     }
 
-    public int getPlayerWithJailCard() {
-        return playerWithJailCard;
-    }
-
-    public String toString() {
-
-        StringBuilder output = new StringBuilder();
-        for (Field field : fields) {
-            output.append(field.toString());
-            output.append("\n\n");
-        }
-
-        return output.toString();
-    }
-
     private boolean standardCardAction(int player, int destination, int amount, String action) {
 
         boolean successfulTransaction;
@@ -460,5 +451,25 @@ public class GameBoard {
             }
         }
         return true;
+    }
+
+    // Relevant getters
+    public int getPlayerWithJailCard() {
+        return playerWithJailCard;
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public String toString() {
+
+        StringBuilder output = new StringBuilder();
+        for (Field field : fields) {
+            output.append(field.toString());
+            output.append("\n\n");
+        }
+
+        return output.toString();
     }
 }
