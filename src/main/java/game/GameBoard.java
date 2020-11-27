@@ -61,7 +61,7 @@ public class GameBoard {
 
     public void castDie(int faceValue) {
 
-        guiController.showMessage(String.format("It is %s's turn Press OK to cast die", players[playerTurn].getName()));
+        guiController.showMessage(String.format("It is %s's turn. Press OK to cast die", players[playerTurn].getName()));
 
         // Show a die being cast
         guiController.setDiceGui(faceValue);
@@ -104,7 +104,6 @@ public class GameBoard {
     }
 
     public boolean giveStartReward(int player) {
-//        boolean successfulTransaction = actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
         boolean successfulTransaction = actorController.makeBankTransaction(false, player, ((Start) fields[0]).getReward());
 
         // Show in GUI that money has been withdrawn from player
@@ -178,13 +177,14 @@ public class GameBoard {
 
             } else {
                 // Announce which player has gone broke
-                // playerWithMinBalance = players[playerWithMinBalance]
                 guiController.showMessage(String.format("%s has gone bankrupt.", players[playerWithMinBalance].getName()));
             }
 
-            // Winner is players[playerWithMaxBalance]
             // Announce that winner
             guiController.showMessage(String.format("%s wins as the player with the most money. Congratulations!", players[playerWithMaxBalance].getName()));
+
+            // Close window after player has pressed OK
+            guiController.close();
         }
     }
 
@@ -204,7 +204,7 @@ public class GameBoard {
         // Property isn't owned by any players (i.e. is owned by the bank)
         if (owner == 0) {
 
-            guiController.showMessage(String.format("%s has landed on an unowned property and need to buy it.", players[player].getName()));
+            guiController.showMessage(String.format("%s has landed on an unowned property and needs to buy it.", players[player].getName()));
 
             // Try to buy property
             // Make transaction and check if it went through
@@ -271,7 +271,6 @@ public class GameBoard {
             return true;
 
         } else { // If player doesn't have free card, try to pay fine (to bank)
-//            boolean successfulTransaction = actorController.makeTransaction(player, 0, bail);
             boolean successfulTransaction = actorController.makeBankTransaction(true, player, bail);
 
             // Show in GUI that money has been withdrawn from player
@@ -414,7 +413,6 @@ public class GameBoard {
         switch (action) {
             case "fine":
                 //remove some money from the players account
-//                successfulTransaction = actorController.makeTransaction(player, 0, amount);
                 successfulTransaction = actorController.makeBankTransaction(true, player, amount);
 
                 // Show in GUI that money has been withdrawn from player
@@ -424,7 +422,6 @@ public class GameBoard {
 
             case "gift":
                 //insert some money into the players account
-//                successfulTransaction = actorController.makeTransaction(0, player, amount);
                 successfulTransaction = actorController.makeBankTransaction(false, player, amount);
 
                 if (successfulTransaction) {
