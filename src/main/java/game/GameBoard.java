@@ -357,6 +357,17 @@ public class GameBoard {
         return playerWithJailCard;
     }
 
+    public String toString() {
+
+        StringBuilder output = new StringBuilder();
+        for (Field field : fields) {
+            output.append(field.toString());
+            output.append("\n\n");
+        }
+
+        return output.toString();
+    }
+
     private boolean standardCardAction(int player, int destination, int amount, String action) {
 
         boolean successfulTransaction;

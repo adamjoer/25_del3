@@ -12,4 +12,8 @@ public class Start extends Field {
     public int getReward() {
         return reward;
     }
+
+    public String toString() {
+        return super.toString() + String.format("\n\t[reward=%d]", getReward());
+    }
 }

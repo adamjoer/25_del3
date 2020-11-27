@@ -39,4 +39,12 @@ public class Property extends Field {
     public void setOwner(int owner) {
         this.owner = owner;
     }
+
+    public String toString() {
+        return super.toString() +
+               String.format("\n\t[value=%d]", getValue()) +
+               String.format("\n\t[color=%s]", getColor().toString()) +
+               String.format("\n\t[relatedPropertyPosition=%d]", getRelatedPropertyPosition()) +
+               String.format("\n\t[owner=%d]", getOwner());
+    }
 }
