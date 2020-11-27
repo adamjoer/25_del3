@@ -14,6 +14,7 @@ public class GUIController {
     private final int playerAmount; // The actual number of players in the game
     private final GUI_Player[] guiPlayerList;
     private final String[] playerNames;
+    private final StringHandler stringHandler = new StringHandler("src/main/resources/stringRefs.xml");
 
     public GUIController(Field[] fields, int numberOfFields){
 
@@ -102,20 +103,21 @@ public class GUIController {
 
         String[] names = new String[MAX_PLAYER_AMOUNT];
         while(true) {
-            boolean btnPressed = getUserLeftButtonPressed("Opret ny spiller", "Ja", "Nej");
+            boolean btnPressed = getUserLeftButtonPressed(getString("createPlayer"), getString("yes"), getString("no"));
             if(btnPressed) {
                 if (i == 4) {
-                    String userBtn = getUserButton("The maximum amount of players have been reach, do you want to:",
-                            "Close game", "Continue");
-                    if (userBtn.equals("Close game")) {
+                    String userBtn = getUserButton(getString("maxPlayerReachedPrompt"),
+                            getString("closeGameOption"), getString("continueOption"));
+                    if (userBtn.equals(getString("closeGameOption"))) {
                         close();
                     }
                     break;
                 } else {
-                    userInputName = getUserString("Skriv dit navn her").toLowerCase();
+                    userInputName = getUserString(getString("inputNamePrompt")).toLowerCase();
                     userInputName = userInputName.substring(0,1).toUpperCase() + userInputName.substring(1);
+
                     if(Arrays.asList(names).contains(userInputName)){
-                        showMessage("Det navn er allerede taget!");
+                        showMessage(getString("nameNotUniqueError"));
                     } else {
                         names[i] = (userInputName);
                         i++;
@@ -123,7 +125,7 @@ public class GUIController {
                 }
             } else{
                 if(i <2){
-                    showMessage("Der skal mindst være 2 spillere for, at man kan starte spillet.");
+                    showMessage(getString("tooFewPlayersError"));
                 } else{
                     break;
                 }
@@ -319,4 +321,5 @@ public class GUIController {
         }
         return null;
     }
+    private String getString(String reference){ return stringHandler.getString(reference); }
 }
