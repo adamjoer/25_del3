@@ -304,7 +304,10 @@ public class GameBoard {
      */
     public int checkIfPlayerHasMoveCard(int player) {
         if (playersWithMoveCards[player] != 0) {
-            return playersWithMoveCards[player];
+            int i = playersWithMoveCards[player];
+            playersWithMoveCards[player] = 0;
+            return i;
+
         } else {
             return 0;
         }
