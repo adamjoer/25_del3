@@ -1,6 +1,7 @@
-package game;
+package game.actor;
 
 
+import game.Account;
 
 public abstract class Actor {
 

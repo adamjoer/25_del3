@@ -1,5 +1,9 @@
 package game;
 
+import game.actor.*;
+//import game.actor.Bank;
+//import game.actor.Player;
+
 public class ActorController {
     //Defining variables
 

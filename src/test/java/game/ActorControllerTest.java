@@ -1,5 +1,6 @@
 package game;
 
+import game.actor.Actor;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

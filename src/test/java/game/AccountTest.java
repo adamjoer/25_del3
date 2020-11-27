@@ -1,5 +1,7 @@
 package game;
 
+import game.actor.Player;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest
