@@ -70,15 +70,12 @@ public class GameBoard {
         // Move player forward by the specified amount of steps
         actorController.movePlayer(player, increment);
 
-        System.out.printf("%s Previous: %d, Current: %d\n", players[player].getName(), players[player].getPreviousPosition(), players[player].getCurrentPosition());
-
         // Show player moving forward in GUI
         guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
     }
 
     public void setPlayerPosition(int player, int position) {
         players[player].setCurrentPosition(position);
-        System.out.printf("%s Previous: %d, Current: %d\n", players[player].getName(), players[player].getPreviousPosition(), players[player].getCurrentPosition());
         guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
 
     }
@@ -100,7 +97,7 @@ public class GameBoard {
 
     public boolean giveStartReward(int player) {
 //        boolean successfulTransaction = actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
-        boolean successfulTransaction = actorController.makeBankTransaction(true, player, ((Start) fields[0]).getReward());
+        boolean successfulTransaction = actorController.makeBankTransaction(false, player, ((Start) fields[0]).getReward());
 
         // Show in GUI that money has been withdrawn from player
         guiController.setPlayerBalance(players[player], players[player].getBalance());
