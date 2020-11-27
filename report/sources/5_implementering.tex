@@ -1,0 +1,34 @@
+\subsection{Actors}
+Da spillet nu skal udvides til et matadorspil har vi brug for en bank. Til dette er det oplagt at bruge nedarvning, da \texttt{Bank} og \texttt{Player} har mange metoder til fælles. Vi har derfor lavet en \texttt{Actor} som superklasse til de fælles attributter og metoder. Den er selvfølgelig \texttt{abstract} da vi ikke vil have lavet nogle instanser af den. \texttt{Bank} og \texttt{Player} klasserne nedarver således fra \texttt{Actor} klassen, så de begge kan få en start balance samt lave transactions.
+
+
+\subsection{ActorController}
+I metoden \texttt{makeTransaction} sikrer vi low coupling og high cohesion ved kun at tilgå de forskellige actors, transaktionen skal ske mellem gennem \texttt{ActorController}, mens det eneste \texttt{Actor} klassen gør når den bliver kaldt af \texttt{makeTransaction} er at udregne og sætte den nye balance for den instans af \texttt{Actor} som kalder metoden.
+
+\subsection{GUIController}
+Når man opretter et object af GUIController, skal der sendes en list af Fields med og antal af Fields, da det er GUIController, som skal starte GUI’en, og oprette de forskellige felter til spillet.
+Inde i selve contructoren af klassen, vil der så være en switch case, som sørger for at tildele de forskellige felter den rigtige type af Field i GUI’en.
+Derefter kan man kommunikere med GUI’en via det GUIController object man har lavet.
+GUIControlleren opretter også spillere på den måde, at den spørger spillere om deres navn, og om man vil oprette flere spiller, derudover tjekker den også på, om man er noget max. Antal spiller, eller om man er under min. Antal spillere. Alle spillernavne bliver derefter smidt ind i et Array, som man kan hente med metode ”returnPlayerNames()”. 
+
+
+
+\subsection{ChanceCardController}
+Når man opretter et object a \texttt{ChanceCardController}, kommer dette til at indeholde et dæk med 20 chancekort. Man har mulighed for at trække et kort(som bliver returneret, da \texttt{GameBoard} skal håndtere hvad kortet gør), ved hjælp af \texttt{drawChanceCard()} metoden. Dækket bliver kørt igennem fra start til slut, og hvis der bliver kaldt \texttt{newGame()} bliver dækket blandet, og variable \texttt{cardsDrawn} bliver sat til 0, for at sørge for at man starter forfra med bunken.
+
+\subsection{GameBoard}
+Når \texttt{GameBoard} instantieres skal den bruge en liste af fields, hvilket den får fra \texttt{Utility} pakken, som læser felterne fra en xml fil. I konstruktøren bliver \texttt{GUIController} også instantieret, så et nyt vindue bliver lavet. 
+
+Den centrale metode i \texttt{GameBoard} kan siges at være \texttt{fieldAction}, da det er den metode der eksekveres når spilleren lander på et spil og skal udføre en bestemt handling ud fra feltets type. Der er derfor forskellige metoder for de forskellige felter, som bliver kørt af \texttt{fieldAction}. 
+
+Hver gang \texttt{fieldAction} bliver kaldt tjekkes der om nogen af spillerne er gået fallit ved at se om nogen af transaktionerne ikke er gået igennem. 
+
+Hvis spilleren lander på et \texttt{Chance}felt skal der trækkes et chancekort som siger hvad spilleren skal gøre. I nogle tilfælde skal spilleren flytte sig frem på næste træk. Derfor bliver det gemt, og skal tjekkes for hver tur spillerne har.
+
+
+I løbet af dette bliver \texttt{GUIController} også brugt til at ændre brættet i overensstemmelse med hvad der sker i spillets logik.
+\subsection{Utility}
+\texttt{Utility} indeholder methods til at hente data fra XML filer. Vi bruger Utility til at importere data til \texttt{ChanceCard} og \texttt{Field} objekterne, som skal bruges i programmet, samt til at lave \texttt{StringRef} objekter der skal benyttes af \texttt{StringHandler}. 
+
+\subsection{StringHandler}
+Denne object controller er lavet for at kunne søge på en String reference for at kunne hente den søgte String til brug hvor det er relevant (typisk i GUIController, der sender beskeder til udskrift i GUIen). Formålet med dette er at kunne skifte sproget fra engelsk til eksempelvis dansk ved blot at oversætte en række strenge i overskuelige filer (her XML).

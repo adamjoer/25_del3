@@ -1,0 +1,28 @@
+\BOOKMARK [1][-]{section.1}{Resum\351}{}% 1
+\BOOKMARK [1][-]{section.2}{Indledning}{}% 2
+\BOOKMARK [1][-]{section.3}{Krav}{}% 3
+\BOOKMARK [1][-]{section.4}{Analyse}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Use case beskrivelser}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Fully dressed Use case}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.3}{Systemsekvensdiagram}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.4}{Designklassediagram}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{Design}{}% 9
+\BOOKMARK [2][-]{subsection.5.1}{Klassediagram}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.2}{GUIController}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.3}{ChanceCardController}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.4}{GameBoard}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.5}{Sekvensdiagram}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{Implementering}{}% 15
+\BOOKMARK [2][-]{subsection.6.1}{Actors}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.2}{ActorController}{section.6}% 17
+\BOOKMARK [2][-]{subsection.6.3}{GUIController}{section.6}% 18
+\BOOKMARK [2][-]{subsection.6.4}{ChanceCardController}{section.6}% 19
+\BOOKMARK [2][-]{subsection.6.5}{GameBoard}{section.6}% 20
+\BOOKMARK [2][-]{subsection.6.6}{Utility}{section.6}% 21
+\BOOKMARK [2][-]{subsection.6.7}{StringHandler}{section.6}% 22
+\BOOKMARK [1][-]{section.7}{Brug}{}% 23
+\BOOKMARK [1][-]{section.8}{Test}{}% 24
+\BOOKMARK [2][-]{subsection.8.1}{Test cases}{section.8}% 25
+\BOOKMARK [2][-]{subsection.8.2}{Dokumentation for code coverage}{section.8}% 26
+\BOOKMARK [1][-]{section.9}{Konklusion}{}% 27
+\BOOKMARK [1][-]{section.9}{Litteratur}{}% 28
