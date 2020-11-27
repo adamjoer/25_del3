@@ -12,4 +12,8 @@ public class GoToJail extends Field {
     public int getJailPosition() {
         return jailPosition;
     }
+
+    public String toString() {
+        return super.toString() + String.format("\n\t[jailPosition=%d]", getJailPosition());
+    }
 }

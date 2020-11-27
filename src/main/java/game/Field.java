@@ -17,7 +17,7 @@ public abstract class Field {
         this.position = position;
     }
 
-    public String getField(){
+    public String getField() {
         return getClass().getSimpleName();
     }
 
@@ -37,4 +37,11 @@ public abstract class Field {
         return position;
     }
 
+    public String toString() {
+
+        return String.format("%s\n\t[title=%s]", getField(), getTitle()) +
+               String.format("\n\t[subText=%s]", getSubText()) +
+               String.format("\n\t[description=%s]", getDescription()) +
+               String.format("\n\t[position=%d]", getPosition());
+    }
 }
