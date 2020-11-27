@@ -26,8 +26,11 @@ public class ActorController {
         } else {
             startBalance = 20;
         }
+
+        // Players get their money from the bank, the sum of money that is assigned to players is therefore withdrawn from the bank
+        actors[0] = new Bank(BANK_BALANCE - (startBalance * playerNames.length));
+
         //Assigning player names and bank with their starting balance
-        actors[0] = new Bank(BANK_BALANCE);
         for (int i = 1; i < actors.length; i++) {
             actors[i] = new Player(startBalance, playerNames[i]);
         }
