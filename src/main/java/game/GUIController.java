@@ -300,6 +300,10 @@ public class GUIController {
         gui.displayChanceCard();
     }
 
+    public GUI_Field[] getGuiFields(){
+        return gui.getFields();
+    }
+
     /**
      * Closes the GUI window.
      */
