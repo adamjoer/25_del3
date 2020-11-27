@@ -45,6 +45,8 @@ public class ActorController {
      */
     //makes transaction between two actors and returns false if senders balance is below amount
     public boolean makeTransaction(int sender, int receiver, int amount) {
+        sender++;
+        receiver++;
 
         if (actors[sender].makeTransaction(-amount) && amount < 91) {
             actors[receiver].makeTransaction(amount);
@@ -57,6 +59,7 @@ public class ActorController {
     }
 
     public boolean makeBankTransaction(boolean playerIsSending, int player, int amount) {
+        player++;
         if (playerIsSending) {
             if (actors[player].makeTransaction(-amount) && amount < 91) {
                 actors[0].makeTransaction(amount);
