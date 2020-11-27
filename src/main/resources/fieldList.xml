@@ -13,7 +13,7 @@
         <subText></subText>
         <description></description>
         <value>1</value>
-        <color>brown</color>
+        <color>0x8B2323</color>
         <relatedPropertyPosition>2</relatedPropertyPosition>
     </field>
     <field>
@@ -22,7 +22,7 @@
         <subText></subText>
         <description></description>
         <value>1</value>
-        <color>brown</color>
+        <color>0x8B2323</color>
         <relatedPropertyPosition>1</relatedPropertyPosition>
     </field>
     <field>
@@ -35,7 +35,7 @@
         <fieldType>Property</fieldType>
         <title>The Candy Store</title>
         <value>1</value>
-        <color>cyan</color>
+        <color>0x00EEEEE</color>
         <relatedPropertyPosition>5</relatedPropertyPosition>
     </field>
     <field>
@@ -44,7 +44,7 @@
         <subText></subText>
         <description></description>
         <value>1</value>
-        <color>cyan</color>
+        <color>0x00EEEEE</color>
         <relatedPropertyPosition>4</relatedPropertyPosition>
     </field>
     <field>
@@ -61,7 +61,7 @@
         <subText></subText>
         <description></description>
         <value>2</value>
-        <color>magenta</color>
+        <color>0xCD00CD</color>
         <relatedPropertyPosition>8</relatedPropertyPosition>
     </field>
     <field>
@@ -70,7 +70,7 @@
         <subText></subText>
         <description></description>
         <value>2</value>
-        <color>magenta</color>
+        <color>0xCD00CD</color>
         <relatedPropertyPosition>7</relatedPropertyPosition>
     </field>
     <field>
@@ -85,7 +85,7 @@
         <subText></subText>
         <description></description>
         <value>2</value>
-        <color>orange</color>
+        <color>0xEE9A00</color>
         <relatedPropertyPosition>11</relatedPropertyPosition>
     </field>
     <field>
@@ -94,7 +94,7 @@
         <subText></subText>
         <description></description>
         <value>2</value>
-        <color>orange</color>
+        <color>0xEE9A00</color>
         <relatedPropertyPosition>10</relatedPropertyPosition>
     </field>
     <field>
@@ -109,7 +109,7 @@
         <subText></subText>
         <description></description>
         <value>3</value>
-        <color>red</color>
+        <color>0xCD0000</color>
         <relatedPropertyPosition>14</relatedPropertyPosition>
     </field>
     <field>
@@ -118,7 +118,7 @@
         <subText></subText>
         <description></description>
         <value>3</value>
-        <color>red</color>
+        <color>0xCD0000</color>
         <relatedPropertyPosition>13</relatedPropertyPosition>
     </field>
     <field>
@@ -133,7 +133,7 @@
         <subText></subText>
         <description></description>
         <value>3</value>
-        <color>yellow</color>
+        <color>0xEEEE00</color>
         <relatedPropertyPosition>17</relatedPropertyPosition>
     </field>
     <field>
@@ -142,7 +142,7 @@
         <subText></subText>
         <description></description>
         <value>3</value>
-        <color>yellow</color>
+        <color>0xEEEE00</color>
         <relatedPropertyPosition>16</relatedPropertyPosition>
     </field>
     <field>
@@ -158,7 +158,7 @@
         <subText></subText>
         <description></description>
         <value>4</value>
-        <color>green</color>
+        <color>0x008B00</color>
         <relatedPropertyPosition>20</relatedPropertyPosition>
     </field>
     <field>
@@ -167,7 +167,7 @@
         <subText></subText>
         <description></description>
         <value>4</value>
-        <color>green</color>
+        <color>0x008B00</color>
         <relatedPropertyPosition>19</relatedPropertyPosition>
     </field>
     <field>
@@ -182,14 +182,14 @@
         <subText></subText>
         <description></description>
         <value>5</value>
-        <color>blue</color>
+        <color>0x0000EE</color>
         <relatedPropertyPosition>23</relatedPropertyPosition>
     </field>
     <field>
         <fieldType>Property</fieldType>
         <title>The Esplanade</title>
         <value>5</value>
-        <color>blue</color>
+        <color>0x0000EE</color>
         <relatedPropertyPosition>22</relatedPropertyPosition>
     </field>
 </fieldList>
