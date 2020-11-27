@@ -32,7 +32,7 @@ public class GUIController {
                     Property property = (Property) fields[i];
                     Color color = property.getColor();
                     guiFields[i] = new GUI_Street(property.getTitle(), property.getSubText(), property.getDescription(),
-                            String.valueOf(property.getValue()), color, Color.white);
+                            String.valueOf(property.getValue()), property.getColor(), Color.BLACK);
                     break;
                 case "GoToJail":
                 case "Jail":

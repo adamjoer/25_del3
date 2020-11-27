@@ -1,7 +1,5 @@
 package game;
 
-import gui_main.GUI;
-
 import java.awt.*;
 
 public class GameBoard {
@@ -12,7 +10,7 @@ public class GameBoard {
     private final GUIController guiController;
     private final ChanceCardController chanceCardController;
     private int[] playersWithMoveCards;
-    private int playerWithJailCard = 0;
+    private int playerWithJailCard = 4;
     private final Player[] players;
     private int playerTurn;
     private boolean hasWinner = false;
@@ -23,9 +21,7 @@ public class GameBoard {
 
         guiController = new GUIController(fields, fields.length);
 
-//        guiController.askForPlayerNames();
         actorController = new ActorController(guiController.returnPlayerNames());
-
 
         chanceCardController = new ChanceCardController();
 
@@ -46,7 +42,7 @@ public class GameBoard {
 
         playerTurn = (int) (Math.random() * (players.length - 1));
 
-        playersWithMoveCards = new int[actors.length];
+        playersWithMoveCards = new int[players.length];
     }
 
     public void castDice(int faceValue1, int faceValue2) {
@@ -57,7 +53,7 @@ public class GameBoard {
 
     public void castDie(int faceValue) {
 
-        guiController.showMessage("Press OK to cast die");
+        guiController.showMessage(String.format("It is %s's turn Press OK to cast die", players[playerTurn].getName()));
 
         // Show a die being cast
         guiController.setDiceGui(faceValue);
@@ -80,6 +76,15 @@ public class GameBoard {
 
     public void setPlayerPosition(int player, int position) {
         players[player].setCurrentPosition(position);
+        guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
+
+    }
+
+    public void checkStartPass(int player) {
+        // Give player start reward if they have passed start
+        if (hasPassedStart(player)) {
+            hasWinner = !giveStartReward(player);
+        }
     }
 
     // Returns whether player has passed Start field
@@ -91,7 +96,8 @@ public class GameBoard {
     }
 
     public boolean giveStartReward(int player) {
-        boolean successfulTransaction = actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
+//        boolean successfulTransaction = actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
+        boolean successfulTransaction = actorController.makeBankTransaction(false, player, ((Start) fields[0]).getReward());
 
         // Show in GUI that money has been withdrawn from player
         guiController.setPlayerBalance(players[player], players[player].getBalance());
@@ -101,11 +107,6 @@ public class GameBoard {
 
     // Execute action of the field the player is on
     public void fieldAction(int player) {
-
-        // Give player start reward if they have passed start
-        if (hasPassedStart(player)) {
-            giveStartReward(player);
-        }
 
         // Get the field that the player has landed on from their position
         int position = actorController.getCurrentPosition(player);
@@ -175,7 +176,7 @@ public class GameBoard {
 
             // Winner is players[playerWithMaxBalance]
             // Announce that winner
-            guiController.showMessage(String.format("%s wins as the player with the most money. Congratulations!", players[playerWithMaxBalance]));
+            guiController.showMessage(String.format("%s wins as the player with the most money. Congratulations!", players[playerWithMaxBalance].getName()));
         }
     }
 
@@ -186,7 +187,7 @@ public class GameBoard {
         int owner = property.getOwner();
 
         // If property is owned by player, do nothing
-        if (owner == player) {
+        if (owner == player + 1) {
             return true;
         }
 
@@ -195,9 +196,12 @@ public class GameBoard {
         // Property isn't owned by any players (i.e. is owned by the bank)
         if (owner == 0) {
 
+            guiController.showMessage(String.format("%s has landed on an unowned property and need to buy it.", players[player].getName()));
+
             // Try to buy property
             // Make transaction and check if it went through
-            successfulTransaction = actorController.makeTransaction(player, 0, property.getValue());
+//            successfulTransaction = actorController.makeTransaction(player, 0, property.getValue());
+            successfulTransaction = actorController.makeBankTransaction(true, player, property.getValue());
 
             // Assign new owner if successful
             if (successfulTransaction) {
@@ -208,12 +212,14 @@ public class GameBoard {
                         property.getSubText(),
                         players[player].getName(),
                         property.getValue(),
-                        property.getColor(),
+                        Color.DARK_GRAY,
                         property.getPosition()
                 );
             }
 
         } else { // Property is owned by another player
+
+            guiController.showMessage(String.format("%s has landed on an owned property and needs to pay rent to %s.", players[player].getName(), players[owner].getName()));
 
             // Value of rent is the value of property
             int rent = property.getValue();
@@ -247,16 +253,18 @@ public class GameBoard {
         int bail = ((Jail) fields[jailPos]).getBail();
 
         players[player].setCurrentPosition(jailPos);
+        guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
 
         // If player has free card, take it away
         if (getPlayerWithJailCard() == player) {
 
-            guiController.displayChanceCard("Card used");
+            guiController.displayChanceCard("'Get out of jail free' card used");
             playerWithJailCard = 0;
             return true;
 
         } else { // If player doesn't have free card, try to pay fine (to bank)
-            boolean successfulTransaction = actorController.makeTransaction(player, 0, bail);
+//            boolean successfulTransaction = actorController.makeTransaction(player, 0, bail);
+            boolean successfulTransaction = actorController.makeBankTransaction(true, player, bail);
 
             // Show in GUI that money has been withdrawn from player
             guiController.setPlayerBalance(players[player], players[player].getBalance());
@@ -300,7 +308,10 @@ public class GameBoard {
             case "TargetedCard":
 
                 //get the player that is going to be moved
-                int target = ((TargetedCard) cCard).getTargetedPlayer();
+                int target = ((TargetedCard) cCard).getTargetedPlayer() - 1;
+                if(target > players.length){
+                    target = player;
+                }
 
                 //update the list of what players have to move at the start of their turn.
                 moveToColor(Color.white, target, true);
@@ -340,7 +351,7 @@ public class GameBoard {
 
         //iterate over all the fields
 
-        for (int i = 0; i < fields.length; i++) {
+        for (int i = 1; i < fields.length; i++) {
             int currentField = (i + actorController.getCurrentPosition(player)) % 24;
             //check if the field is of type "Property"
             if (fields[currentField].getField().equals("Property")) {
@@ -395,7 +406,8 @@ public class GameBoard {
         switch (action) {
             case "fine":
                 //remove some money from the players account
-                successfulTransaction = actorController.makeTransaction(player, 0, amount);
+//                successfulTransaction = actorController.makeTransaction(player, 0, amount);
+                successfulTransaction = actorController.makeBankTransaction(true, player, amount);
 
                 // Show in GUI that money has been withdrawn from player
                 guiController.setPlayerBalance(players[player], players[player].getBalance());
@@ -404,7 +416,8 @@ public class GameBoard {
 
             case "gift":
                 //insert some money into the players account
-                successfulTransaction = actorController.makeTransaction(0, player, amount);
+//                successfulTransaction = actorController.makeTransaction(0, player, amount);
+                successfulTransaction = actorController.makeBankTransaction(false, player, amount);
 
                 if (successfulTransaction) {
                     guiController.setPlayerBalance(players[player], players[player].getBalance());
@@ -432,6 +445,9 @@ public class GameBoard {
                 actorController.setCurrentPosition(player, destination);
                 guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
                 fieldAction(player);
+                if (players[player].getCurrentPosition() == 0) {
+                    actorController.makeBankTransaction(false, player, ((Start) fields[0]).getReward());
+                }
                 return true;
 
             default:
