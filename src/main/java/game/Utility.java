@@ -37,7 +37,7 @@ public class Utility {
 
                     switch (fieldType){
                         case "Property":
-                            Color color = Color.getColor(getString(ele,"color"));
+                            Color color = new Color(getInt(ele,"color"));
                             int value = getInt(ele,"value");
                             int relatedPropertyPosition = getInt(ele, "relatedPropertyPosition");
 
@@ -126,10 +126,10 @@ public class Utility {
                             int amount = 0;
 
 
-                            if(standardType == "gift" || standardType == "playerGift"){
+                            if(standardType.equals("gift") || standardType.equals("playerGift")){
                                 amount = getInt(ele,"amount");
                             }
-                            else if(standardType == "moveDestination" || standardType == "moveIncrement"){
+                            else if(standardType.equals("moveDestination") || standardType.equals("moveIncrement")){
                                 moveDestination = getInt(ele,"moveDestination");
                             }
 
