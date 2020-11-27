@@ -215,7 +215,7 @@ public class Utility {
     private static int getInt (Element ele, String tag){
         int n = Integer.MAX_VALUE;
         try{
-            n = Integer.parseInt(ele.getElementsByTagName(tag).item(0).getTextContent());
+            n = Integer.decode(ele.getElementsByTagName(tag).item(0).getTextContent());
         } catch (Exception e){
             e.printStackTrace();
         }
