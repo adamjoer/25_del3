@@ -140,6 +140,30 @@ public class Utility {
         return chanceCards;
     }
 
+    /**
+     * Generates an array of stringRefs from an XML file.
+     * @param filePath Filepath of the XML file.
+     * @return A StringRef[] with the given information.
+     */
+    public static StringRef[] stringRefGenerator(String filePath){
+        NodeList stringRefList = getXmlContent(filePath,"stringRef");
+        StringRef[] stringRefs = new StringRef[stringRefList.getLength()];
+
+        try {
+            for (int i = 0; i < stringRefList.getLength(); i++) {
+                Node stringRef = stringRefList.item(i);
+
+                if (stringRef.getNodeType() == Node.ELEMENT_NODE){
+                    Element ele = (Element) stringRef;
+                    stringRefs[i] = new StringRef(getString(ele,"reference"),getString(ele,"outputString"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stringRefs;
+    }
+
     /*
      * Extracts a boolean from an XML element.
      * @param ele An XML element extracted from a document.
