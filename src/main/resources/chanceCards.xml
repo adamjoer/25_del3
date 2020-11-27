@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chancecards>
+    <chancecard>
+        <cardText>On green car's next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.</cardText>
+        <cardType>TargetedCard</cardType>
+        <targetPlayer>1</targetPlayer>
+    </chancecard>
+    <chancecard>
+        <cardText>Move to start. Receive M2.</cardText>
+        <cardType>StandardCard</cardType>
+        <standardType>moveDestination</standardType>
+        <moveDestination>0</moveDestination>
+    </chancecard>
+    <chancecard>
+        <cardText>Move 5 fields forward.</cardText>
+        <cardType>StandardCard</cardType>
+        <standardType>moveIncrement</standardType>
+        <moveDestination>5</moveDestination>
+    </chancecard>
+    <chancecard>
+        <cardText>Move to the the next orange field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.</cardText>
+        <cardType>MoveToColorCard</cardType>
+        <color>orange</color>
+    </chancecard>
+    <chancecard>
+        <cardText>Move 1 field forward.</cardText>
+        <cardType>StandardCard</cardType>
+        <standardType>moveIncrement</standardType>
+        <moveDestination>1</moveDestination>
+    </chancecard>
+    <chancecard>
+        <cardText>On blue car's next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.</cardText>
+        <cardType>TargetedCard</cardType>
+        <targetPlayer>2</targetPlayer>
+    </chancecard>
+    <chancecard>
+        <cardText>You ate to much candy, pay the bank M2.</cardText>
+        <cardType>StandardCard</cardType>
+        <standardType>fine</standardType>
+        <amount>2</amount>
+    </chancecard>
+    <chancecard>
+        <cardText>Move to the next green field. If it's not owned by anyone, get it for free, otherwise, pay the owner rent.</cardText>
+        <cardType>MoveToColorCard</cardType>
+        <color>green</color>
+    </chancecard>
+    <chancecard>
+        <cardText>Move to the next light blue field. If it's not owned by anyone, get it for free, otherwise, pay the owner rent.</cardText>
+        <cardType>MoveToColorCard</cardType>
+        <color>cyan</color>
+    </chancecard>
+    <chancecard>
+        <cardText>Keep this card until you need it. When you are in jail you can use this card at the start of your turn to get out for free.</cardText>
+        <cardType>HeldCard</cardType>
+    </chancecard>
+    <chancecard>
+        <cardText>When drawn move to The Boulevard.</cardText>
+        <cardType>StandardCard</cardType>
+        <standardType>moveDestination</standardType>
+        <moveDestination>23</moveDestination>
+    </chancecard>
+    <chancecard>
+        <cardText>On orange car's next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.</cardText>
+        <cardType>TargetedCard</cardType>
+        <targetPlayer>3</targetPlayer>
+    </chancecard>
+    <chancecard>
+        <cardText>On black car's next turn, move to the next field, that is not owned by another player, and buy it. If all fields are owned, move to the closest field and buy it from that player.</cardText>
+        <cardType>TargetedCard</cardType>
+        <targetPlayer>4</targetPlayer>
+    </chancecard>
+    <chancecard>
+        <cardText>Congratulations, it's your birthday! Receive M1 from all other players.</cardText>
+        <cardType>StandardCard</cardType>
+        <standardType>playerGift</standardType>
+        <amount>1</amount>
+    </chancecard>
+    <chancecard>
+        <cardText>Move to the the next pink field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.</cardText>
+        <cardType>MoveToColorCard</cardType>
+        <color>pink</color>
+    </chancecard>
+    <chancecard>
+        <cardText>You did your homework, you get M2 from the bank.</cardText>
+        <cardType>StandardCard</cardType>
+        <standardType>gift</standardType>
+        <amount>2</amount>
+    </chancecard>
+    <chancecard>
+        <cardText>Move to the the next pink field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.</cardText>
+        <cardType>MoveToColorCard</cardType>
+        <color>red</color>
+    </chancecard>
+    <chancecard>
+        <cardText>Move to The Skate Park. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.</cardText>
+        <cardType>StandardCard</cardType>
+        <standardType>moveDestination</standardType>
+        <moveDestination>10</moveDestination>
+    </chancecard>
+    <chancecard>
+        <cardText>Move to the the next dark blue field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.</cardText>
+        <cardType>MoveToColorCard</cardType>
+        <color>blue</color>
+    </chancecard>
+    <chancecard>
+        <cardText>Move to the the next brown field. If it's not owned by another player, you get it for free, otherwise, pay the owner rent.</cardText>
+        <cardType>MoveToColorCard</cardType>
+        <color>brown</color>
+    </chancecard>
+</chancecards>

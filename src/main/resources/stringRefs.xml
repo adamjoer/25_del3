@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stringRefs>
+    <stringRef>
+        <reference>createPlayer</reference>
+        <outputString>Create new player?</outputString>
+    </stringRef>
+    <stringRef>
+        <reference>yes</reference>
+        <outputString>Yes</outputString>
+    </stringRef>
+    <stringRef>
+        <reference>no</reference>
+        <outputString>No</outputString>
+    </stringRef>
+    <stringRef>
+        <reference>maxPlayerReachedPrompt</reference>
+        <outputString>The maximum amount of players have been reached, do you want to:</outputString>
+    </stringRef>
+    <stringRef>
+        <reference>closeGameOption</reference>
+        <outputString>Close game.</outputString>
+    </stringRef>
+    <stringRef>
+        <reference>continueOption</reference>
+        <outputString>Continue.</outputString>
+    </stringRef>
+    <stringRef>
+        <reference>inputNamePrompt</reference>
+        <outputString>Enter your name here.</outputString>
+    </stringRef>
+    <stringRef>
+        <reference>nameNotUniqueError</reference>
+        <outputString>That name already exists!</outputString>
+    </stringRef>
+    <stringRef>
+        <reference>tooFewPlayersError</reference>
+        <outputString>There needs to be at least two players to start the game.</outputString>
+    </stringRef>
+    <stringRef>
+        <reference>test</reference>
+        <outputString>Test did not fail!</outputString>
+    </stringRef>
+</stringRefs>

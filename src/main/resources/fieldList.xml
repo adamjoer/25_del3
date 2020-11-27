@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fieldList>
+    <field>
+        <fieldType>Start</fieldType>
+        <title>Start</title>
+        <subText></subText>
+        <description></description>
+        <reward>2</reward>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Street Food</title>
+        <subText>1M</subText>
+        <description></description>
+        <value>1</value>
+        <color>0x8b2323</color>
+        <relatedPropertyPosition>2</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Pizza Parlor</title>
+        <subText>1M</subText>
+        <description></description>
+        <value>1</value>
+        <color>0x8b2323</color>
+        <relatedPropertyPosition>1</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Chance</fieldType>
+        <title>Chance</title>
+        <subText></subText>
+        <description></description>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Candy Store</title>
+        <subText>1M</subText>
+        <description></description>
+        <value>1</value>
+        <color>0x00eeee</color>
+        <relatedPropertyPosition>5</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Ice Cream Store</title>
+        <subText>1M</subText>
+        <description></description>
+        <value>1</value>
+        <color>0x00eeee</color>
+        <relatedPropertyPosition>4</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Jail</fieldType>
+        <title>Jail</title>
+        <subText></subText>
+        <description></description>
+        <goToJailPosition>18</goToJailPosition>
+        <fine>1</fine>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Museum</title>
+        <subText>2M</subText>
+        <description></description>
+        <value>2</value>
+        <color>0xcd00cd</color>
+        <relatedPropertyPosition>8</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Library</title>
+        <subText>2M</subText>
+        <description></description>
+        <value>2</value>
+        <color>0xcd00cd</color>
+        <relatedPropertyPosition>7</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Chance</fieldType>
+        <title>Chance</title>
+        <subText></subText>
+        <description></description>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Skate Park</title>
+        <subText>2M</subText>
+        <description></description>
+        <value>2</value>
+        <color>0xee9a00</color>
+        <relatedPropertyPosition>11</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Swimming Pool</title>
+        <subText>2M</subText>
+        <description></description>
+        <value>2</value>
+        <color>0xee9a00</color>
+        <relatedPropertyPosition>10</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>ParkingLot</fieldType>
+        <title>Parking Lot</title>
+        <subText></subText>
+        <description></description>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Arcade</title>
+        <subText>3M</subText>
+        <description></description>
+        <value>3</value>
+        <color>0xcd0000</color>
+        <relatedPropertyPosition>14</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Cinema</title>
+        <subText>3M</subText>
+        <description></description>
+        <value>3</value>
+        <color>0xcd0000</color>
+        <relatedPropertyPosition>13</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Chance</fieldType>
+        <title>Chance</title>
+        <subText></subText>
+        <description></description>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Toy Store</title>
+        <subText>3M</subText>
+        <description></description>
+        <value>3</value>
+        <color>0xeeee00</color>
+        <relatedPropertyPosition>17</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Pet Store</title>
+        <subText>3M</subText>
+        <description></description>
+        <value>3</value>
+        <color>0xeeee00</color>
+        <relatedPropertyPosition>16</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>GoToJail</fieldType>
+        <title>Go To Jail</title>
+        <subText></subText>
+        <description></description>
+        <jailPosition>6</jailPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Bowling Alley</title>
+        <subText>4M</subText>
+        <description></description>
+        <value>4</value>
+        <color>0x008b00</color>
+        <relatedPropertyPosition>20</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Zoo</title>
+        <subText>4M</subText>
+        <description></description>
+        <value>4</value>
+        <color>0x008b00</color>
+        <relatedPropertyPosition>19</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Chance</fieldType>
+        <title>Chance</title>
+        <subText></subText>
+        <description></description>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Water Park</title>
+        <subText>5M</subText>
+        <description></description>
+        <value>5</value>
+        <color>0x0000ee</color>
+        <relatedPropertyPosition>23</relatedPropertyPosition>
+    </field>
+    <field>
+        <fieldType>Property</fieldType>
+        <title>The Esplanade</title>
+        <subText>5M</subText>
+        <description></description>
+        <value>5</value>
+        <color>0x0000ee</color>
+        <relatedPropertyPosition>22</relatedPropertyPosition>
+    </field>
+</fieldList>
