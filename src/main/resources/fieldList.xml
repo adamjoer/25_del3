@@ -102,8 +102,8 @@
     <field>
         <fieldType>ParkingLot</fieldType>
         <title>Parking Lot</title>
-        <subText></subText>
-        <description></description>
+        <subText>Parking Lot</subText>
+        <description>Parking Lot</description>
     </field>
     <field>
         <fieldType>Property</fieldType>
