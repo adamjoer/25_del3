@@ -1,4 +1,4 @@
-package game;
+package game.chance.card;
 
 public class StandardCard extends ChanceCard {
 

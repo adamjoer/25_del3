@@ -1,5 +1,6 @@
 package game;
 
+import game.chance.card.ChanceCard;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

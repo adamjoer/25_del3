@@ -1,4 +1,4 @@
-package game;
+package game.chance.card;
 
 import java.awt.*;
 
