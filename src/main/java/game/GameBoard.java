@@ -42,7 +42,7 @@ public class GameBoard {
 
         playerTurn = (int) (Math.random() * (players.length - 1));
 
-        playersWithMoveCards = new int[actors.length];
+        playersWithMoveCards = new int[players.length];
     }
 
     public void castDice(int faceValue1, int faceValue2) {
@@ -291,7 +291,7 @@ public class GameBoard {
                 moveToColor(color, player, false);
 
                 //move the player to the field
-                actorController.setCurrentPosition(player, playersWithMoveCards[player + 1]);
+                actorController.setCurrentPosition(player, playersWithMoveCards[player]);
                 playersWithMoveCards[player] = 0;
                 guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
 
@@ -345,7 +345,7 @@ public class GameBoard {
 
         //iterate over all the fields
 
-        for (int i = 0; i < fields.length; i++) {
+        for (int i = 1; i < fields.length; i++) {
             int currentField = (i + actorController.getCurrentPosition(player)) % 24;
             //check if the field is of type "Property"
             if (fields[currentField].getField().equals("Property")) {
