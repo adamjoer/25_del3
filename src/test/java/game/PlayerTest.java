@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PlayerTest extends Actor {
+public class PlayerTest{
     /*
      @org.junit.jupiter.api.Test
     void createPlayerCheckName(){
@@ -32,23 +32,23 @@ public class PlayerTest extends Actor {
             actors[i] = new Player(16, name);
         }
 
-        transactionSucces = actors[0].makeTransaction(actors[1], 16);
+        transactionSucces = actors[0].makeTransaction(16);
         assertTrue(transactionSucces);
 
         ((Player)actors[0]).setBalance(16);
-        transactionSucces = actors[0].makeTransaction(actors[1], 17);
+        transactionSucces = actors[0].makeTransaction(17);
+        assertTrue(transactionSucces);
+
+        ((Player)actors[0]).setBalance(16);
+        transactionSucces = actors[0].makeTransaction(-17);
         assertFalse(transactionSucces);
 
         ((Player)actors[0]).setBalance(16);
-        transactionSucces = actors[0].makeTransaction(actors[1], -17);
+        transactionSucces = actors[0].makeTransaction(Integer.MAX_VALUE);
         assertFalse(transactionSucces);
 
         ((Player)actors[0]).setBalance(16);
-        transactionSucces = actors[0].makeTransaction(actors[1], Integer.MAX_VALUE);
-        assertFalse(transactionSucces);
-
-        ((Player)actors[0]).setBalance(16);
-        transactionSucces = actors[0].makeTransaction(actors[1], Integer.MIN_VALUE);
+        transactionSucces = actors[0].makeTransaction(Integer.MIN_VALUE);
         assertFalse(transactionSucces);
 
 

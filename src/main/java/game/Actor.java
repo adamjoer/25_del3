@@ -20,7 +20,7 @@ public abstract class Actor {
      */
     // Make transaction on the account - and prevent negative balance. Returns true if transaction is successful.
     public boolean makeTransaction (int amount) {
-        if (getBalance() >= -amount) {
+        if (getBalance() >= -amount && amount >= -90 && amount <= 90) {
             setBalance(getBalance() + amount);
             return true;
         }
