@@ -116,9 +116,8 @@ public class Utility {
                             break;
 
                         case "TargetedCard":
-                            Color color1 = Color.getColor(getString(ele,"color"));
                             int targetPlayer = getInt(ele, "targetPlayer");
-                            chanceCards[i] = new TargetedCard(cardText, targetPlayer,color1);
+                            chanceCards[i] = new TargetedCard(cardText, targetPlayer);
                             break;
 
                         case "StandardCard":
