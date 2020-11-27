@@ -1,5 +1,13 @@
 package game;
 
+import game.actor.Actor;
+import game.actor.Player;
+import game.chance.card.ChanceCard;
+import game.chance.card.MoveToColorCard;
+import game.chance.card.StandardCard;
+import game.chance.card.TargetedCard;
+import game.field.*;
+
 import java.awt.*;
 
 public class GameBoard {

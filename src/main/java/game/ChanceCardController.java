@@ -1,5 +1,7 @@
 package game;
 
+import game.chance.card.ChanceCard;
+
 import java.util.Random;
 
 public class ChanceCardController {

@@ -1,6 +1,4 @@
-package game;
-
-import java.awt.*;
+package game.chance.card;
 
 public class TargetedCard extends ChanceCard{
 

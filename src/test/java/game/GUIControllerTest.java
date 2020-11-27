@@ -1,5 +1,7 @@
 package game;
 
+import game.actor.Player;
+import game.field.Field;
 import gui_fields.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
