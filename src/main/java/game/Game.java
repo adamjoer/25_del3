@@ -25,7 +25,10 @@ public class Game {
                 board.castDie(beaker.getSum());
 
                 board.movePlayer(playerTurn, beaker.getSum());
+
             }
+
+            board.checkStartPass(playerTurn);
 
             board.fieldAction(playerTurn);
 

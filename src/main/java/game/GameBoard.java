@@ -78,6 +78,13 @@ public class GameBoard {
         players[player].setCurrentPosition(position);
     }
 
+    public void checkStartPass(int player) {
+        // Give player start reward if they have passed start
+        if (hasPassedStart(player)) {
+            hasWinner = !giveStartReward(player);
+        }
+    }
+
     // Returns whether player has passed Start field
     public boolean hasPassedStart(int player) {
 
@@ -97,11 +104,6 @@ public class GameBoard {
 
     // Execute action of the field the player is on
     public void fieldAction(int player) {
-
-        // Give player start reward if they have passed start
-        if (hasPassedStart(player)) {
-            giveStartReward(player);
-        }
 
         // Get the field that the player has landed on from their position
         int position = actorController.getCurrentPosition(player);
