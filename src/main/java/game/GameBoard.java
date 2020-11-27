@@ -303,6 +303,9 @@ public class GameBoard {
 
                 //get the player that is going to be moved
                 int target = ((TargetedCard) cCard).getTargetedPlayer();
+                if(target > players.length){
+                    target = player;
+                }
 
                 //update the list of what players have to move at the start of their turn.
                 moveToColor(Color.white, target, true);
