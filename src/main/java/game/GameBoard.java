@@ -70,12 +70,17 @@ public class GameBoard {
         // Move player forward by the specified amount of steps
         actorController.movePlayer(player, increment);
 
+        System.out.printf("%s Previous: %d, Current: %d\n", players[player].getName(), players[player].getPreviousPosition(), players[player].getCurrentPosition());
+
         // Show player moving forward in GUI
         guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
     }
 
     public void setPlayerPosition(int player, int position) {
         players[player].setCurrentPosition(position);
+        System.out.printf("%s Previous: %d, Current: %d\n", players[player].getName(), players[player].getPreviousPosition(), players[player].getCurrentPosition());
+        guiController.setCarPlacement(players[player], players[player].getPreviousPosition(), players[player].getCurrentPosition());
+
     }
 
     public void checkStartPass(int player) {
@@ -94,7 +99,8 @@ public class GameBoard {
     }
 
     public boolean giveStartReward(int player) {
-        boolean successfulTransaction = actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
+//        boolean successfulTransaction = actorController.makeTransaction(player, 0, ((Start) fields[0]).getReward());
+        boolean successfulTransaction = actorController.makeBankTransaction(true, player, ((Start) fields[0]).getReward());
 
         // Show in GUI that money has been withdrawn from player
         guiController.setPlayerBalance(players[player], players[player].getBalance());
@@ -197,7 +203,8 @@ public class GameBoard {
 
             // Try to buy property
             // Make transaction and check if it went through
-            successfulTransaction = actorController.makeTransaction(player, 0, property.getValue());
+//            successfulTransaction = actorController.makeTransaction(player, 0, property.getValue());
+            successfulTransaction = actorController.makeBankTransaction(true, player, property.getValue());
 
             // Assign new owner if successful
             if (successfulTransaction) {
@@ -258,7 +265,8 @@ public class GameBoard {
             return true;
 
         } else { // If player doesn't have free card, try to pay fine (to bank)
-            boolean successfulTransaction = actorController.makeTransaction(player, 0, bail);
+//            boolean successfulTransaction = actorController.makeTransaction(player, 0, bail);
+            boolean successfulTransaction = actorController.makeBankTransaction(true, player, bail);
 
             // Show in GUI that money has been withdrawn from player
             guiController.setPlayerBalance(players[player], players[player].getBalance());
@@ -400,7 +408,8 @@ public class GameBoard {
         switch (action) {
             case "fine":
                 //remove some money from the players account
-                successfulTransaction = actorController.makeTransaction(player, 0, amount);
+//                successfulTransaction = actorController.makeTransaction(player, 0, amount);
+                successfulTransaction = actorController.makeBankTransaction(true, player, amount);
 
                 // Show in GUI that money has been withdrawn from player
                 guiController.setPlayerBalance(players[player], players[player].getBalance());
@@ -409,7 +418,8 @@ public class GameBoard {
 
             case "gift":
                 //insert some money into the players account
-                successfulTransaction = actorController.makeTransaction(0, player, amount);
+//                successfulTransaction = actorController.makeTransaction(0, player, amount);
+                successfulTransaction = actorController.makeBankTransaction(false, player, amount);
 
                 if (successfulTransaction) {
                     guiController.setPlayerBalance(players[player], players[player].getBalance());
